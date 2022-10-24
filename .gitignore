@@ -1,2 +1,4 @@
 # Project exclude paths
 /cmake-build-debug/
+.idea
+./Lab1/data_for_test
