@@ -1,4 +1,5 @@
 #include "file_handler/file_handler.h"
+#include "tests/test.h"
 #include <stdio.h>
 
 int main(int argc, char** argv){
@@ -7,5 +8,6 @@ int main(int argc, char** argv){
         return 0;
     }
     create_file(argv[1]);
+    run_tests();
     return 0;
 }

@@ -8,7 +8,7 @@ void create_file(const char* directory){
         file = fopen(file_path, "w+b");
     }
     fclose(file);
-    fprintf(stdout, "%s", "File was opened.");
+    fprintf(stdout, "%s", "File was created.");
 }
 
 FILE* open_file_to_read(const char* directory){
