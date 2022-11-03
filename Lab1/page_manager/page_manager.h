@@ -52,12 +52,11 @@ struct block_info {
     uint16_t type; // 1 - node, 2 - relation, 3 - props
     uint32_t length;
     void* data_link; //link for node or relationship or props
-    struct block_info* next_block_address;
 };
 
 bool create_new_page(struct page prev_page, struct page_header header, struct block_info* block_info);
-bool create_new_block_info();
-bool create_new_string_bucket();
+bool create_new_block_info(struct node* node, struct relationship* relationship, struct property* property);
+bool create_new_string_bucket(char* string_link);
 bool create_new_node();
 bool create_new_relationship();
 bool create_new_property();
