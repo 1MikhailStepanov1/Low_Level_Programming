@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include "../header_manager/header_manager.h"
 
+//TODO Необходима структура страницы для хранения строк
+
 struct page {
     uint32_t length;
     struct page_header page_header;
