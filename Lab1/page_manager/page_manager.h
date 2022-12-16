@@ -43,6 +43,7 @@ struct property { //field
         bool props_block4;
     };
 };
+
 struct string_bucket {
     uint16_t length;
     char* data_start;
@@ -58,7 +59,7 @@ bool create_new_page(struct page prev_page, struct page_header header, struct bl
 bool create_new_block_info(struct node* node, struct relationship* relationship, struct property* property);
 bool create_new_string_bucket(char* string_link);
 bool create_new_node();
-bool create_new_relationship();
+bool create_new_relationship(struct node* node1, struct node* node2, struct relationship* rel1, struct relationship* rel2);
 bool create_new_property();
 
 bool delete_page();
