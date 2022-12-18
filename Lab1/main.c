@@ -1,5 +1,5 @@
-#include "file_handler/file_handler.h"
-#include "tests/test.h"
+#include "include/file_handler.h"
+#include "include/test.h"
 #include <stdio.h>
 
 int main(int argc, char** argv){

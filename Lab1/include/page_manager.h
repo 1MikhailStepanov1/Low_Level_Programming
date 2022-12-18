@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include "../header_manager/header_manager.h"
+#include "header_manager.h"
 
 //TODO Необходима структура страницы для хранения строк
 

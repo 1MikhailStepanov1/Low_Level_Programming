@@ -1,5 +1,5 @@
 #include <malloc.h>
-#include "page_manager.h"
+#include "../include/page_manager.h"
 #define PAGE_SIZE_IN_b 4096;
 
 //TODO Id generators for nodes, relationships, properties

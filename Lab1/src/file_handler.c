@@ -1,4 +1,4 @@
-#include "file_handler.h"
+#include "../include/file_handler.h"
 
 void create_file(const char* directory){
     char* file_path = strcat(directory, "/db.data");
