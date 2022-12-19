@@ -22,7 +22,7 @@ struct node { //entity
 
 struct relationship { //relationship
     uint32_t id;
-    uint32_t length;
+    uint16_t length;
     struct node* first_node_link;
     struct node* second_node_link;
     struct relationship* prev_rel_link;
@@ -31,26 +31,28 @@ struct relationship { //relationship
 
 struct property { //field
     uint32_t id;
-    uint32_t length;
+    uint16_t length;
     char* type;   //name
-    uint32_t prev_prop_link;
-    uint32_t next_prop_id;
-    bool is_props_data_string;
-    union props_block{  //valueOf(type)
-        int props_block1;
-        int props_block2;
-        float props_block3;
-        bool props_block4;
-    };
+    struct property* prev_prop_link;
+    struct property* next_prop_link;
+    struct data_bucket* dataBucket;
 };
 
-struct string_bucket {
+enum property_data_type{
+    INTEGER,
+    FLOAT,
+    STRING,
+    BOOLEAN
+};
+
+struct data_bucket {
     uint16_t length;
-    char* data_start;
+    enum property_data_type type;
+    void* data_start;
 };
 
 struct block_info {
-    uint16_t type; // 1 - node, 2 - relation, 3 - props
+    uint8_t type; // 1 - node, 2 - relation, 3 - props
     uint32_t length;
     void* data_link; //link for node or relationship or props
 };

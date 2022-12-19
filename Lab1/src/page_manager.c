@@ -26,7 +26,7 @@ bool create_new_block_info(struct node* node, struct relationship* relationship,
         new_block_info->type = 3;
         new_block_info->data_link = property;
     } else {
-        fprintf(stderr, "%s", "Choose one option of input data: node, relationship or property.");
+//        fprintf(stderr, "%s", "Choose one option of input data: node, relationship or property.");
         return false;
     }
     return true;
@@ -54,4 +54,9 @@ bool create_new_relationship(struct node* node1, struct node* node2, struct rela
     new_relationship->prev_rel_link = rel1;
     new_relationship->next_rel_link = rel2;
     return true;
+}
+
+
+bool create_new_property(){
+
 }
