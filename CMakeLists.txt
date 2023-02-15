@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 3.20.2)
-project(LLP C)
+project(LLP)
 
-set(CMAKE_C_STANDARD 90)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(LLP Lab1/main.c Lab1/include/file_handler.h Lab1/src/file_handler.c Lab1/include/page_manager.h Lab1/src/page_manager.c Lab1/include/header_manager.h Lab1/src/header_manager.c Lab1/src/test.c Lab1/include/test.h)
+include(ExternalProject)
+ExternalProject_Add(cereal
+        GIT_REPOSITORY https://github.com/USCiLab/cereal.git
+        PREFIX cereal
+        SOURCE_DIR "${CMAKE_BINARY_DIR}/third-party/cereal"
+        CONFIGURE_COMMAND ""
+        BUILD_COMMAND ""
+        INSTALL_COMMAND ""
+        )
+include_directories(${CMAKE_BINARY_DIR}/third-party/cereal/include)
+
+file(GLOB SRC "${CMAKE_CURRENT_LIST_DIR}/Lab1/include/*.h" "${CMAKE_CURRENT_LIST_DIR}/Lab1/src/*.cpp")
+add_executable(LLP Lab1/main.cpp ${SRC})
