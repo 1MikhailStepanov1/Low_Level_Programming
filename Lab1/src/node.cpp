@@ -2,7 +2,8 @@
 
 node::node(){}
 
-node::node(const std::string& node_class){
+node::node(const std::string& node_name, const std::string& node_class){
+    this->node_name = node_name;
     this->node_class = node_class;
 }
 
@@ -45,6 +46,7 @@ void node::serialize(const std::string &file, int32_t pos) {
 
     size_t start = fout.tellp();
     obin(id);
+    obin(node_name);
     obin(node_class);
     obin(props);
     obin(relations);
@@ -56,12 +58,13 @@ void node::serialize(const std::string &file, int32_t pos) {
 }
 
 void node::deserialize(const std::string &file, int32_t pos) {
-    std::ifstream fin(file, BO);
+    std::ifstream fin(file, BI);
     fin.seekg(META + PAGE * pos);
     cereal::BinaryInputArchive ibin(fin);
 
     size_t start = fin.tellg();
     ibin(id);
+    ibin(node_name);
     ibin(node_class);
     ibin(props);
     ibin(relations);

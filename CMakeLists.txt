@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.20.2)
+cmake_minimum_required(VERSION 3.24)
 project(LLP)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 14)
+SET (CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/clang++.exe")
 
 include(ExternalProject)
 ExternalProject_Add(cereal
@@ -15,5 +15,8 @@ ExternalProject_Add(cereal
         )
 include_directories(${CMAKE_BINARY_DIR}/third-party/cereal/include)
 
-file(GLOB SRC "${CMAKE_CURRENT_LIST_DIR}/Lab1/include/*.h" "${CMAKE_CURRENT_LIST_DIR}/Lab1/src/*.cpp")
+file(GLOB SRC "${CMAKE_CURRENT_LIST_DIR}/Lab1/include/*.h"
+              "${CMAKE_CURRENT_LIST_DIR}/Lab1/src/*.cpp"
+              "${CMAKE_CURRENT_LIST_DIR}/Lab1/test/*.h"
+              "${CMAKE_CURRENT_LIST_DIR}/Lab1/test/*.cpp")
 add_executable(LLP Lab1/main.cpp ${SRC})

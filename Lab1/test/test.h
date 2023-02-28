@@ -7,7 +7,7 @@
 
 struct test {
 
-    std::string file = "../file.data";
+    static std::string file;
 
     void run_tests();
 };

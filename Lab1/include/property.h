@@ -1,6 +1,8 @@
 #ifndef LLP_PROPERTY_H
 #define LLP_PROPERTY_H
+
 #include <cereal/archives/binary.hpp>
+#include <cereal/types/string.hpp>
 
 struct property { //field
 
@@ -48,7 +50,7 @@ public:
     }
 
     template <>
-    void save<cereal::BinaryOutputArchive>(cereal::BinaryOutputArchive& archive) const {
+    void save<cereal::BinaryOutputArchive>(cereal::BinaryOutputArchive  &archive) const {
         archive(t);
         switch (t) {
             case INT: archive(int_value);

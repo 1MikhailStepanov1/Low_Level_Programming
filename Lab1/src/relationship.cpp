@@ -23,7 +23,7 @@ void relationship::serialize(const std::string &file, int32_t pos) {
 }
 
 void relationship::deserialize(const std::string &file, int32_t pos) {
-    std::ifstream fin(file, BO);
+    std::ifstream fin(file, BI);
     fin.seekg(META + PAGE * pos);
     cereal::BinaryInputArchive ibin(fin);
 
