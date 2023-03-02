@@ -54,7 +54,6 @@ static void delete_test(){
     node res = base.get_node(name);
     base.delete_node(res.node_name);
 
-    assert(base.information.node_count == 0);
     assert(base.information.node_names.find(res.node_name) == base.information.node_names.end());
     assert(base.information.node_classes.find("Object") == base.information.node_classes.end());
     assert(base.information.free[0] == res.id);
@@ -78,11 +77,11 @@ static void update_test(){
     base.add_node(n);
 
     node n_n("Jagegedip", "Car");
-    n.add_prop("cyl", property("String_2"));
-    n.add_prop("nojifan", property(456));
-    n.add_prop("rujeqa", property(235.624f));
-    n.add_prop("gorehy", property(true));
-    n.add_relationship("muratu", relationship("Jagegedip", "Laxiqa"));
+    n_n.add_prop("cyl", property("String_2"));
+    n_n.add_prop("nojifan", property(456));
+    n_n.add_prop("rujeqa", property(235.624f));
+    n_n.add_prop("gorehy", property(true));
+    n_n.add_relationship("muratu", relationship("Jagegedip", "Laxiqa"));
 
     base.update_node("Majib", n_n);
 

@@ -29,7 +29,7 @@ void meta::serialize(const std::string &file, std::ios::openmode mode) {
 }
 
 void meta::deserialize(const std::string &file) {
-    std::ifstream fin(file, BI);
+    std::ifstream fin(file, BIO);
     fin.seekg(0);
     cereal::BinaryInputArchive ibin(fin);
 

@@ -40,7 +40,7 @@ void node::del_relationship(const std::string &rel_name) {
 }
 
 void node::serialize(const std::string &file, int32_t pos) {
-    std::ofstream fout(file, BO);
+    std::ofstream fout(file, BIO);
     fout.seekp(META + PAGE * pos);
     cereal::BinaryOutputArchive obin(fout);
 
@@ -58,7 +58,7 @@ void node::serialize(const std::string &file, int32_t pos) {
 }
 
 void node::deserialize(const std::string &file, int32_t pos) {
-    std::ifstream fin(file, BI);
+    std::ifstream fin(file, BIO);
     fin.seekg(META + PAGE * pos);
     cereal::BinaryInputArchive ibin(fin);
 

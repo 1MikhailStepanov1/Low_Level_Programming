@@ -13,7 +13,6 @@ struct meta{
     meta();
 
     int32_t get_id_by_node_name(const std::string &node_name);
-    std::string
 
     void serialize(const std::string& file, std::ios::openmode mode);
     void deserialize(const std::string& file);

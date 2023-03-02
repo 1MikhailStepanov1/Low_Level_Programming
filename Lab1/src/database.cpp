@@ -13,7 +13,7 @@ void database::open() {
 }
 
 void database::save(){
-    information.serialize(file, BO);
+    information.serialize(file, BIO);
 }
 
 void database::add_node_to_meta(const node& node) {
@@ -52,6 +52,7 @@ node database::get_node(const std::string &node_name) {
     node_name_validation(node_name, true);
 
     node result;
+    auto temp = information.get_id_by_node_name(node_name);
     result.deserialize(file, information.get_id_by_node_name(node_name));
 
     return result;
@@ -64,6 +65,9 @@ void database::delete_node_meta(const std::string &node_name, int32_t pos) {
         if (node_class.second.count(pos) != 0){
             node_class.second.erase(pos);
         }
+        if (node_class.second.empty()) {
+            information.node_classes.erase(node_class.first);
+        }
     }
 }
 
@@ -72,7 +76,7 @@ void database::delete_node(const std::string &node_name) {
     int32_t pos = information.get_id_by_node_name(node_name);
     delete_node_meta(node_name, pos);
 
-    std::ofstream fout(file, BO);
+    std::ofstream fout(file, BIO);
     cereal::BinaryOutputArchive obin(fout);
     fout.seekp(META + PAGE * pos, fout.beg);
     fout.close();

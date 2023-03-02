@@ -1,41 +1,45 @@
 #include "../include/property.h"
 
 property::property(const int32_t v) {
-    this->t = INT;
-    this->int_value = v;
+    this->tag = INT;
+    this->int_val = v;
 }
 
 property::property(const bool v) {
-    this->t = BOOL;
-    this->bool_value = v;
+    this->tag = BOOL;
+    this->bool_val = v;
 }
 
 property::property(const float v) {
-    this->t = FLOAT;
-    this->float_value = v;
+    this->tag = FLOAT;
+    this->float_val = v;
 }
 
 property::property(const char* v) {
-    this->t = STRING;
-    this->string_value = v;
+    this->tag = STRING;
+    this->string_val = v;
 }
 
 property::type property::get_type() {
-    return t;
+    return tag;
 }
 
 int32_t property::get_int() {
-    return int_value;
+    return int_val;
 }
 
 bool property::get_bool() {
-    return bool_value;
+    return bool_val;
 }
 
 float property::get_float() {
-    return float_value;
+    return float_val;
 }
 
 std::string property::get_string() {
-    return string_value;
+    return string_val;
+}
+
+property::property() {
+
 }

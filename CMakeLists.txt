@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 project(LLP)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET (CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/clang++.exe")
 
 include(ExternalProject)
