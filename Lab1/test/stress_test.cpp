@@ -56,15 +56,15 @@ static void insert_op_test() {
     for (size_t i = 1; i < 25; i++) {
         database base(stress_test::file);
         base.create();
-        load_nodes(&base, "node", "Object", 100 * i);
+        load_nodes(&base, "node", "Object", 1000 * i);
         base.save();
 
         auto start_t = std::chrono::high_resolution_clock::now();
-        load_nodes(&base, "test_node", "Object", 100);
+        load_nodes(&base, "test_node", "Object", 1000);
         auto end_t = std::chrono::high_resolution_clock::now();
         auto time = end_t - start_t;
 
-        cout << "Time to insert " << 100 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
+        cout << "Time to insert " << 1000 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
     }
 }
 
@@ -74,18 +74,18 @@ static void select_op_test() {
     for (size_t i = 1; i < 25; i++) {
         database base(stress_test::file);
         base.create();
-        load_nodes(&base, "node", "Object", 100 * i);
+        load_nodes(&base, "node", "Object", 1000 * i);
         base.save();
 
         auto start_t = std::chrono::high_resolution_clock::now();
-        for (size_t j = 0; j < 100; j++) {
+        for (size_t j = 0; j < 1000; j++) {
             string name = "node" + to_string(j);
             node res = base.get_node(name);
         }
         auto end_t = std::chrono::high_resolution_clock::now();
         auto time = end_t - start_t;
 
-        cout << "Time to select " << 100 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
+        cout << "Time to select " << 1000 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
     }
 }
 
@@ -94,18 +94,18 @@ static void delete_op_test() {
     for (size_t i = 1; i < 25; i++) {
         database base(stress_test::file);
         base.create();
-        load_nodes(&base, "node", "Object", 100 * i);
+        load_nodes(&base, "node", "Object", 1000 * i);
         base.save();
 
         auto start_t = std::chrono::high_resolution_clock::now();
-        for (size_t j = 0; j < 100; j++) {
+        for (size_t j = 0; j < 1000; j++) {
             string name = "node" + to_string(j);
             base.delete_node(name);
         }
         auto end_t = std::chrono::high_resolution_clock::now();
         auto time = end_t - start_t;
 
-        cout << "Time to delete " << 100 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
+        cout << "Time to delete " << 1000 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
     }
 }
 
@@ -114,18 +114,18 @@ static void update_op_test() {
     for (size_t i = 1; i < 25; i++) {
         database base(stress_test::file);
         base.create();
-        load_nodes(&base, "node", "Object", 100 * i);
+        load_nodes(&base, "node", "Object", 1000 * i);
         base.save();
 
         auto start_t = std::chrono::high_resolution_clock::now();
-        for (size_t j = 0; j < 100; j++) {
+        for (size_t j = 0; j < 1000; j++) {
             node n = node("test" + to_string(j), "Object");
             base.update_node("node" + to_string(j), n);
         }
         auto end_t = std::chrono::high_resolution_clock::now();
         auto time = end_t - start_t;
 
-        cout << "Time to update " << 100 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
+        cout << "Time to update " << 1000 * i << " node to base: " << time / chrono::milliseconds(1) << endl;
     }
 }
 
