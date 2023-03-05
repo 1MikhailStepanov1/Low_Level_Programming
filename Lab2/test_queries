@@ -1,0 +1,87 @@
+Запрос на выборку элемента
+
+Person(node_name: "John"){
+    id,
+    props{
+        cyl
+    }
+}
+
+Result output:
+
+Operation_type: select
+Selection_set:
+    Class_type: Person
+    Arguments:
+        Argument: node_name
+            Argument_value: "John"
+    Selection_set:
+        Field: id
+        Field: props
+            Selection_set:
+                Field: cyl
+
+------------------------------------------------------
+
+Запрос на удаление элемента
+
+Person(delete: true,
+    node_name: "John"){
+    id,
+    node_name
+}
+
+Operation_type: delete
+Selection_set:
+    Class_type: Person
+    Arguments:
+        Argument: node_name
+            Argument_value: "John"
+Selection_set:
+    Field: id
+    Field: node_name
+
+------------------------------------------------------
+
+Запрос на вставку элемента
+
+Person(insert: {
+    node_class: "Object",
+    node_name: "Volkswagen"
+}){
+    id
+}
+
+Operation_type: insert
+Selection_set:
+    Class_type: Person
+    Arguments:
+        Argument: node_class
+            Argument_value: "Object"
+        Argument: node_name
+            Argument_value: "Volkswagen"
+Selection_set:
+    Class_type: Person
+    Selection_set:
+        Field: id
+
+------------------------------------------------------
+
+Запрос на обновление элемента
+
+Person(update: [["set", "node_name", "Jack"], ["set", "props.cyl", "123"]], id: 1){
+    id,
+    node_class,
+    node_name
+}
+
+Operation_type: update
+Selection_set:
+    Class_type: Person
+    Arguments:
+        Sub_operation: set
+            Argument: node_name
+                Argument_value: "Jack"
+        Sub_operation: set
+            Argument: props.cyl
+                Argument_value: "123"
