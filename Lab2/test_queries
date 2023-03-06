@@ -10,7 +10,7 @@ Person(node_name: "John"){
 Result output:
 
 Operation_type: select
-Selection_set:
+Result_set:
     Class_type: Person
     Arguments:
         Argument: node_name
@@ -37,7 +37,7 @@ Selection_set:
     Arguments:
         Argument: node_name
             Argument_value: "John"
-Selection_set:
+Result_set:
     Field: id
     Field: node_name
 
@@ -60,7 +60,7 @@ Selection_set:
             Argument_value: "Object"
         Argument: node_name
             Argument_value: "Volkswagen"
-Selection_set:
+Result_set:
     Class_type: Person
     Selection_set:
         Field: id
@@ -76,7 +76,7 @@ Person(update: [["set", "node_name", "Jack"], ["set", "props.cyl", "123"]], id: 
 }
 
 Operation_type: update
-Selection_set:
+Result_set:
     Class_type: Person
     Arguments:
         Sub_operation: set
@@ -85,3 +85,11 @@ Selection_set:
         Sub_operation: set
             Argument: props.cyl
                 Argument_value: "123"
+
+
+_gt - Greater than
+_ge - Greater than or equal
+_lt - Lass than
+_le - Less than or equal
+_ne - Not equal
+_like - pattern search

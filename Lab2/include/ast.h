@@ -4,9 +4,12 @@
 #include <list>
 #include <string>
 
+void print_node_val(const char* node, std::basic_string<char> val, int depth);
+
 enum node_type {
     OPERATION_TYPE_NODE,
     SELECTION_SET_NODE,
+    RESULT_SET_NODE,
     CLASS_TYPE_NODE,
     ARGUMENT_NODE,
     ARGUMENT_VALUE_NODE,
@@ -36,12 +39,12 @@ enum operation_type {
 
 class OperationTypeNode : public Node{
     private:
-        operation_type type;
+        operation_type op_type;
 
     public:
-    OperationTypeNode(operation_type type);
-    void print(int depth) override;
-    ~OperationTypeNode();
+        OperationTypeNode(operation_type op_type);
+        void print(int depth) override;
+        ~OperationTypeNode();
 };
 
 class SelectionSetNode : public Node{
@@ -49,12 +52,24 @@ class SelectionSetNode : public Node{
         std::list<Node*> set_nodes;
 
     public:
-        SelectionSetNode(){
+        SelectionSetNode() {
             this->type = SELECTION_SET_NODE;
-        }
+        };
         void add_attr(Node* attribute);
         void print(int depth) override;
         ~SelectionSetNode();
+};
+
+class ResultSetNode : public Node{
+    private:
+        std::list<Node*> res_nodes;
+    public:
+        ResultSetNode(){
+            this->type = RESULT_SET_NODE;
+        };
+        void add_attr(Node* attribute);
+        void print(int depth) override;
+        ~ResultSetNode();
 };
 
 enum data_type {
@@ -133,4 +148,59 @@ class BoolConstant : public ConstantNode{
             return this->value ? "true" : "false";
         }
 };
+
+class ArgumentNode : public Node{
+    private:
+        ConstantNode* value;
+        const char* name;
+    public:
+        ArgumentNode(const char* name, ConstantNode* value);
+        void print(int depth) override;
+        ~ArgumentNode();
+};
+
+class ClassTypeNode : public Node{
+    private:
+        const char* value;
+    public:
+        ClassTypeNode(const char* value){
+            this->value = value;
+            this->type = CLASS_TYPE_NODE;
+        };
+        void print(int depth) override;
+        ~ClassTypeNode(){
+            free((void*) value);
+        };
+};
+
+class FieldNode : public Node{
+    private:
+        const char* name;
+    public:
+        FieldNode(const char* name){
+            this->name = name;
+            this->type = FIELD_NODE;
+        };
+        void print(int depth) override;
+        ~FieldNode();
+};
+
+enum sub_operation {
+    SET,
+    ADD,
+    SUB
+};
+
+class SubOperationNode : public Node{
+    private:
+        sub_operation sub_op_type;
+    public:
+        SubOperationNode(sub_operation sub_op){
+            this->sub_op_type = sub_op;
+            this->type = SUB_OPERATION_NODE;
+        };
+        void print(int depth) override;
+        ~SubOperationNode();
+};
+
 #endif
