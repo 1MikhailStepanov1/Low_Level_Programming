@@ -44,6 +44,17 @@ const char* get_string_from_operation_type(operation_type type){
     }
 }
 
+const char* get_string_from_sub_oper_type(sub_operation type){
+    switch (type) {
+        case SET:
+            return "set";
+        case ADD:
+            return "add";
+        case SUB:
+            return "sub";
+    }
+}
+
 //-----------------   Operation type node   -----------------//
 
 OperationTypeNode::OperationTypeNode(operation_type op_type) {
@@ -71,4 +82,83 @@ void ArgumentNode::print(int depth) {
 ArgumentNode::~ArgumentNode(){
     delete this->name;
     delete this->value;
+}
+
+//-----------------   Selection set node   -----------------//
+
+void SelectionSetNode::add_attr(Node *attribute) {
+    this->set_nodes.push_back(attribute);
+}
+
+void SelectionSetNode::print(int depth) {
+    print_node_val("Selection_set", "", depth);
+    for (auto n : this->set_nodes){
+        n->print(depth+1);
+    }
+}
+
+SelectionSetNode::~SelectionSetNode(){
+    for (auto n : this->set_nodes){
+        delete n;
+    }
+}
+
+//-----------------   Result set node   -----------------//
+
+void ResultSetNode::add_attr(Node *attribute) {
+    this->res_nodes.push_back(attribute);
+}
+
+void ResultSetNode::print(int depth) {
+    print_node_val("Selection_set", "", depth);
+    for (auto n : this->res_nodes){
+        n->print(depth+1);
+    }
+}
+
+ResultSetNode::~ResultSetNode(){
+    for (auto n : this->res_nodes){
+        delete n;
+    }
+}
+
+//-----------------   Class type node   -----------------//
+
+ClassTypeNode::ClassTypeNode(const char *value) {
+    this->value = value;
+    this->type = CLASS_TYPE_NODE;
+}
+
+void ClassTypeNode::print(int depth) {
+    print_node_val("Class_type", this->value, depth);
+}
+
+ClassTypeNode::~ClassTypeNode(){
+    delete this->value;
+}
+
+//-----------------   Field node   -----------------//
+
+FieldNode::FieldNode(const char *name) {
+    this->name = name;
+    this->type = FIELD_NODE;
+}
+
+void FieldNode::print(int depth) {
+    print_node_val("Field", this->name, depth);
+}
+
+FieldNode::~FieldNode(){
+    delete this->name;
+}
+
+//-----------------   Sub operation node   -----------------//
+
+SubOperationNode::SubOperationNode(sub_operation sub_op) {
+    this->sub_op_type = sub_op;
+    this->type = SUB_OPERATION_NODE;
+}
+
+void SubOperationNode::print(int depth) {
+    print_node_val("Sub_operation", get_string_from_sub_oper_type(this->sub_op_type), depth);
 }

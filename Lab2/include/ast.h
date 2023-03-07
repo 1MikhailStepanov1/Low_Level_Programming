@@ -12,7 +12,6 @@ enum node_type {
     RESULT_SET_NODE,
     CLASS_TYPE_NODE,
     ARGUMENT_NODE,
-    ARGUMENT_VALUE_NODE,
     FIELD_NODE,
     SUB_OPERATION_NODE,
     CONSTANT_NODE
@@ -163,24 +162,16 @@ class ClassTypeNode : public Node{
     private:
         const char* value;
     public:
-        ClassTypeNode(const char* value){
-            this->value = value;
-            this->type = CLASS_TYPE_NODE;
-        };
+        ClassTypeNode(const char* value);
         void print(int depth) override;
-        ~ClassTypeNode(){
-            free((void*) value);
-        };
+        ~ClassTypeNode();
 };
 
 class FieldNode : public Node{
     private:
         const char* name;
     public:
-        FieldNode(const char* name){
-            this->name = name;
-            this->type = FIELD_NODE;
-        };
+        FieldNode(const char* name);
         void print(int depth) override;
         ~FieldNode();
 };
@@ -195,12 +186,16 @@ class SubOperationNode : public Node{
     private:
         sub_operation sub_op_type;
     public:
-        SubOperationNode(sub_operation sub_op){
-            this->sub_op_type = sub_op;
-            this->type = SUB_OPERATION_NODE;
-        };
+        SubOperationNode(sub_operation sub_op);
         void print(int depth) override;
         ~SubOperationNode();
+};
+
+class ReferenceNode : public Node {
+    private:
+    public:
+        ReferenceNode();
+        ~ReferenceNode();
 };
 
 #endif
