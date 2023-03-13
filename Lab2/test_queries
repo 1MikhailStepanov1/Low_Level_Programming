@@ -1,8 +1,8 @@
 Запрос на выборку элемента
 
-Person(node_name: "John"){
+Person(select: true, node_name: "John"){
     id,
-    props{
+    props {
         cyl
     }
 }
@@ -38,8 +38,10 @@ Selection_set:
         Argument: node_name
             Argument_value: "John"
 Result_set:
-    Field: id
-    Field: node_name
+    Class_type: Person
+    Selection_set:
+        Field: id
+        Field: node_name
 
 ------------------------------------------------------
 
@@ -76,7 +78,7 @@ Person(update: [["set", "node_name", "Jack"], ["set", "props.cyl", "123"]], id: 
 }
 
 Operation_type: update
-Result_set:
+Selection_set:
     Class_type: Person
     Arguments:
         Sub_operation: set
@@ -85,6 +87,12 @@ Result_set:
         Sub_operation: set
             Argument: props.cyl
                 Argument_value: "123"
+Result_set:
+    Class_type: Person
+    Selection_set:
+        Field: id
+        Field: node_class
+        Field: node_name
 
 
 _gt - Greater than

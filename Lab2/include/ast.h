@@ -29,6 +29,10 @@ class Node{
         }
 };
 
+struct NodeWrapper {
+    Node* node;
+};
+
 enum operation_type {
     SELECT,
     INSERT,

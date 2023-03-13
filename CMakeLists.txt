@@ -28,7 +28,7 @@ project(LLP)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-SET (CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/clang++.exe")
+SET (CMAKE_CXX_COMPILER "/usr/bin/c++")
 
 file(GLOB SRC "${CMAKE_CURRENT_LIST_DIR}/Lab2/include/*.h"
         "${CMAKE_CURRENT_LIST_DIR}/Lab2/src/*.cpp"

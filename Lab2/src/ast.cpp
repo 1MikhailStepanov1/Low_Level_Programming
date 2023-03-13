@@ -1,5 +1,7 @@
 #include "../include/ast.h"
 #include <iostream>
+#include <vector>
+#include <map>
 
 void print_node_val(const char* node, std::basic_string<char> val, int depth){
     for (int i = 0; i < depth; i++){
