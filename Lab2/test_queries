@@ -2,9 +2,7 @@
 
 Person(select: true, node_name: "John"){
     id,
-    props {
-        cyl
-    }
+    props.cyl
 }
 
 Result output:

@@ -4,17 +4,36 @@
 #include <list>
 #include <string>
 
-void print_node_val(const char* node, std::basic_string<char> val, int depth);
+void print_node_val(const char* node, const char* val, int depth);
 
 enum node_type {
-    OPERATION_TYPE_NODE,
+    QUERY_NODE,
     SELECTION_SET_NODE,
     RESULT_SET_NODE,
-    CLASS_TYPE_NODE,
+    ARGUMENT_WRAPPER_NODE,
     ARGUMENT_NODE,
+    OBJECT_WRAPPER_NODE,
+    OBJECT_NODE,
+    FIELDS_WRAPPER_NODE,
     FIELD_NODE,
-    SUB_OPERATION_NODE,
+    RELATION_WRAPPER_NODE,
+    RELATION_NODE,
+    SUB_OPERATION_WRAPPER,
+    SUB_OPERATION,
     CONSTANT_NODE
+};
+
+enum sub_operation {
+    SET,
+    ADD,
+    SUB
+};
+
+enum data_type {
+    INT,
+    FLOAT,
+    STRING,
+    BOOL
 };
 
 class Node{
@@ -33,56 +52,7 @@ struct NodeWrapper {
     Node* node;
 };
 
-enum operation_type {
-    SELECT,
-    INSERT,
-    DELETE,
-    UPDATE
-};
-
-class OperationTypeNode : public Node{
-    private:
-        operation_type op_type;
-
-    public:
-        OperationTypeNode(operation_type op_type);
-        void print(int depth) override;
-        ~OperationTypeNode();
-};
-
-class SelectionSetNode : public Node{
-    private:
-        std::list<Node*> set_nodes;
-
-    public:
-        SelectionSetNode() {
-            this->type = SELECTION_SET_NODE;
-        };
-        void add_attr(Node* attribute);
-        void print(int depth) override;
-        ~SelectionSetNode();
-};
-
-class ResultSetNode : public Node{
-    private:
-        std::list<Node*> res_nodes;
-    public:
-        ResultSetNode(){
-            this->type = RESULT_SET_NODE;
-        };
-        void add_attr(Node* attribute);
-        void print(int depth) override;
-        ~ResultSetNode();
-};
-
-enum data_type {
-    INT,
-    FLOAT,
-    STRING,
-    BOOL
-};
-
-class ConstantNode : public Node{
+class ConstantNode : public Node {
     private:
         data_type d_type;
 
@@ -103,12 +73,12 @@ class IntConstant : public ConstantNode{
         int value;
 
     public:
-    IntConstant(int value): ConstantNode(INT){
-        this->value = value;
-    }
-    std::string get_str_val() override {
-        return std::to_string(this->value);
-    }
+        IntConstant(int value): ConstantNode(INT){
+            this->value = value;
+        }
+        std::string get_str_val() override {
+            return std::to_string(this->value);
+        }
 };
 
 class FloatConstant : public ConstantNode{
@@ -135,9 +105,9 @@ class StringConstant : public ConstantNode {
         std::string get_str_val() override{
             return this->value;
         }
-        ~StringConstant(){
-            free((void*) value);
-        }
+    ~StringConstant(){
+        free((void*) value);
+    }
 };
 
 class BoolConstant : public ConstantNode{
@@ -152,54 +122,156 @@ class BoolConstant : public ConstantNode{
         }
 };
 
-class ArgumentNode : public Node{
+enum operation_type {
+    SELECT,
+    INSERT,
+    DELETE,
+    UPDATE,
+    UNKNOWN
+};
+
+class QueryNode : public Node {
     private:
-        ConstantNode* value;
-        const char* name;
+        operation_type oper_type;
+        const char* class_type;
+        Node* selection_set;
+        Node* result_set;
+
     public:
-        ArgumentNode(const char* name, ConstantNode* value);
+        QueryNode(const char* op_type, const char* class_type);
+        void print(int depth) override;
+        void setSelectionSet(Node* sel_set);
+        void setResultSet(Node* res_set);
+        ~QueryNode();
+};
+
+class SelectionSetNode : public Node{
+    private:
+        Node* arguments;
+        Node* objects;
+        Node* sub_operations;
+    public:
+        SelectionSetNode();
+        void set_args(Node* args);
+        void set_objs(Node* objs);
+        void set_subops(Node* sub_ops);
+        void print(int depth) override;
+        ~SelectionSetNode();
+};
+
+class ResultSetNode : public Node {
+    private:
+        std::list<Node*> attributes;
+    public:
+        ResultSetNode();
+        void add_attr(Node* attr);
+        void print(int depth) override;
+        ~ResultSetNode();
+};
+
+class ArgumentWrapperNode : public Node {
+    private:
+        std::list<Node*> attributes;
+    public:
+        ArgumentWrapperNode();
+        void add_attr(Node* attr);
+        void print(int depth) override;
+        ~ArgumentWrapperNode();
+};
+
+class ArgumentNode : public Node {
+    private:
+        StringConstant* name;
+        ConstantNode* value;
+    public:
+        ArgumentNode(StringConstant* name, ConstantNode* value);
         void print(int depth) override;
         ~ArgumentNode();
 };
 
-class ClassTypeNode : public Node{
+class ObjectWrapperNode : public Node {
     private:
-        const char* value;
+        std::list<Node*> attributes;
     public:
-        ClassTypeNode(const char* value);
+        ObjectWrapperNode();
+        void add_attr(Node* attr);
         void print(int depth) override;
-        ~ClassTypeNode();
+        ~ObjectWrapperNode();
 };
 
-class FieldNode : public Node{
+class ObjectNode : public Node {
     private:
-        const char* name;
+        const char* node_name;
+        const char* node_class;
+        Node* props;
+        Node* relations;
     public:
-        FieldNode(const char* name);
+        ObjectNode(const char* node_name, const char* node_class);
+        void add_props(Node* fields);
+        void add_rels(Node* rels);
+        void print(int depth) override;
+        ~ObjectNode();
+};
+
+class FieldsWrapperNode : public Node {
+    private:
+        std::list<Node*> attributes;
+    public:
+        FieldsWrapperNode();
+        void add_attr(Node* attr);
+        void print(int depth) override;
+        ~FieldsWrapperNode();
+};
+
+class FieldNode : public Node {
+    private:
+        StringConstant* name;
+        ConstantNode* value;
+    public:
+        FieldNode(StringConstant* name, ConstantNode* value);
         void print(int depth) override;
         ~FieldNode();
 };
 
-enum sub_operation {
-    SET,
-    ADD,
-    SUB
+class RelationWrapperNode : public Node {
+    private:
+        std::list<Node*> attributes;
+    public:
+        RelationWrapperNode();
+        void add_attr(Node* attr);
+        void print(int depth) override;
+        ~RelationWrapperNode();
 };
 
-class SubOperationNode : public Node{
+class RelationNode : public Node {
     private:
-        sub_operation sub_op_type;
+        ConstantNode* name;
     public:
-        SubOperationNode(sub_operation sub_op);
+        RelationNode(ConstantNode* name);
+        void print(int depth) override;
+        ~RelationNode();
+};
+
+class SubOperationWrapperNode : public Node {
+    private:
+        std::list<Node*> attributes;
+    public:
+        SubOperationWrapperNode();
+        void add_attr(Node* attr);
+        void print(int depth) override;
+        ~SubOperationWrapperNode();
+};
+
+class SubOperationNode : public Node {
+    private:
+        node_type type;
+        const char* sub_op_token;
+        ConstantNode* name;
+        ConstantNode* value;
+    public:
+        SubOperationNode(const char* sub_op_token, ConstantNode* name, ConstantNode* value);
         void print(int depth) override;
         ~SubOperationNode();
-};
-
-class ReferenceNode : public Node {
-    private:
-    public:
-        ReferenceNode();
-        ~ReferenceNode();
 };
 
 #endif

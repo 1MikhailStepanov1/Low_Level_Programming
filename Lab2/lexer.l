@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include "../include/ast.h"
+#include "../Lab2/include/ast.h"
 #include "parser.h"
 %}
 
@@ -22,15 +22,17 @@
 "delete: true"      { return DELETE_FLAG; }
 "insert: "          { return INSERTION_FLAG; }
 "update: "          { return UPDATE_FLAG; }
-""                  { return NAME_TOKEN; }
-""                  { return PROPS_TOKEN; }
-""                  { return RELATIONS_TOKEN; }
-""                  { return SUB_OPERATION_TOKEN; }
-"true"              { yylval.boolVal = true; return BOOL_TOKEN; }
-"false"             { yylval.boolVal = false; return BOOL_TOKEN; }
+^[A-z]+[0-9A-z]*    { return NAME_TOKEN; }
+"props"             { return PROPS_TOKEN; }
+"relations"         { return RELATIONS_TOKEN; }
+\"(set|add|sub)\"   { return SUB_OPERATION_TOKEN; }
+"node_name: "       { return NODE_NAME; }
+"node_class: "      { return NODE_CLASS; }
+"true"              { yylval.bool_val = true; return BOOL_TOKEN; }
+"false"             { yylval.bool_val = false; return BOOL_TOKEN; }
 \"[^\"]*\"          { yylval.str = strdup(yytext); return STRING_TOKEN; }
--?[0-9]+            { yylval.intVal = atoi(yytext); return INT_TOKEN; }
--?[0-9]+\.[0-9]+    { yylval.floatVal = atof(yytext); return FLOAT_TOKEN; }
+-?[0-9]+            { yylval.int_val = atoi(yytext); return INT_TOKEN; }
+-?[0-9]+\.[0-9]+    { yylval.float_val = atof(yytext); return FLOAT_TOKEN; }
 [ \t\n]+            { /* ignore white spaces */ }
 .                   { /* ignore everything else */ }
 
