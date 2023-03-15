@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <cstring>
 
 void print_node_val(const char* node, const char* val, int depth){
     for (int i = 0; i < depth; i++){
@@ -61,13 +62,13 @@ const char* get_string_from_operation_type(operation_type type){
 }
 
 operation_type get_op_type_from_string(const char* str){
-    if (str == "select") {
+    if (strcmp(str, "select") == 0) {
         return SELECT;
-    } else if (str == "delete"){
+    } else if (strcmp(str, "delete") == 0){
         return DELETE;
-    } else if (str == "insert"){
+    } else if (strcmp(str, "insert") == 0){
         return INSERT;
-    } else if (str == "update") {
+    } else if (strcmp(str, "update") == 0) {
         return UPDATE;
     } else return UNKNOWN;
 }
@@ -75,7 +76,7 @@ operation_type get_op_type_from_string(const char* str){
 
 
 // ---------------------------   Query Node   --------------------------- //
-QueryNode::QueryNode(const char* op_type, const char *class_type) {
+QueryNode::QueryNode(const char* op_type, StringConstant *class_type) {
     this->type = QUERY_NODE;
     this->oper_type = get_op_type_from_string(op_type);
     this->class_type = class_type;
@@ -91,13 +92,13 @@ void QueryNode::setResultSet(Node* res_set) {
 
 void QueryNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), get_string_from_operation_type(this->oper_type), depth);
-    print_node_val("class_type", this->class_type, depth);
+    print_node_val("class_type", this->class_type->get_str_val().c_str(), depth);
     this->selection_set->print(depth+1);
     this->result_set->print(depth+1);
 }
 
 QueryNode::~QueryNode() {
-    free((void*) class_type);
+    delete this->class_type;
     delete this->selection_set;
     delete this->result_set;
 }
@@ -105,6 +106,9 @@ QueryNode::~QueryNode() {
 // ---------------------------   Selection Set Node   --------------------------- //
 SelectionSetNode::SelectionSetNode() {
     this->type = SELECTION_SET_NODE;
+    this->arguments = NULL;
+    this->objects = NULL;
+    this->sub_operations = NULL;
 }
 
 void SelectionSetNode::set_args(Node * args) {
@@ -121,9 +125,15 @@ void SelectionSetNode::set_subops(Node * sub_ops) {
 
 void SelectionSetNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
-    this->arguments->print(depth+1);
-    this->objects->print(depth+1);
-    this->sub_operations->print(depth+1);
+    if (this->arguments != NULL) {
+        this->arguments->print(depth + 1);
+    }
+    if (this->objects != NULL) {
+        this->objects->print(depth+1);
+    }
+    if (this->sub_operations != NULL) {
+        this->sub_operations->print(depth + 1);
+    }
 }
 
 SelectionSetNode::~SelectionSetNode() {
@@ -216,7 +226,7 @@ ObjectWrapperNode::~ObjectWrapperNode() {
 }
 
 // ---------------------------   Object Node   --------------------------- //
-ObjectNode::ObjectNode(const char* node_name, const char* node_class) {
+ObjectNode::ObjectNode(StringConstant* node_name, StringConstant* node_class) {
     this->type = OBJECT_NODE;
     this->node_name = node_name;
     this->node_class = node_class;
@@ -232,8 +242,8 @@ void ObjectNode::add_rels(Node *rels) {
 
 void ObjectNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
-    print_node_val("Name", this->node_name, depth+1);
-    print_node_val("Class", this->node_class, depth+1);
+    print_node_val("Name", this->node_name->get_str_val().c_str(), depth+1);
+    print_node_val("Class", this->node_class->get_str_val().c_str(), depth+1);
     props->print(depth+1);
     relations->print(depth+1);
 }

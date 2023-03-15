@@ -42,7 +42,7 @@ class Node{
 
     public:
         virtual void print(int depth) = 0;
-        virtual ~Node();
+        virtual ~Node(){};
         node_type get_node_type(){
             return this->type;
         }
@@ -64,8 +64,6 @@ class ConstantNode : public Node {
         virtual std::string get_str_val(){
             return "";
         }
-        std::string get_str_type();
-        void print(int depth) override;
 };
 
 class IntConstant : public ConstantNode{
@@ -78,6 +76,9 @@ class IntConstant : public ConstantNode{
         }
         std::string get_str_val() override {
             return std::to_string(this->value);
+        }
+        void print(int depth) override{
+            print_node_val("IntConstant", get_str_val().c_str(), depth);
         }
 };
 
@@ -92,6 +93,9 @@ class FloatConstant : public ConstantNode{
         std::string get_str_val() override {
             return std::to_string(this->value);
         }
+        void print(int depth) override {
+            print_node_val("FloatConstant", get_str_val().c_str(), depth);
+        }
 };
 
 class StringConstant : public ConstantNode {
@@ -105,8 +109,11 @@ class StringConstant : public ConstantNode {
         std::string get_str_val() override{
             return this->value;
         }
-    ~StringConstant(){
-        free((void*) value);
+        void print(int depth) override {
+            print_node_val("StringConstant", get_str_val().c_str(), depth);
+        }
+    ~StringConstant() override{
+//        free((void*) this->value);
     }
 };
 
@@ -119,6 +126,9 @@ class BoolConstant : public ConstantNode{
         }
         std::string get_str_val() override{
             return this->value ? "true" : "false";
+        }
+        void print(int depth) override{
+            print_node_val("BoolConstant", get_str_val().c_str(), depth);
         }
 };
 
@@ -133,12 +143,12 @@ enum operation_type {
 class QueryNode : public Node {
     private:
         operation_type oper_type;
-        const char* class_type;
+        StringConstant* class_type;
         Node* selection_set;
         Node* result_set;
 
     public:
-        QueryNode(const char* op_type, const char* class_type);
+        QueryNode(const char* op_type, StringConstant* class_type);
         void print(int depth) override;
         void setSelectionSet(Node* sel_set);
         void setResultSet(Node* res_set);
@@ -201,12 +211,12 @@ class ObjectWrapperNode : public Node {
 
 class ObjectNode : public Node {
     private:
-        const char* node_name;
-        const char* node_class;
+        StringConstant* node_name;
+        StringConstant* node_class;
         Node* props;
         Node* relations;
     public:
-        ObjectNode(const char* node_name, const char* node_class);
+        ObjectNode(StringConstant* node_name, StringConstant* node_class);
         void add_props(Node* fields);
         void add_rels(Node* rels);
         void print(int depth) override;

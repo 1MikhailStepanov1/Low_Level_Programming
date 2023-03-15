@@ -1,23 +1,27 @@
 Запрос на выборку элемента
 
+Person(select: true, node_name: "John", props.privet: 123){
+    id,
+    props.cyl
+};
+
 Person(select: true, node_name: "John"){
     id,
     props.cyl
-}
+};
+
 
 Result output:
 
-Operation_type: select
-Result_set:
-    Class_type: Person
+Query: Select
+class_type: Person
+  SelectionSet:
     Arguments:
-        Argument: node_name
-            Argument_value: "John"
-    Selection_set:
-        Field: id
-        Field: props
-            Selection_set:
-                Field: cyl
+      Argument: node_name
+      Argument_value: "John"
+  ResultSet:
+    StringConstant: id
+    StringConstant: props.cyl
 
 ------------------------------------------------------
 

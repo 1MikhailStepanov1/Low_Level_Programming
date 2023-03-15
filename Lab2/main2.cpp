@@ -13,21 +13,24 @@ int parseInput(string& query, NodeWrapper& nodeWrapper){
 }
 
 int main(int argc, char** argv){
+//    yydebug = 1;
     string buf;
     string line;
     while(getline(cin, line)){
         buf.append(line);
-        buf.append("\n");
-        NodeWrapper nodeWrapper;
-        int code = parseInput(buf, nodeWrapper);
-        if (code){
-            std::cout << "ret_code: " << code << std::endl;
-        } else {
-            nodeWrapper.node->print(0);
-            delete nodeWrapper.node;
+        cout << buf << endl;
+        if (line.find(';') != string::npos) {
+            NodeWrapper nodeWrapper;
+            int code = parseInput(buf, nodeWrapper);
+            if (code) {
+                cout << "ret_code: " << code << endl;
+            } else {
+                nodeWrapper.node->print(0);
+                delete nodeWrapper.node;
+            }
+            buf.clear();
+            std::cout << "-----------------" << endl;
         }
-        buf.clear();
-        std::cout << "-----------------" << endl;
     }
     return 0;
 }

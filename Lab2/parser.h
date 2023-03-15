@@ -54,19 +54,19 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    CLASS_TYPE = 258,              /* CLASS_TYPE  */
-    L_BRACKET = 259,               /* L_BRACKET  */
-    R_BRACKET = 260,               /* R_BRACKET  */
-    L_BRACE = 261,                 /* L_BRACE  */
-    R_BRACE = 262,                 /* R_BRACE  */
-    L_SQUARE_BRACKET = 263,        /* L_SQUARE_BRACKET  */
-    R_SQUARE_BRACKET = 264,        /* R_SQUARE_BRACKET  */
-    COMMA = 265,                   /* COMMA  */
-    SELECTION_FLAG = 266,          /* SELECTION_FLAG  */
-    DELETE_FLAG = 267,             /* DELETE_FLAG  */
-    INSERTION_FLAG = 268,          /* INSERTION_FLAG  */
-    UPDATE_FLAG = 269,             /* UPDATE_FLAG  */
-    NAME_TOKEN = 270,              /* NAME_TOKEN  */
+    L_BRACKET = 258,               /* L_BRACKET  */
+    R_BRACKET = 259,               /* R_BRACKET  */
+    L_BRACE = 260,                 /* L_BRACE  */
+    R_BRACE = 261,                 /* R_BRACE  */
+    L_SQUARE_BRACKET = 262,        /* L_SQUARE_BRACKET  */
+    R_SQUARE_BRACKET = 263,        /* R_SQUARE_BRACKET  */
+    COMMA = 264,                   /* COMMA  */
+    SELECTION_FLAG = 265,          /* SELECTION_FLAG  */
+    DELETE_FLAG = 266,             /* DELETE_FLAG  */
+    INSERTION_FLAG = 267,          /* INSERTION_FLAG  */
+    UPDATE_FLAG = 268,             /* UPDATE_FLAG  */
+    NAME_TOKEN = 269,              /* NAME_TOKEN  */
+    REF_TOKEN = 270,               /* REF_TOKEN  */
     PROPS_TOKEN = 271,             /* PROPS_TOKEN  */
     RELATIONS_TOKEN = 272,         /* RELATIONS_TOKEN  */
     SUB_OPERATION_TOKEN = 273,     /* SUB_OPERATION_TOKEN  */
@@ -92,9 +92,23 @@ union YYSTYPE
     bool bool_val;
 
     Node* node;
+    QueryNode* queryNode;
+    SelectionSetNode* selectionSetNode;
+    ResultSetNode* resultSetNode;
+    ArgumentWrapperNode* argumentWrapperNode;
+    ArgumentNode* argumentNode;
+    ObjectWrapperNode* objectWrapperNode;
+    ObjectNode* objectNode;
+    FieldsWrapperNode* fieldsWrapperNode;
+    FieldNode* fieldNode;
+    RelationWrapperNode* relationWrapperNode;
+    RelationNode* relationNode;
+    SubOperationWrapperNode* subOperationWrapperNode;
+    SubOperationNode* subOperationNode;
     ConstantNode* constant;
+    StringConstant* stringConstant;
 
-#line 98 "parser.h"
+#line 112 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
