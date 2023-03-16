@@ -1,7 +1,6 @@
 #include "../include/ast.h"
 #include <iostream>
 #include <vector>
-#include <map>
 #include <cstring>
 
 void print_node_val(const char* node, const char* val, int depth){
@@ -195,7 +194,7 @@ ArgumentNode::ArgumentNode(StringConstant *name, ConstantNode *value) {
 
 void ArgumentNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
-    print_node_val("Argument_value", this->value->get_str_val().c_str(), depth);
+    print_node_val("Argument_value", this->value->get_str_val().c_str(), depth+1);
 }
 
 ArgumentNode::~ArgumentNode() {
@@ -242,15 +241,19 @@ void ObjectNode::add_rels(Node *rels) {
 
 void ObjectNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
-    print_node_val("Name", this->node_name->get_str_val().c_str(), depth+1);
-    print_node_val("Class", this->node_class->get_str_val().c_str(), depth+1);
-    props->print(depth+1);
-    relations->print(depth+1);
+    print_node_val("Name", this->node_name->get_str_val().c_str(), depth + 1);
+    print_node_val("Class", this->node_class->get_str_val().c_str(), depth + 1);
+    if (this->props != NULL) {
+        this->props->print(depth + 1);
+    }
+    if (this->relations != NULL) {
+        this->relations->print(depth + 1);
+    }
 }
 
 ObjectNode::~ObjectNode() {
-    free((void*) this->node_name);
-    free((void*) this->node_class);
+//    free((void*) this->node_name);
+//    free((void*) this->node_class);
     delete this->props;
     delete this->relations;
 }

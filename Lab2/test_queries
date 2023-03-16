@@ -1,10 +1,5 @@
 Запрос на выборку элемента
 
-Person(select: true, node_name: "John", props.privet: 123){
-    id,
-    props.cyl
-};
-
 Person(select: true, node_name: "John"){
     id,
     props.cyl
@@ -23,6 +18,23 @@ class_type: Person
     StringConstant: id
     StringConstant: props.cyl
 
+Person(select: true, node_name: "John", props.privet: 123){
+    id,
+    props.cyl
+};
+
+Query: Select
+class_type: Person
+  SelectionSet:
+    Arguments:
+      Argument: node_name
+        Argument_value: "John"
+      Argument: props.privet
+        Argument_value: 123
+  ResultSet:
+    StringConstant: id
+    StringConstant: props.cyl
+
 ------------------------------------------------------
 
 Запрос на удаление элемента
@@ -31,70 +43,101 @@ Person(delete: true,
     node_name: "John"){
     id,
     node_name
-}
+};
 
-Operation_type: delete
-Selection_set:
-    Class_type: Person
+Result output:
+
+Query: Delete
+class_type: Person
+  SelectionSet:
     Arguments:
-        Argument: node_name
-            Argument_value: "John"
-Result_set:
-    Class_type: Person
-    Selection_set:
-        Field: id
-        Field: node_name
+      Argument: node_name
+        Argument_value: "John"
+  ResultSet:
+    StringConstant: id
+    StringConstant: node_name
+
 
 ------------------------------------------------------
 
 Запрос на вставку элемента
 
 Person(insert: {
-    node_class: "Object",
-    node_name: "Volkswagen"
+    {
+        node_name: Volkswagen,
+        node_class: Object2
+    }
 }){
     id
-}
+};
 
-Operation_type: insert
-Selection_set:
-    Class_type: Person
-    Arguments:
-        Argument: node_class
-            Argument_value: "Object"
-        Argument: node_name
-            Argument_value: "Volkswagen"
-Result_set:
-    Class_type: Person
-    Selection_set:
-        Field: id
+Result Output:
+
+Query: Insert
+class_type: Person
+  SelectionSet:
+    Objects:
+      Object:
+        Name: Volkswagen
+        Class: Object2
+  ResultSet:
+    StringConstant: id
+
+
+Person(insert: {
+    {
+        node_name: Volkswagen,
+        node_class: Object,
+        props {
+            cyl : 123,
+            privet : "privet"
+        }
+    }
+}){
+    id
+};
+
+Result Output:
+
+Query: Insert
+class_type: Person
+  SelectionSet:
+    Objects:
+      Object:
+        Name: Volkswagen
+        Class: Object
+        Fields:
+          Field: cyl
+          Value: 123
+          Field: privet
+          Value: "privet"
+  ResultSet:
+    StringConstant: id
 
 ------------------------------------------------------
 
 Запрос на обновление элемента
 
-Person(update: [["set", "node_name", "Jack"], ["set", "props.cyl", "123"]], id: 1){
-    id,
-    node_class,
-    node_name
-}
+Person(update:[["set", node_name, "Jack"],["set", props.cyl, "123"]],id: 1){id,node_class,node_name};
 
-Operation_type: update
-Selection_set:
-    Class_type: Person
+Query: Update
+class_type: Person
+  SelectionSet:
     Arguments:
-        Sub_operation: set
-            Argument: node_name
-                Argument_value: "Jack"
-        Sub_operation: set
-            Argument: props.cyl
-                Argument_value: "123"
-Result_set:
-    Class_type: Person
-    Selection_set:
-        Field: id
-        Field: node_class
-        Field: node_name
+      Argument: id
+        Argument_value: 1
+    SubOperations:
+      Sub_Operation: Person
+        Name: node_name
+        Value: "Jack"
+      Sub_Operation: "Jack"
+        Name: props.cyl
+        Value: "123"
+  ResultSet:
+    StringConstant: id
+    StringConstant: node_class
+    StringConstant: node_name
+
 
 
 _gt - Greater than
@@ -102,4 +145,6 @@ _ge - Greater than or equal
 _lt - Lass than
 _le - Less than or equal
 _ne - Not equal
+AND
+OR
 _like - pattern search

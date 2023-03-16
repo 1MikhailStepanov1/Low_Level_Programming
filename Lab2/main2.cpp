@@ -13,12 +13,11 @@ int parseInput(string& query, NodeWrapper& nodeWrapper){
 }
 
 int main(int argc, char** argv){
-//    yydebug = 1;
+    yydebug = 1;
     string buf;
     string line;
     while(getline(cin, line)){
         buf.append(line);
-        cout << buf << endl;
         if (line.find(';') != string::npos) {
             NodeWrapper nodeWrapper;
             int code = parseInput(buf, nodeWrapper);

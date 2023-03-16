@@ -213,8 +213,8 @@ class ObjectNode : public Node {
     private:
         StringConstant* node_name;
         StringConstant* node_class;
-        Node* props;
-        Node* relations;
+        Node* props = NULL;
+        Node* relations = NULL;
     public:
         ObjectNode(StringConstant* node_name, StringConstant* node_class);
         void add_props(Node* fields);

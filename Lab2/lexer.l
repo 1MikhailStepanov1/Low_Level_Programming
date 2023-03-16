@@ -19,8 +19,8 @@
 ","                                 { return COMMA; }
 "select: true"                      { return SELECTION_FLAG; }
 "delete: true"                      { return DELETE_FLAG; }
-"insert: "                          { return INSERTION_FLAG; }
-"update: "                          { return UPDATE_FLAG; }
+"insert:"                           { return INSERTION_FLAG; }
+"update:"                           { return UPDATE_FLAG; }
 "props"                             { return PROPS_TOKEN; }
 "relations"                         { return RELATIONS_TOKEN; }
 \"(set|add|sub)\"                   { return SUB_OPERATION_TOKEN; }
@@ -28,7 +28,7 @@
 "node_class: "                      { return NODE_CLASS; }
 "true"                              { yylval.bool_val = true; return BOOL_TOKEN; }
 "false"                             { yylval.bool_val = false; return BOOL_TOKEN; }
-[A-z]+[0-9A-z]*                     { yylval.str = strdup(yytext); return NAME_TOKEN; }
+[A-Za-z]+[0-9A-z]*                     { yylval.str = strdup(yytext); return NAME_TOKEN; }
 (props|relations)\.[A-z]+[0-9A-z]*   { yylval.str = strdup(yytext); return REF_TOKEN;}
 \"[^\"]*\"                          { yylval.str = strdup(yytext); return STRING_TOKEN; }
 -?[0-9]+                            { yylval.int_val = atoi(yytext); return INT_TOKEN; }

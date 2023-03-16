@@ -95,14 +95,14 @@ select_query: name L_BRACKET SELECTION_FLAG COMMA selection_set R_BRACKET L_BRAC
 
 delete_query: name L_BRACKET DELETE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("delete", $1); node->setSelectionSet($5); node->setResultSet($8); $$ = node; }
 
-insert_query: name L_BRACKET INSERTION_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("insert", $1); node->setSelectionSet($5); node->setResultSet($8); $$ = node; }
+insert_query: name L_BRACKET INSERTION_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("insert", $1); node->setSelectionSet($4); node->setResultSet($7); $$ = node; }
 
-update_query: name L_BRACKET UPDATE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("update", $1); node->setSelectionSet($5); node->setResultSet($8); $$ = node; }
+update_query: name L_BRACKET UPDATE_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("update", $1); node->setSelectionSet($4); node->setResultSet($7); $$ = node; }
 
 selection_set: arguments { SelectionSetNode* node = new SelectionSetNode(); node->set_args($1); $$ = node; }
-               | L_BRACE objects R_BRACE { SelectionSetNode* node = new SelectionSetNode(); node->set_objs($2); $$ = node; }
-               | L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET { SelectionSetNode* node = new SelectionSetNode(); node->set_subops($2); $$ = node; }
-               | L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET COMMA arguments { SelectionSetNode* node = new SelectionSetNode(); node->set_subops($2); node->set_args($5); $$ = node; }
+              | L_BRACE objects R_BRACE { SelectionSetNode* node = new SelectionSetNode(); node->set_objs($2); $$ = node; }
+              | L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET { SelectionSetNode* node = new SelectionSetNode(); node->set_subops($2); $$ = node; }
+              | L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET COMMA arguments { SelectionSetNode* node = new SelectionSetNode(); node->set_subops($2); node->set_args($5); $$ = node; }
 
 result_set: result_set COMMA name { $$ = $1; $1->add_attr($3); }
            | result_set COMMA REF_TOKEN { $$ = $1; $1->add_attr(new StringConstant($3)); }
@@ -113,6 +113,7 @@ arguments: arguments COMMA argument { $$ = $1; $1->add_attr($3); }
            | argument { $$ = new ArgumentWrapperNode(); $$->add_attr($1); }
 
 argument: name value { $$ = new ArgumentNode($1, $2); }
+         | REF_TOKEN value { $$ = new ArgumentNode(new StringConstant($1), $2); }
          | NODE_NAME STRING_TOKEN { $$ = new ArgumentNode(new StringConstant("node_name"), new StringConstant($2)); }
          | NODE_CLASS STRING_TOKEN { $$ = new ArgumentNode(new StringConstant("node_class"), new StringConstant($2)); }
 
@@ -120,9 +121,9 @@ objects: objects COMMA object { $$ = $1; $$->add_attr($3); }
         | object { $$ = new ObjectWrapperNode(); $$->add_attr($1); }
 
 object: L_BRACE NODE_NAME name COMMA NODE_CLASS name R_BRACE{ $$ = new ObjectNode($3, $6); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($9); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_rels($9); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($9); $$->add_rels($13); }
+       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($10); }
+       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_rels($10); }
+       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($10); $$->add_rels($14); }
 
 fields: fields COMMA field { $$ = $1; $1->add_attr($3); }
        | field { $$ = new FieldsWrapperNode(); $$->add_attr($1); }
@@ -138,6 +139,7 @@ sub_operations: sub_operations COMMA sub_operation { $$ = $1; $1->add_attr($3); 
                | sub_operation { $$ = new SubOperationWrapperNode(); $$->add_attr($1); }
 
 sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA name COMMA value R_SQUARE_BRACKET { $$ = new SubOperationNode($2, $4, $6); }
+              | L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA REF_TOKEN COMMA value R_SQUARE_BRACKET { $$ = new SubOperationNode($2, new StringConstant($4), $6); }
 
 name: NAME_TOKEN { $$ = new StringConstant($1); }
 
