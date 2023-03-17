@@ -13,7 +13,7 @@ int parseInput(string& query, NodeWrapper& nodeWrapper){
 }
 
 int main(int argc, char** argv){
-    yydebug = 1;
+//    yydebug = 1;
     string buf;
     string line;
     while(getline(cin, line)){

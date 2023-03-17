@@ -21,6 +21,7 @@ enum node_type {
     SUB_OPERATION_WRAPPER,
     SUB_OPERATION,
     FILTER_NODE,
+    LOGICAL_OP_NODE,
     CONSTANT_NODE
 };
 
@@ -37,6 +38,11 @@ enum filter_operation{
     LE,
     NE,
     LIKE
+};
+
+enum logical_operation{
+    OR,
+    AND
 };
 
 enum data_type {
@@ -199,6 +205,17 @@ class ArgumentWrapperNode : public Node {
         ~ArgumentWrapperNode();
 };
 
+class LogicalOperationNode : public Node {
+private:
+    logical_operation logic_op;
+    Node* attributes = NULL;
+public:
+    LogicalOperationNode(logical_operation logic_op);
+    void set_attr(Node* attr);
+    void print(int depth) override;
+    ~LogicalOperationNode();
+};
+
 class FilterNode : public Node {
     private:
         filter_operation filter_flag;
@@ -232,11 +249,10 @@ class ObjectWrapperNode : public Node {
 class ObjectNode : public Node {
     private:
         StringConstant* node_name;
-        StringConstant* node_class;
         Node* props = NULL;
         Node* relations = NULL;
     public:
-        ObjectNode(StringConstant* node_name, StringConstant* node_class);
+        ObjectNode(StringConstant* node_name);
         void add_props(Node* fields);
         void add_rels(Node* rels);
         void print(int depth) override;

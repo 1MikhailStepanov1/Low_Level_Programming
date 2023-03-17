@@ -23,6 +23,8 @@
 "le"                                    { yylval.filter_op = filter_operation::LE; return COMP_OP; }
 "ne"                                    { yylval.filter_op = filter_operation::NE; return COMP_OP; }
 "like"                                  { yylval.filter_op = filter_operation::LIKE; return LIKE_FILTER; }
+"or"                                    { yylval.logical_op = logical_operation::OR; return LOGIC_OP; }
+"and"                                   { yylval.logical_op = logical_operation::AND; return LOGIC_OP; }
 "filter"                                { return FILTER_TOKEN; }
 "op:"                                   { return OP_TOKEN; }
 "val:"                                  { return VAL_TOKEN; }
@@ -38,7 +40,7 @@
 "true"                                  { yylval.bool_val = true; return BOOL_TOKEN; }
 "false"                                 { yylval.bool_val = false; return BOOL_TOKEN; }
 [A-Za-z]+[0-9A-z]*                      { yylval.str = strdup(yytext); return NAME_TOKEN; }
-(props|relations)\.[A-Za-z]+[0-9A-z]*   { yylval.str = strdup(yytext); printf("%s PISYA\n", yytext); return REF_TOKEN;}
+(props|relations)\.[A-Za-z]+[0-9A-z]*   { yylval.str = strdup(yytext); return REF_TOKEN;}
 \"[^\"]*\"                              { yylval.str = strdup(yytext); return STRING_TOKEN; }
 -?[0-9]+                                { yylval.int_val = atoi(yytext); return INT_TOKEN; }
 -?[0-9]+\.[0-9]+                        { yylval.float_val = atof(yytext); return FLOAT_TOKEN; }

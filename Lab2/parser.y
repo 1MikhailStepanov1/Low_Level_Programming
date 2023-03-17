@@ -22,6 +22,7 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
     int int_val;
     bool bool_val;
     filter_operation filter_op;
+    logical_operation logical_op;
 
     Node* node;
     QueryNode* queryNode;
@@ -38,6 +39,7 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
     SubOperationWrapperNode* subOperationWrapperNode;
     SubOperationNode* subOperationNode;
     FilterNode* filterNode;
+    LogicalOperationNode* logicalOperationNode;
     ConstantNode* constant;
     StringConstant* stringConstant;
 }
@@ -63,6 +65,7 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
 %token FILTER_TOKEN
 %token OP_TOKEN
 %token VAL_TOKEN
+%token<logical_op> LOGIC_OP
 %token<filter_op> COMP_OP
 %token<filter_op> LIKE_FILTER
 %token<int_val> INT_TOKEN
@@ -84,9 +87,11 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
 %type<subOperationWrapperNode> sub_operations
 %type<subOperationNode> sub_operation
 %type<filterNode> filter
+%type<logicalOperationNode> logic_op
 %type<constant> value
 %type<stringConstant> name
 
+%left LOGIC_OP
 %left SELECTION_FLAG
 %left DELETE_FLAG
 %left INSERTION_FLAG
@@ -118,7 +123,9 @@ result_set: result_set COMMA name { $$ = $1; $1->add_attr($3); }
            | name { $$ = new ResultSetNode(); $$->add_attr($1); }
 
 arguments: arguments COMMA argument { $$ = $1; $1->add_attr($3); }
-           | argument { $$ = new ArgumentWrapperNode(); $$->add_attr($1); }
+          | arguments COMMA logic_op { $$ = $1; $1->add_attr($3); }
+          | argument { $$ = new ArgumentWrapperNode(); $$->add_attr($1); }
+          | logic_op { $$ = new ArgumentWrapperNode(); $$->add_attr($1); }
 
 argument: name value { $$ = new ArgumentNode($1, $2); }
          | name filter VAL_TOKEN value R_BRACE { ArgumentNode* node = new ArgumentNode($1, $4); node->set_filter($2); $$ = node; }
@@ -134,16 +141,18 @@ argument: name value { $$ = new ArgumentNode($1, $2); }
          | NODE_CLASS STRING_TOKEN { $$ = new ArgumentNode(new StringConstant("node_class"), new StringConstant($2)); }
          | NODE_CLASS filter VAL_TOKEN STRING_TOKEN R_BRACE { ArgumentNode* node = new ArgumentNode(new StringConstant("node_class"), new StringConstant($4)); node->set_filter($2); $$ = node; }
 
+logic_op: LOGIC_OP L_BRACE arguments R_BRACE { LogicalOperationNode* node = new LogicalOperationNode($1); node->set_attr($3); $$ = node; }
+
 filter: FILTER_TOKEN L_BRACE OP_TOKEN COMP_OP COMMA { $$ = new FilterNode($4); }
        | FILTER_TOKEN L_BRACE OP_TOKEN LIKE_FILTER COMMA { $$ = new FilterNode($4); }
 
 objects: objects COMMA object { $$ = $1; $$->add_attr($3); }
         | object { $$ = new ObjectWrapperNode(); $$->add_attr($1); }
 
-object: L_BRACE NODE_NAME name COMMA NODE_CLASS name R_BRACE{ $$ = new ObjectNode($3, $6); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($10); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_rels($10); }
-       | L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3, $6); $$->add_props($10); $$->add_rels($14); }
+object: L_BRACE NODE_NAME name R_BRACE{ $$ = new ObjectNode($3); }
+       | L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE{ $$ = new ObjectNode($3); $$->add_props($7); }
+       | L_BRACE NODE_NAME name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3); $$->add_rels($7); }
+       | L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE{ $$ = new ObjectNode($3); $$->add_props($7); $$->add_rels($11); }
 
 fields: fields COMMA field { $$ = $1; $1->add_attr($3); }
        | field { $$ = new FieldsWrapperNode(); $$->add_attr($1); }

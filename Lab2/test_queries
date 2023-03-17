@@ -5,7 +5,6 @@ Person(select: true, node_name: "John"){
     props.cyl
 };
 
-
 Result output:
 
 Query: Select
@@ -37,7 +36,8 @@ class_type: Person
 
 Person(select: true, node_name: "John", props.privet: filter{ op: gt, val: 123}){
     id,
-    props.cyl
+    props.cyl,
+    relations.muratu
 };
 
 Query: Select
@@ -49,6 +49,56 @@ class_type: Person
       Argument: props.privet
         Argument_value: 123
         Filter: GT
+  ResultSet:
+    StringConstant: id
+    StringConstant: props.cyl
+
+Person(select: true, node_name: "John", or{id:5, props.privet: 123}){
+    id,
+    props.cyl
+};
+
+Result Output:
+Query: Select
+class_type: Person
+  SelectionSet:
+    Arguments:
+      Argument: node_name
+        Argument_value: "John"
+      Logical_op: OR
+        Arguments:
+          Argument: id
+            Argument_value: 5
+          Argument: props.privet
+            Argument_value: 123
+  ResultSet:
+    StringConstant: id
+    StringConstant: props.cyl
+
+Person(select: true, node_name: "John", or{ and{ id:5, relations.kiwi: "Ogurec"}, props.cyl: 10}, props.privet: 123){
+    id,
+    props.cyl
+};
+
+Result Output:
+Query: Select
+class_type: Person
+  SelectionSet:
+    Arguments:
+      Argument: node_name
+        Argument_value: "John"
+      Logical_op: OR
+        Arguments:
+          Logical_op: AND
+            Arguments:
+              Argument: id
+                Argument_value: 5
+              Argument: relations.kiwi
+                Argument_value: "Ogurec"
+          Argument: props.cyl
+            Argument_value: 10
+      Argument: props.privet
+        Argument_value: 123
   ResultSet:
     StringConstant: id
     StringConstant: props.cyl
@@ -83,7 +133,10 @@ class_type: Person
 Person(insert: {
     {
         node_name: Volkswagen,
-        node_class: Object2
+        props{
+            id: 5,
+            cyl: 124.5
+        }
     }
 }){
     id
@@ -97,10 +150,13 @@ class_type: Person
     Objects:
       Object:
         Name: Volkswagen
-        Class: Object2
+        Fields:
+          Field: id
+            Value: 5
+          Field: cyl
+            Value: 124.500000
   ResultSet:
     StringConstant: id
-
 
 Person(insert: {
     {
@@ -136,7 +192,11 @@ class_type: Person
 
 Запрос на обновление элемента
 
-Person(update:[["set", node_name, "Jack"],["set", props.cyl, "123"]],id: 1){id,node_class,node_name};
+Person(update:[["set", node_name, "Jack"],["set", props.cyl, "123"]], id: 1){
+    id,
+    node_class,
+    node_name
+};
 
 Query: Update
 class_type: Person

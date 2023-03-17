@@ -133,33 +133,35 @@ enum yysymbol_kind_t
   YYSYMBOL_FILTER_TOKEN = 21,              /* FILTER_TOKEN  */
   YYSYMBOL_OP_TOKEN = 22,                  /* OP_TOKEN  */
   YYSYMBOL_VAL_TOKEN = 23,                 /* VAL_TOKEN  */
-  YYSYMBOL_COMP_OP = 24,                   /* COMP_OP  */
-  YYSYMBOL_LIKE_FILTER = 25,               /* LIKE_FILTER  */
-  YYSYMBOL_INT_TOKEN = 26,                 /* INT_TOKEN  */
-  YYSYMBOL_FLOAT_TOKEN = 27,               /* FLOAT_TOKEN  */
-  YYSYMBOL_STRING_TOKEN = 28,              /* STRING_TOKEN  */
-  YYSYMBOL_BOOL_TOKEN = 29,                /* BOOL_TOKEN  */
-  YYSYMBOL_YYACCEPT = 30,                  /* $accept  */
-  YYSYMBOL_query = 31,                     /* query  */
-  YYSYMBOL_select_query = 32,              /* select_query  */
-  YYSYMBOL_delete_query = 33,              /* delete_query  */
-  YYSYMBOL_insert_query = 34,              /* insert_query  */
-  YYSYMBOL_update_query = 35,              /* update_query  */
-  YYSYMBOL_selection_set = 36,             /* selection_set  */
-  YYSYMBOL_result_set = 37,                /* result_set  */
-  YYSYMBOL_arguments = 38,                 /* arguments  */
-  YYSYMBOL_argument = 39,                  /* argument  */
-  YYSYMBOL_filter = 40,                    /* filter  */
-  YYSYMBOL_objects = 41,                   /* objects  */
-  YYSYMBOL_object = 42,                    /* object  */
-  YYSYMBOL_fields = 43,                    /* fields  */
-  YYSYMBOL_field = 44,                     /* field  */
-  YYSYMBOL_relations = 45,                 /* relations  */
-  YYSYMBOL_relation = 46,                  /* relation  */
-  YYSYMBOL_sub_operations = 47,            /* sub_operations  */
-  YYSYMBOL_sub_operation = 48,             /* sub_operation  */
-  YYSYMBOL_name = 49,                      /* name  */
-  YYSYMBOL_value = 50                      /* value  */
+  YYSYMBOL_LOGIC_OP = 24,                  /* LOGIC_OP  */
+  YYSYMBOL_COMP_OP = 25,                   /* COMP_OP  */
+  YYSYMBOL_LIKE_FILTER = 26,               /* LIKE_FILTER  */
+  YYSYMBOL_INT_TOKEN = 27,                 /* INT_TOKEN  */
+  YYSYMBOL_FLOAT_TOKEN = 28,               /* FLOAT_TOKEN  */
+  YYSYMBOL_STRING_TOKEN = 29,              /* STRING_TOKEN  */
+  YYSYMBOL_BOOL_TOKEN = 30,                /* BOOL_TOKEN  */
+  YYSYMBOL_YYACCEPT = 31,                  /* $accept  */
+  YYSYMBOL_query = 32,                     /* query  */
+  YYSYMBOL_select_query = 33,              /* select_query  */
+  YYSYMBOL_delete_query = 34,              /* delete_query  */
+  YYSYMBOL_insert_query = 35,              /* insert_query  */
+  YYSYMBOL_update_query = 36,              /* update_query  */
+  YYSYMBOL_selection_set = 37,             /* selection_set  */
+  YYSYMBOL_result_set = 38,                /* result_set  */
+  YYSYMBOL_arguments = 39,                 /* arguments  */
+  YYSYMBOL_argument = 40,                  /* argument  */
+  YYSYMBOL_logic_op = 41,                  /* logic_op  */
+  YYSYMBOL_filter = 42,                    /* filter  */
+  YYSYMBOL_objects = 43,                   /* objects  */
+  YYSYMBOL_object = 44,                    /* object  */
+  YYSYMBOL_fields = 45,                    /* fields  */
+  YYSYMBOL_field = 46,                     /* field  */
+  YYSYMBOL_relations = 47,                 /* relations  */
+  YYSYMBOL_relation = 48,                  /* relation  */
+  YYSYMBOL_sub_operations = 49,            /* sub_operations  */
+  YYSYMBOL_sub_operation = 50,             /* sub_operation  */
+  YYSYMBOL_name = 51,                      /* name  */
+  YYSYMBOL_value = 52                      /* value  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -487,19 +489,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   159
+#define YYLAST   167
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  30
+#define YYNTOKENS  31
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  21
+#define YYNNTS  22
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  52
+#define YYNRULES  55
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  141
+#define YYNSTATES  144
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   284
+#define YYMAXUTOK   285
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -541,19 +543,19 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29
+      25,    26,    27,    28,    29,    30
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    97,    97,    98,    99,   100,   102,   104,   106,   108,
-     110,   111,   112,   113,   115,   116,   117,   118,   120,   121,
-     123,   124,   125,   127,   128,   129,   131,   132,   134,   135,
-     137,   138,   140,   141,   143,   144,   145,   146,   148,   149,
-     151,   153,   154,   156,   158,   159,   161,   162,   164,   166,
-     167,   168,   169
+       0,   102,   102,   103,   104,   105,   107,   109,   111,   113,
+     115,   116,   117,   118,   120,   121,   122,   123,   125,   126,
+     127,   128,   130,   131,   132,   134,   135,   136,   138,   139,
+     141,   142,   144,   146,   147,   149,   150,   152,   153,   154,
+     155,   157,   158,   160,   162,   163,   165,   167,   168,   170,
+     171,   173,   175,   176,   177,   178
 };
 #endif
 
@@ -574,12 +576,13 @@ static const char *const yytname[] =
   "R_SQUARE_BRACKET", "COMMA", "SELECTION_FLAG", "DELETE_FLAG",
   "INSERTION_FLAG", "UPDATE_FLAG", "NAME_TOKEN", "REF_TOKEN",
   "PROPS_TOKEN", "RELATIONS_TOKEN", "SUB_OPERATION_TOKEN", "NODE_NAME",
-  "NODE_CLASS", "FILTER_TOKEN", "OP_TOKEN", "VAL_TOKEN", "COMP_OP",
-  "LIKE_FILTER", "INT_TOKEN", "FLOAT_TOKEN", "STRING_TOKEN", "BOOL_TOKEN",
-  "$accept", "query", "select_query", "delete_query", "insert_query",
-  "update_query", "selection_set", "result_set", "arguments", "argument",
-  "filter", "objects", "object", "fields", "field", "relations",
-  "relation", "sub_operations", "sub_operation", "name", "value", YY_NULLPTR
+  "NODE_CLASS", "FILTER_TOKEN", "OP_TOKEN", "VAL_TOKEN", "LOGIC_OP",
+  "COMP_OP", "LIKE_FILTER", "INT_TOKEN", "FLOAT_TOKEN", "STRING_TOKEN",
+  "BOOL_TOKEN", "$accept", "query", "select_query", "delete_query",
+  "insert_query", "update_query", "selection_set", "result_set",
+  "arguments", "argument", "logic_op", "filter", "objects", "object",
+  "fields", "field", "relations", "relation", "sub_operations",
+  "sub_operation", "name", "value", YY_NULLPTR
 };
 
 static const char *
@@ -589,7 +592,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-24)
+#define YYPACT_NINF (-46)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -603,21 +606,21 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      -5,   -24,    15,   -24,   -24,   -24,   -24,    24,   -24,    21,
-      26,    54,    -3,    -3,    -3,    -3,    88,    69,    -7,   -18,
-     -15,    76,    87,   -24,    -7,    94,    95,    97,    83,    -1,
-     -24,    86,    75,   -24,   100,   -24,   -24,   -24,   -24,    84,
-     -24,   -24,    85,   -24,    89,   101,     9,    90,   -24,   104,
-     105,   106,    -5,   -24,    88,   107,   108,    69,    92,    11,
-      93,    96,    71,   -24,    16,    71,    71,    71,   109,   -24,
-      73,     9,   -24,    65,   116,   117,   119,   120,   -24,    44,
-     -24,   121,   123,    45,    49,    50,   110,   124,   125,    87,
-     126,   127,   -24,   -24,   -24,   -24,   -24,    77,   -24,   -24,
-     -24,   -24,   -24,    -5,    20,    20,   -24,   -24,   -24,   -24,
-      51,   130,   131,   -24,    78,   -24,   -24,   135,   136,    -5,
-      -5,    55,   -24,    20,    62,   -24,   -24,     1,    -5,   -24,
-     137,    -5,   -24,   139,   -24,   -24,   -24,    -5,    63,   140,
-     -24
+     -10,   -46,     9,   -46,   -46,   -46,   -46,    24,   -46,    28,
+      12,    16,    -2,    -2,    -2,    -2,    95,    96,     5,   -15,
+       7,   100,     3,    20,   -46,   -46,     5,   102,   103,   104,
+      90,    54,   -46,    92,    34,   -46,   106,   -46,   -46,   -46,
+     -46,    89,   -46,   -46,    91,   -46,    93,    -4,   108,    -4,
+      94,   -46,   110,   115,   116,   -10,   -46,    95,   113,   114,
+      96,   105,    18,    97,    99,    55,    39,   -46,   -46,    22,
+      39,    39,    39,    56,   -46,    70,    -4,   -46,    66,   118,
+     119,   123,   124,   -46,   -46,    67,   -46,   126,   127,    68,
+      72,    73,   -46,    85,   128,   129,    20,   130,   132,   -46,
+     -46,   -46,   -46,   -46,    83,   -46,   -46,   -46,   -46,   -46,
+     131,   137,    29,    29,   -46,   -46,   -46,   -46,   -10,   -10,
+     135,   136,    74,   -46,    29,    80,   -46,   -46,   -46,   -46,
+       2,   -10,   -46,   139,   -10,   -46,   141,   -46,   -46,   -46,
+     -10,    84,   142,   -46
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -625,37 +628,37 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    48,     0,     2,     3,     4,     5,     0,     1,     0,
+       0,    51,     0,     2,     3,     4,     5,     0,     1,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    10,    19,     0,     0,     0,     0,     0,     0,
-      33,     0,     0,    45,     0,    49,    50,    51,    52,     0,
-      23,    26,     0,    28,     0,     0,     0,     0,    20,     0,
-       0,     0,     0,    11,     0,     0,    12,     0,     0,     0,
-       0,     0,     0,    18,     0,     0,     0,     0,     0,    32,
-       0,     0,    44,     0,     0,     0,     0,     0,    16,     0,
-      17,     0,     0,     0,     0,     0,     0,     0,     0,    13,
-       0,     0,    25,    24,    27,    29,     8,     0,    22,    21,
-       9,     6,     7,     0,     0,     0,    30,    31,    15,    14,
-       0,     0,     0,    34,     0,    47,    46,     0,     0,     0,
-       0,     0,    39,     0,     0,    42,    43,     0,     0,    40,
-       0,     0,    35,     0,    38,    36,    41,     0,     0,     0,
-      37
+       0,     0,     0,    10,    20,    21,     0,     0,     0,     0,
+       0,     0,    36,     0,     0,    48,     0,    52,    53,    54,
+      55,     0,    25,    28,     0,    30,     0,     0,     0,     0,
+       0,    22,     0,     0,     0,     0,    11,     0,     0,    12,
+       0,     0,     0,     0,     0,     0,     0,    18,    19,     0,
+       0,     0,     0,     0,    35,     0,     0,    47,     0,     0,
+       0,     0,     0,    32,    16,     0,    17,     0,     0,     0,
+       0,     0,    37,     0,     0,     0,    13,     0,     0,    27,
+      26,    29,    31,     8,     0,    24,    23,     9,     6,     7,
+       0,     0,     0,     0,    33,    34,    15,    14,     0,     0,
+       0,     0,     0,    42,     0,     0,    45,    46,    50,    49,
+       0,     0,    43,     0,     0,    38,     0,    41,    39,    44,
+       0,     0,     0,    40
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -24,   -24,   -24,   -24,   -24,   -24,    60,    12,    61,    99,
-       6,   -24,    98,   -24,   -13,     5,    17,   -24,   102,     0,
-     -23
+     -46,   -46,   -46,   -46,   -46,   -46,    81,    -3,   -45,    86,
+      98,     4,   -46,   101,   -46,    19,    11,    15,   -46,   107,
+       0,   -25
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     4,     5,     6,    21,    79,    22,    23,
-      39,    29,    30,   121,   122,   124,   125,    32,    33,    24,
-      40
+       0,     2,     3,     4,     5,     6,    22,    85,    23,    24,
+      25,    41,    31,    32,   122,   123,   125,   126,    34,    35,
+      26,    42
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -663,85 +666,87 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       7,    48,    16,    34,    17,    53,    34,   132,    54,     1,
-      41,     1,    18,    43,    34,     8,    19,    20,   133,    35,
-      36,    37,    38,     1,    18,    42,    44,     9,    19,    20,
-      47,    10,    11,    12,    13,    14,    75,    35,    36,    74,
-      38,    82,    35,    36,    81,    38,    35,    36,    37,    38,
-      96,   100,    68,    97,    97,   101,   102,   113,    97,    97,
-     114,   127,    80,    15,   128,    80,    80,    80,   130,   139,
-      88,   131,   131,    25,    26,    27,    31,    83,    84,    85,
-      45,   111,   112,    56,    57,     1,    78,     1,    87,    90,
-      91,     1,   108,    28,   117,   118,    46,   109,    49,    50,
-     129,    51,    52,   110,    55,    58,    62,    59,    60,    65,
-      66,    67,    61,    64,    73,   134,    70,    71,    86,   123,
-     126,    76,    92,    93,    77,    94,    95,    98,   123,    99,
-     103,   126,    89,   104,   105,   106,   107,   126,   115,   116,
-     119,   120,   138,   135,   137,    63,   140,     0,   136,     0,
-       0,     0,    69,     0,     0,     0,     0,     0,     0,    72
+       7,    51,    65,    16,     1,    17,    36,    48,   135,     8,
+       1,    18,     1,    18,    43,    19,    20,    19,    20,   136,
+      21,    14,    21,    44,    46,    15,    36,     9,    36,    49,
+      50,    96,    37,    38,    39,    40,    45,    80,    10,    11,
+      12,    13,    59,    60,    88,    37,    38,    79,    40,    37,
+      38,    87,    40,     1,    84,    73,    37,    38,    39,    40,
+      56,    83,    92,    57,    49,    93,    86,    89,    90,    91,
+      86,    86,    86,   103,   107,    95,   104,   104,   108,   109,
+     130,   104,   104,   131,     1,    94,   133,   120,   121,   134,
+     142,    97,    98,   134,    27,    28,    29,     1,   116,   132,
+      30,   110,   111,    33,   117,    47,    52,    53,    54,    55,
+      58,    61,    62,    66,    63,    70,    64,    69,   124,   127,
+      71,    72,    75,    76,    99,   100,    81,    78,    82,   101,
+     102,   124,   105,   106,   127,    67,   118,   112,   113,   114,
+     127,   115,   119,   128,   129,   138,   140,    68,   143,   139,
+     137,   141,     0,     0,     0,     0,     0,     0,    74,     0,
+       0,     0,     0,     0,     0,     0,     0,    77
 };
 
 static const yytype_int16 yycheck[] =
 {
-       0,    24,     5,    21,     7,     6,    21,     6,     9,    14,
-      28,    14,    15,    28,    21,     0,    19,    20,    17,    26,
-      27,    28,    29,    14,    15,    19,    20,     3,    19,    20,
-      24,    10,    11,    12,    13,     9,    59,    26,    27,    28,
-      29,    64,    26,    27,    28,    29,    26,    27,    28,    29,
-       6,     6,    52,     9,     9,     6,     6,     6,     9,     9,
-       9,     6,    62,     9,     9,    65,    66,    67,     6,     6,
-      70,     9,     9,    13,    14,    15,     7,    65,    66,    67,
-       4,   104,   105,     8,     9,    14,    15,    14,    15,    24,
-      25,    14,    15,     5,    16,    17,     9,    97,     4,     4,
-     123,     4,    19,   103,    18,     5,     5,    23,    23,     5,
-       5,     5,    23,    23,    22,   128,     9,     9,     9,   119,
-     120,    28,     6,     6,    28,     6,     6,     6,   128,     6,
-      20,   131,    71,     9,     9,     9,     9,   137,     8,     8,
-       5,     5,   137,     6,     5,    46,     6,    -1,   131,    -1,
-      -1,    -1,    54,    -1,    -1,    -1,    -1,    -1,    -1,    57
+       0,    26,    47,     5,    14,     7,    21,     4,     6,     0,
+      14,    15,    14,    15,    29,    19,    20,    19,    20,    17,
+      24,     9,    24,    19,    20,     9,    21,     3,    21,     9,
+      26,    76,    27,    28,    29,    30,    29,    62,    10,    11,
+      12,    13,     8,     9,    69,    27,    28,    29,    30,    27,
+      28,    29,    30,    14,    15,    55,    27,    28,    29,    30,
+       6,     6,     6,     9,     9,     9,    66,    70,    71,    72,
+      70,    71,    72,     6,     6,    75,     9,     9,     6,     6,
+       6,     9,     9,     9,    14,    15,     6,   112,   113,     9,
+       6,    25,    26,     9,    13,    14,    15,    14,    15,   124,
+       5,    16,    17,     7,   104,     5,     4,     4,     4,    19,
+      18,     5,    23,     5,    23,     5,    23,    23,   118,   119,
+       5,     5,     9,     9,     6,     6,    29,    22,    29,     6,
+       6,   131,     6,     6,   134,    49,     5,     9,     9,     9,
+     140,     9,     5,     8,     8,     6,     5,    49,     6,   134,
+     131,   140,    -1,    -1,    -1,    -1,    -1,    -1,    57,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    60
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    14,    31,    32,    33,    34,    35,    49,     0,     3,
+       0,    14,    32,    33,    34,    35,    36,    51,     0,     3,
       10,    11,    12,    13,     9,     9,     5,     7,    15,    19,
-      20,    36,    38,    39,    49,    36,    36,    36,     5,    41,
-      42,     7,    47,    48,    21,    26,    27,    28,    29,    40,
-      50,    28,    40,    28,    40,     4,     9,    40,    50,     4,
-       4,     4,    19,     6,     9,    18,     8,     9,     5,    23,
-      23,    23,     5,    39,    23,     5,     5,     5,    49,    42,
-       9,     9,    48,    22,    28,    50,    28,    28,    15,    37,
-      49,    28,    50,    37,    37,    37,     9,    15,    49,    38,
-      24,    25,     6,     6,     6,     6,     6,     9,     6,     6,
-       6,     6,     6,    20,     9,     9,     9,     9,    15,    49,
-      49,    50,    50,     6,     9,     8,     8,    16,    17,     5,
-       5,    43,    44,    49,    45,    46,    49,     6,     9,    50,
-       6,     9,     6,    17,    44,     6,    46,     5,    45,     6,
-       6
+      20,    24,    37,    39,    40,    41,    51,    37,    37,    37,
+       5,    43,    44,     7,    49,    50,    21,    27,    28,    29,
+      30,    42,    52,    29,    42,    29,    42,     5,     4,     9,
+      42,    52,     4,     4,     4,    19,     6,     9,    18,     8,
+       9,     5,    23,    23,    23,    39,     5,    40,    41,    23,
+       5,     5,     5,    51,    44,     9,     9,    50,    22,    29,
+      52,    29,    29,     6,    15,    38,    51,    29,    52,    38,
+      38,    38,     6,     9,    15,    51,    39,    25,    26,     6,
+       6,     6,     6,     6,     9,     6,     6,     6,     6,     6,
+      16,    17,     9,     9,     9,     9,    15,    51,     5,     5,
+      52,    52,    45,    46,    51,    47,    48,    51,     8,     8,
+       6,     9,    52,     6,     9,     6,    17,    46,     6,    48,
+       5,    47,     6,     6
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    30,    31,    31,    31,    31,    32,    33,    34,    35,
-      36,    36,    36,    36,    37,    37,    37,    37,    38,    38,
-      39,    39,    39,    39,    39,    39,    39,    39,    39,    39,
-      40,    40,    41,    41,    42,    42,    42,    42,    43,    43,
-      44,    45,    45,    46,    47,    47,    48,    48,    49,    50,
-      50,    50,    50
+       0,    31,    32,    32,    32,    32,    33,    34,    35,    36,
+      37,    37,    37,    37,    38,    38,    38,    38,    39,    39,
+      39,    39,    40,    40,    40,    40,    40,    40,    40,    40,
+      40,    40,    41,    42,    42,    43,    43,    44,    44,    44,
+      44,    45,    45,    46,    47,    47,    48,    49,    49,    50,
+      50,    51,    52,    52,    52,    52
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     1,     1,     9,     9,     8,     8,
-       1,     3,     3,     5,     3,     3,     1,     1,     3,     1,
-       2,     5,     5,     2,     5,     5,     2,     5,     2,     5,
-       5,     5,     3,     1,     7,    12,    12,    16,     3,     1,
-       2,     3,     1,     1,     3,     1,     7,     7,     1,     1,
-       1,     1,     1
+       1,     3,     3,     5,     3,     3,     1,     1,     3,     3,
+       1,     1,     2,     5,     5,     2,     5,     5,     2,     5,
+       2,     5,     4,     5,     5,     3,     1,     4,     9,     9,
+      13,     3,     1,     2,     3,     1,     1,     3,     1,     7,
+       7,     1,     1,     1,     1,     1
 };
 
 
@@ -1477,313 +1482,331 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* query: select_query  */
-#line 97 "parser.y"
+#line 102 "parser.y"
                     { root.node = (yyvsp[0].queryNode);}
-#line 1483 "parser.c"
+#line 1488 "parser.c"
     break;
 
   case 3: /* query: delete_query  */
-#line 98 "parser.y"
+#line 103 "parser.y"
                      { root.node = (yyvsp[0].queryNode); }
-#line 1489 "parser.c"
+#line 1494 "parser.c"
     break;
 
   case 4: /* query: insert_query  */
-#line 99 "parser.y"
+#line 104 "parser.y"
                      { root.node = (yyvsp[0].queryNode); }
-#line 1495 "parser.c"
+#line 1500 "parser.c"
     break;
 
   case 5: /* query: update_query  */
-#line 100 "parser.y"
+#line 105 "parser.y"
                      { root.node = (yyvsp[0].queryNode); }
-#line 1501 "parser.c"
+#line 1506 "parser.c"
     break;
 
   case 6: /* select_query: name L_BRACKET SELECTION_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 102 "parser.y"
+#line 107 "parser.y"
                                                                                                      { QueryNode* node = new QueryNode("select", (yyvsp[-8].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
-#line 1507 "parser.c"
+#line 1512 "parser.c"
     break;
 
   case 7: /* delete_query: name L_BRACKET DELETE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 104 "parser.y"
+#line 109 "parser.y"
                                                                                                   { QueryNode* node = new QueryNode("delete", (yyvsp[-8].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
-#line 1513 "parser.c"
+#line 1518 "parser.c"
     break;
 
   case 8: /* insert_query: name L_BRACKET INSERTION_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 106 "parser.y"
+#line 111 "parser.y"
                                                                                                { QueryNode* node = new QueryNode("insert", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
-#line 1519 "parser.c"
+#line 1524 "parser.c"
     break;
 
   case 9: /* update_query: name L_BRACKET UPDATE_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 108 "parser.y"
+#line 113 "parser.y"
                                                                                             { QueryNode* node = new QueryNode("update", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
-#line 1525 "parser.c"
+#line 1530 "parser.c"
     break;
 
   case 10: /* selection_set: arguments  */
-#line 110 "parser.y"
+#line 115 "parser.y"
                          { SelectionSetNode* node = new SelectionSetNode(); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
-#line 1531 "parser.c"
+#line 1536 "parser.c"
     break;
 
   case 11: /* selection_set: L_BRACE objects R_BRACE  */
-#line 111 "parser.y"
+#line 116 "parser.y"
                                         { SelectionSetNode* node = new SelectionSetNode(); node->set_objs((yyvsp[-1].objectWrapperNode)); (yyval.selectionSetNode) = node; }
-#line 1537 "parser.c"
+#line 1542 "parser.c"
     break;
 
   case 12: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET  */
-#line 112 "parser.y"
+#line 117 "parser.y"
                                                                  { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-1].subOperationWrapperNode)); (yyval.selectionSetNode) = node; }
-#line 1543 "parser.c"
+#line 1548 "parser.c"
     break;
 
   case 13: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET COMMA arguments  */
-#line 113 "parser.y"
+#line 118 "parser.y"
                                                                                  { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-3].subOperationWrapperNode)); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
-#line 1549 "parser.c"
+#line 1554 "parser.c"
     break;
 
   case 14: /* result_set: result_set COMMA name  */
-#line 115 "parser.y"
+#line 120 "parser.y"
                                   { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
-#line 1555 "parser.c"
+#line 1560 "parser.c"
     break;
 
   case 15: /* result_set: result_set COMMA REF_TOKEN  */
-#line 116 "parser.y"
+#line 121 "parser.y"
                                         { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
-#line 1561 "parser.c"
+#line 1566 "parser.c"
     break;
 
   case 16: /* result_set: REF_TOKEN  */
-#line 117 "parser.y"
+#line 122 "parser.y"
                        { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
-#line 1567 "parser.c"
+#line 1572 "parser.c"
     break;
 
   case 17: /* result_set: name  */
-#line 118 "parser.y"
+#line 123 "parser.y"
                   { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
-#line 1573 "parser.c"
+#line 1578 "parser.c"
     break;
 
   case 18: /* arguments: arguments COMMA argument  */
-#line 120 "parser.y"
-                                    { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
-#line 1579 "parser.c"
-    break;
-
-  case 19: /* arguments: argument  */
-#line 121 "parser.y"
-                      { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
-#line 1585 "parser.c"
-    break;
-
-  case 20: /* argument: name value  */
-#line 123 "parser.y"
-                     { (yyval.argumentNode) = new ArgumentNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
-#line 1591 "parser.c"
-    break;
-
-  case 21: /* argument: name filter VAL_TOKEN value R_BRACE  */
-#line 124 "parser.y"
-                                               { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1597 "parser.c"
-    break;
-
-  case 22: /* argument: name filter VAL_TOKEN STRING_TOKEN R_BRACE  */
 #line 125 "parser.y"
-                                                      { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1603 "parser.c"
+                                    { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
+#line 1584 "parser.c"
     break;
 
-  case 23: /* argument: REF_TOKEN value  */
+  case 19: /* arguments: arguments COMMA logic_op  */
+#line 126 "parser.y"
+                                     { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
+#line 1590 "parser.c"
+    break;
+
+  case 20: /* arguments: argument  */
 #line 127 "parser.y"
-                           { (yyval.argumentNode) = new ArgumentNode(new StringConstant((yyvsp[-1].str)), (yyvsp[0].constant)); }
-#line 1609 "parser.c"
+                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
+#line 1596 "parser.c"
     break;
 
-  case 24: /* argument: REF_TOKEN filter VAL_TOKEN value R_BRACE  */
+  case 21: /* arguments: logic_op  */
 #line 128 "parser.y"
-                                                    { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1615 "parser.c"
+                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
+#line 1602 "parser.c"
     break;
 
-  case 25: /* argument: REF_TOKEN filter VAL_TOKEN STRING_TOKEN R_BRACE  */
-#line 129 "parser.y"
-                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1621 "parser.c"
+  case 22: /* argument: name value  */
+#line 130 "parser.y"
+                     { (yyval.argumentNode) = new ArgumentNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
+#line 1608 "parser.c"
     break;
 
-  case 26: /* argument: NODE_NAME STRING_TOKEN  */
+  case 23: /* argument: name filter VAL_TOKEN value R_BRACE  */
 #line 131 "parser.y"
-                                  { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[0].str))); }
-#line 1627 "parser.c"
+                                               { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1614 "parser.c"
     break;
 
-  case 27: /* argument: NODE_NAME filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+  case 24: /* argument: name filter VAL_TOKEN STRING_TOKEN R_BRACE  */
 #line 132 "parser.y"
-                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1633 "parser.c"
+                                                      { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1620 "parser.c"
     break;
 
-  case 28: /* argument: NODE_CLASS STRING_TOKEN  */
+  case 25: /* argument: REF_TOKEN value  */
 #line 134 "parser.y"
-                                   { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[0].str))); }
-#line 1639 "parser.c"
+                           { (yyval.argumentNode) = new ArgumentNode(new StringConstant((yyvsp[-1].str)), (yyvsp[0].constant)); }
+#line 1626 "parser.c"
     break;
 
-  case 29: /* argument: NODE_CLASS filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+  case 26: /* argument: REF_TOKEN filter VAL_TOKEN value R_BRACE  */
 #line 135 "parser.y"
-                                                            { ArgumentNode* node = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
-#line 1645 "parser.c"
+                                                    { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1632 "parser.c"
     break;
 
-  case 30: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN COMP_OP COMMA  */
-#line 137 "parser.y"
-                                                    { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
-#line 1651 "parser.c"
+  case 27: /* argument: REF_TOKEN filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 136 "parser.y"
+                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1638 "parser.c"
     break;
 
-  case 31: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN LIKE_FILTER COMMA  */
+  case 28: /* argument: NODE_NAME STRING_TOKEN  */
 #line 138 "parser.y"
-                                                         { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
-#line 1657 "parser.c"
+                                  { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[0].str))); }
+#line 1644 "parser.c"
     break;
 
-  case 32: /* objects: objects COMMA object  */
-#line 140 "parser.y"
-                              { (yyval.objectWrapperNode) = (yyvsp[-2].objectWrapperNode); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
-#line 1663 "parser.c"
+  case 29: /* argument: NODE_NAME filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 139 "parser.y"
+                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1650 "parser.c"
     break;
 
-  case 33: /* objects: object  */
+  case 30: /* argument: NODE_CLASS STRING_TOKEN  */
 #line 141 "parser.y"
-                 { (yyval.objectWrapperNode) = new ObjectWrapperNode(); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
-#line 1669 "parser.c"
+                                   { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[0].str))); }
+#line 1656 "parser.c"
     break;
 
-  case 34: /* object: L_BRACE NODE_NAME name COMMA NODE_CLASS name R_BRACE  */
-#line 143 "parser.y"
-                                                            { (yyval.objectNode) = new ObjectNode((yyvsp[-4].stringConstant), (yyvsp[-1].stringConstant)); }
-#line 1675 "parser.c"
+  case 31: /* argument: NODE_CLASS filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 142 "parser.y"
+                                                            { ArgumentNode* node = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+#line 1662 "parser.c"
     break;
 
-  case 35: /* object: L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE  */
+  case 32: /* logic_op: LOGIC_OP L_BRACE arguments R_BRACE  */
 #line 144 "parser.y"
-                                                                                                      { (yyval.objectNode) = new ObjectNode((yyvsp[-9].stringConstant), (yyvsp[-6].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-2].fieldsWrapperNode)); }
-#line 1681 "parser.c"
+                                             { LogicalOperationNode* node = new LogicalOperationNode((yyvsp[-3].logical_op)); node->set_attr((yyvsp[-1].argumentWrapperNode)); (yyval.logicalOperationNode) = node; }
+#line 1668 "parser.c"
     break;
 
-  case 36: /* object: L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
-#line 145 "parser.y"
-                                                                                                             { (yyval.objectNode) = new ObjectNode((yyvsp[-9].stringConstant), (yyvsp[-6].stringConstant)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
-#line 1687 "parser.c"
-    break;
-
-  case 37: /* object: L_BRACE NODE_NAME name COMMA NODE_CLASS name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+  case 33: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN COMP_OP COMMA  */
 #line 146 "parser.y"
-                                                                                                                                                { (yyval.objectNode) = new ObjectNode((yyvsp[-13].stringConstant), (yyvsp[-10].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-6].fieldsWrapperNode)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
-#line 1693 "parser.c"
+                                                    { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
+#line 1674 "parser.c"
     break;
 
-  case 38: /* fields: fields COMMA field  */
-#line 148 "parser.y"
-                           { (yyval.fieldsWrapperNode) = (yyvsp[-2].fieldsWrapperNode); (yyvsp[-2].fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
-#line 1699 "parser.c"
+  case 34: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN LIKE_FILTER COMMA  */
+#line 147 "parser.y"
+                                                         { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
+#line 1680 "parser.c"
     break;
 
-  case 39: /* fields: field  */
+  case 35: /* objects: objects COMMA object  */
 #line 149 "parser.y"
-               { (yyval.fieldsWrapperNode) = new FieldsWrapperNode(); (yyval.fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
-#line 1705 "parser.c"
+                              { (yyval.objectWrapperNode) = (yyvsp[-2].objectWrapperNode); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
+#line 1686 "parser.c"
     break;
 
-  case 40: /* field: name value  */
-#line 151 "parser.y"
-                  { (yyval.fieldNode) = new FieldNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
-#line 1711 "parser.c"
+  case 36: /* objects: object  */
+#line 150 "parser.y"
+                 { (yyval.objectWrapperNode) = new ObjectWrapperNode(); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
+#line 1692 "parser.c"
     break;
 
-  case 41: /* relations: relations COMMA relation  */
+  case 37: /* object: L_BRACE NODE_NAME name R_BRACE  */
+#line 152 "parser.y"
+                                      { (yyval.objectNode) = new ObjectNode((yyvsp[-1].stringConstant)); }
+#line 1698 "parser.c"
+    break;
+
+  case 38: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE  */
 #line 153 "parser.y"
-                                    { (yyval.relationWrapperNode) = (yyvsp[-2].relationWrapperNode); (yyvsp[-2].relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
-#line 1717 "parser.c"
+                                                                                { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-2].fieldsWrapperNode)); }
+#line 1704 "parser.c"
     break;
 
-  case 42: /* relations: relation  */
+  case 39: /* object: L_BRACE NODE_NAME name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
 #line 154 "parser.y"
-                     { (yyval.relationWrapperNode) = new RelationWrapperNode(); (yyval.relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
-#line 1723 "parser.c"
+                                                                                       { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
+#line 1710 "parser.c"
     break;
 
-  case 43: /* relation: name  */
-#line 156 "parser.y"
-               { (yyval.relationNode) = new RelationNode((yyvsp[0].stringConstant)); }
-#line 1729 "parser.c"
+  case 40: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+#line 155 "parser.y"
+                                                                                                                          { (yyval.objectNode) = new ObjectNode((yyvsp[-10].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-6].fieldsWrapperNode)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
+#line 1716 "parser.c"
     break;
 
-  case 44: /* sub_operations: sub_operations COMMA sub_operation  */
+  case 41: /* fields: fields COMMA field  */
+#line 157 "parser.y"
+                           { (yyval.fieldsWrapperNode) = (yyvsp[-2].fieldsWrapperNode); (yyvsp[-2].fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
+#line 1722 "parser.c"
+    break;
+
+  case 42: /* fields: field  */
 #line 158 "parser.y"
-                                                   { (yyval.subOperationWrapperNode) = (yyvsp[-2].subOperationWrapperNode); (yyvsp[-2].subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
-#line 1735 "parser.c"
+               { (yyval.fieldsWrapperNode) = new FieldsWrapperNode(); (yyval.fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
+#line 1728 "parser.c"
     break;
 
-  case 45: /* sub_operations: sub_operation  */
-#line 159 "parser.y"
-                               { (yyval.subOperationWrapperNode) = new SubOperationWrapperNode(); (yyval.subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
-#line 1741 "parser.c"
+  case 43: /* field: name value  */
+#line 160 "parser.y"
+                  { (yyval.fieldNode) = new FieldNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
+#line 1734 "parser.c"
     break;
 
-  case 46: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA name COMMA value R_SQUARE_BRACKET  */
-#line 161 "parser.y"
-                                                                                            { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].str), (yyvsp[-3].stringConstant), (yyvsp[-1].constant)); }
-#line 1747 "parser.c"
-    break;
-
-  case 47: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA REF_TOKEN COMMA value R_SQUARE_BRACKET  */
+  case 44: /* relations: relations COMMA relation  */
 #line 162 "parser.y"
-                                                                                                  { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].str), new StringConstant((yyvsp[-3].str)), (yyvsp[-1].constant)); }
-#line 1753 "parser.c"
+                                    { (yyval.relationWrapperNode) = (yyvsp[-2].relationWrapperNode); (yyvsp[-2].relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
+#line 1740 "parser.c"
     break;
 
-  case 48: /* name: NAME_TOKEN  */
-#line 164 "parser.y"
-                 { (yyval.stringConstant) = new StringConstant((yyvsp[0].str)); }
-#line 1759 "parser.c"
+  case 45: /* relations: relation  */
+#line 163 "parser.y"
+                     { (yyval.relationWrapperNode) = new RelationWrapperNode(); (yyval.relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
+#line 1746 "parser.c"
     break;
 
-  case 49: /* value: INT_TOKEN  */
-#line 166 "parser.y"
-                 { (yyval.constant) = new IntConstant((yyvsp[0].int_val)); }
-#line 1765 "parser.c"
+  case 46: /* relation: name  */
+#line 165 "parser.y"
+               { (yyval.relationNode) = new RelationNode((yyvsp[0].stringConstant)); }
+#line 1752 "parser.c"
     break;
 
-  case 50: /* value: FLOAT_TOKEN  */
+  case 47: /* sub_operations: sub_operations COMMA sub_operation  */
 #line 167 "parser.y"
-                    { (yyval.constant) = new FloatConstant((yyvsp[0].float_val)); }
-#line 1771 "parser.c"
+                                                   { (yyval.subOperationWrapperNode) = (yyvsp[-2].subOperationWrapperNode); (yyvsp[-2].subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
+#line 1758 "parser.c"
     break;
 
-  case 51: /* value: STRING_TOKEN  */
+  case 48: /* sub_operations: sub_operation  */
 #line 168 "parser.y"
+                               { (yyval.subOperationWrapperNode) = new SubOperationWrapperNode(); (yyval.subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
+#line 1764 "parser.c"
+    break;
+
+  case 49: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA name COMMA value R_SQUARE_BRACKET  */
+#line 170 "parser.y"
+                                                                                            { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].str), (yyvsp[-3].stringConstant), (yyvsp[-1].constant)); }
+#line 1770 "parser.c"
+    break;
+
+  case 50: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA REF_TOKEN COMMA value R_SQUARE_BRACKET  */
+#line 171 "parser.y"
+                                                                                                  { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].str), new StringConstant((yyvsp[-3].str)), (yyvsp[-1].constant)); }
+#line 1776 "parser.c"
+    break;
+
+  case 51: /* name: NAME_TOKEN  */
+#line 173 "parser.y"
+                 { (yyval.stringConstant) = new StringConstant((yyvsp[0].str)); }
+#line 1782 "parser.c"
+    break;
+
+  case 52: /* value: INT_TOKEN  */
+#line 175 "parser.y"
+                 { (yyval.constant) = new IntConstant((yyvsp[0].int_val)); }
+#line 1788 "parser.c"
+    break;
+
+  case 53: /* value: FLOAT_TOKEN  */
+#line 176 "parser.y"
+                    { (yyval.constant) = new FloatConstant((yyvsp[0].float_val)); }
+#line 1794 "parser.c"
+    break;
+
+  case 54: /* value: STRING_TOKEN  */
+#line 177 "parser.y"
                      { (yyval.constant) = new StringConstant((yyvsp[0].str)); }
-#line 1777 "parser.c"
+#line 1800 "parser.c"
     break;
 
-  case 52: /* value: BOOL_TOKEN  */
-#line 169 "parser.y"
+  case 55: /* value: BOOL_TOKEN  */
+#line 178 "parser.y"
                    { (yyval.constant) = new BoolConstant((yyvsp[0].bool_val)); }
-#line 1783 "parser.c"
+#line 1806 "parser.c"
     break;
 
 
-#line 1787 "parser.c"
+#line 1810 "parser.c"
 
       default: break;
     }
@@ -2007,4 +2030,4 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 171 "parser.y"
+#line 180 "parser.y"

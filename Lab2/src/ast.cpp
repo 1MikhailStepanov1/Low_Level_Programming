@@ -40,6 +40,10 @@ const char* get_string_from_node_type(node_type type){
             return "Sub_Operation";
         case CONSTANT_NODE:
             return "Constant";
+        case FILTER_NODE:
+            return "Filter";
+        case LOGICAL_OP_NODE:
+            return "Logical_op";
         default:
             return "unknown";
     }
@@ -90,6 +94,17 @@ const char* get_str_filter_from_enum(filter_operation operation){
             return "unknown";
     }
 }
+
+const char* get_str_from_logic_op_type (logical_operation logic_op){
+    switch (logic_op) {
+        case OR:
+            return "OR";
+        case AND:
+            return "AND";
+        default:
+            return "unknown";
+    }
+};
 
 
 
@@ -204,6 +219,28 @@ ArgumentWrapperNode::~ArgumentWrapperNode() {
     }
 }
 
+// ---------------------------   Logical Operation Node   --------------------------- //
+
+LogicalOperationNode::LogicalOperationNode(logical_operation logic_op) {
+    this->type = LOGICAL_OP_NODE;
+    this->logic_op = logic_op;
+}
+
+void LogicalOperationNode::set_attr(Node *attr) {
+    this->attributes = attr;
+}
+
+void LogicalOperationNode::print(int depth) {
+    print_node_val(get_string_from_node_type(this->type), get_str_from_logic_op_type(this->logic_op), depth);
+    if (this->attributes != NULL){
+        this->attributes->print(depth+1);
+    }
+}
+
+LogicalOperationNode::~LogicalOperationNode() {
+    delete this->attributes;
+}
+
 // ---------------------------   Filter Node   --------------------------- //
 
 FilterNode::FilterNode(filter_operation filter_flag) {
@@ -212,7 +249,7 @@ FilterNode::FilterNode(filter_operation filter_flag) {
 }
 
 void FilterNode::print(int depth) {
-    print_node_val("Filter", get_str_filter_from_enum(this->filter_flag), depth);
+    print_node_val(get_string_from_node_type(this->type), get_str_filter_from_enum(this->filter_flag), depth);
 }
 
 
@@ -264,10 +301,9 @@ ObjectWrapperNode::~ObjectWrapperNode() {
 }
 
 // ---------------------------   Object Node   --------------------------- //
-ObjectNode::ObjectNode(StringConstant* node_name, StringConstant* node_class) {
+ObjectNode::ObjectNode(StringConstant* node_name) {
     this->type = OBJECT_NODE;
     this->node_name = node_name;
-    this->node_class = node_class;
 }
 
 void ObjectNode::add_props(Node* fields) {
@@ -281,7 +317,6 @@ void ObjectNode::add_rels(Node *rels) {
 void ObjectNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     print_node_val("Name", this->node_name->get_str_val().c_str(), depth + 1);
-    print_node_val("Class", this->node_class->get_str_val().c_str(), depth + 1);
     if (this->props != NULL) {
         this->props->print(depth + 1);
     }
@@ -328,7 +363,7 @@ FieldNode::FieldNode(StringConstant *name, ConstantNode *value) {
 
 void FieldNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
-    print_node_val("Value", this->value->get_str_val().c_str(), depth);
+    print_node_val("Value", this->value->get_str_val().c_str(), depth+1);
 }
 
 FieldNode::~FieldNode() {
