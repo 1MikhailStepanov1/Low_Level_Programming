@@ -20,6 +20,7 @@ enum node_type {
     RELATION_NODE,
     SUB_OPERATION_WRAPPER,
     SUB_OPERATION,
+    FILTER_NODE,
     CONSTANT_NODE
 };
 
@@ -27,6 +28,15 @@ enum sub_operation {
     SET,
     ADD,
     SUB
+};
+
+enum filter_operation{
+    GT,
+    GE,
+    LT,
+    LE,
+    NE,
+    LIKE
 };
 
 enum data_type {
@@ -189,12 +199,22 @@ class ArgumentWrapperNode : public Node {
         ~ArgumentWrapperNode();
 };
 
+class FilterNode : public Node {
+    private:
+        filter_operation filter_flag;
+    public:
+        FilterNode(filter_operation filter_flag);
+        void print(int depth) override;
+};
+
 class ArgumentNode : public Node {
     private:
         StringConstant* name;
         ConstantNode* value;
+        Node* filerNode = NULL;
     public:
         ArgumentNode(StringConstant* name, ConstantNode* value);
+        void set_filter(Node* filterNode);
         void print(int depth) override;
         ~ArgumentNode();
 };

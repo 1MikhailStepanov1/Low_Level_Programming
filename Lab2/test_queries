@@ -35,6 +35,24 @@ class_type: Person
     StringConstant: id
     StringConstant: props.cyl
 
+Person(select: true, node_name: "John", props.privet: filter{ op: gt, val: 123}){
+    id,
+    props.cyl
+};
+
+Query: Select
+class_type: Person
+  SelectionSet:
+    Arguments:
+      Argument: node_name
+        Argument_value: "John"
+      Argument: props.privet
+        Argument_value: 123
+        Filter: GT
+  ResultSet:
+    StringConstant: id
+    StringConstant: props.cyl
+
 ------------------------------------------------------
 
 Запрос на удаление элемента
@@ -139,12 +157,5 @@ class_type: Person
     StringConstant: node_name
 
 
-
-_gt - Greater than
-_ge - Greater than or equal
-_lt - Lass than
-_le - Less than or equal
-_ne - Not equal
 AND
 OR
-_like - pattern search

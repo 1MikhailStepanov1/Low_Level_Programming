@@ -72,10 +72,15 @@ extern int yydebug;
     SUB_OPERATION_TOKEN = 273,     /* SUB_OPERATION_TOKEN  */
     NODE_NAME = 274,               /* NODE_NAME  */
     NODE_CLASS = 275,              /* NODE_CLASS  */
-    INT_TOKEN = 276,               /* INT_TOKEN  */
-    FLOAT_TOKEN = 277,             /* FLOAT_TOKEN  */
-    STRING_TOKEN = 278,            /* STRING_TOKEN  */
-    BOOL_TOKEN = 279               /* BOOL_TOKEN  */
+    FILTER_TOKEN = 276,            /* FILTER_TOKEN  */
+    OP_TOKEN = 277,                /* OP_TOKEN  */
+    VAL_TOKEN = 278,               /* VAL_TOKEN  */
+    COMP_OP = 279,                 /* COMP_OP  */
+    LIKE_FILTER = 280,             /* LIKE_FILTER  */
+    INT_TOKEN = 281,               /* INT_TOKEN  */
+    FLOAT_TOKEN = 282,             /* FLOAT_TOKEN  */
+    STRING_TOKEN = 283,            /* STRING_TOKEN  */
+    BOOL_TOKEN = 284               /* BOOL_TOKEN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -90,6 +95,7 @@ union YYSTYPE
     float float_val;
     int int_val;
     bool bool_val;
+    filter_operation filter_op;
 
     Node* node;
     QueryNode* queryNode;
@@ -105,10 +111,11 @@ union YYSTYPE
     RelationNode* relationNode;
     SubOperationWrapperNode* subOperationWrapperNode;
     SubOperationNode* subOperationNode;
+    FilterNode* filterNode;
     ConstantNode* constant;
     StringConstant* stringConstant;
 
-#line 112 "parser.h"
+#line 119 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -72,6 +72,25 @@ operation_type get_op_type_from_string(const char* str){
     } else return UNKNOWN;
 }
 
+const char* get_str_filter_from_enum(filter_operation operation){
+    switch (operation) {
+        case GT:
+            return "GT";
+        case GE:
+            return "GE";
+        case LT:
+            return "LT";
+        case LE:
+            return "LE";
+        case NE:
+            return "NE";
+        case LIKE:
+            return "LIKE";
+        default:
+            return "unknown";
+    }
+}
+
 
 
 // ---------------------------   Query Node   --------------------------- //
@@ -185,6 +204,18 @@ ArgumentWrapperNode::~ArgumentWrapperNode() {
     }
 }
 
+// ---------------------------   Filter Node   --------------------------- //
+
+FilterNode::FilterNode(filter_operation filter_flag) {
+    this->type = FILTER_NODE;
+    this->filter_flag = filter_flag;
+}
+
+void FilterNode::print(int depth) {
+    print_node_val("Filter", get_str_filter_from_enum(this->filter_flag), depth);
+}
+
+
 // ---------------------------   Argument Node   --------------------------- //
 ArgumentNode::ArgumentNode(StringConstant *name, ConstantNode *value) {
     this->type = ARGUMENT_NODE;
@@ -192,12 +223,20 @@ ArgumentNode::ArgumentNode(StringConstant *name, ConstantNode *value) {
     this->value = value;
 }
 
+void ArgumentNode::set_filter(Node *filterNode) {
+    this->filerNode = filterNode;
+}
+
 void ArgumentNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
     print_node_val("Argument_value", this->value->get_str_val().c_str(), depth+1);
+    if (this->filerNode != NULL){
+        this->filerNode->print(depth+1);
+    }
 }
 
 ArgumentNode::~ArgumentNode() {
+    delete this->filerNode;
     delete this->name;
     delete this->value;
 }
