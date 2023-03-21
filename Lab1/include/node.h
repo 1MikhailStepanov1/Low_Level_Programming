@@ -1,8 +1,8 @@
 #ifndef LLP_NODE_H
 #define LLP_NODE_H
 
-#include "../include/property.h"
-#include "../include/relationship.h"
+#include "property.h"
+#include "relationship.h"
 #include <cereal/types/unordered_map.hpp>
 
 

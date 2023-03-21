@@ -1,9 +1,9 @@
 #ifndef LLP_DATABASE_H
 #define LLP_DATABASE_H
 
-#include "../include/meta.h"
-#include "../include/util.h"
-#include "../include/node.h"
+#include "meta.h"
+#include "util.h"
+#include "node.h"
 
 struct database{
     std::string file;

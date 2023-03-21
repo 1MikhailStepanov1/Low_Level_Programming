@@ -166,6 +166,10 @@ class QueryNode : public Node {
     public:
         QueryNode(const char* op_type, StringConstant* class_type);
         void print(int depth) override;
+        const char* get_str_oper_type();
+        StringConstant* get_class_type();
+        Node* get_selection_set();
+        Node* get_result_set();
         void setSelectionSet(Node* sel_set);
         void setResultSet(Node* res_set);
         ~QueryNode();
@@ -181,6 +185,9 @@ class SelectionSetNode : public Node{
         void set_args(Node* args);
         void set_objs(Node* objs);
         void set_subops(Node* sub_ops);
+        Node* get_arguments();
+        Node* get_objects();
+        Node* get_sub_operations();
         void print(int depth) override;
         ~SelectionSetNode();
 };
@@ -191,6 +198,7 @@ class ResultSetNode : public Node {
     public:
         ResultSetNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~ResultSetNode();
 };
@@ -201,6 +209,7 @@ class ArgumentWrapperNode : public Node {
     public:
         ArgumentWrapperNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~ArgumentWrapperNode();
 };
@@ -211,7 +220,9 @@ private:
     Node* attributes = NULL;
 public:
     LogicalOperationNode(logical_operation logic_op);
+    const char* get_logic_op_type();
     void set_attr(Node* attr);
+    Node* get_attr();
     void print(int depth) override;
     ~LogicalOperationNode();
 };
@@ -232,6 +243,8 @@ class ArgumentNode : public Node {
     public:
         ArgumentNode(StringConstant* name, ConstantNode* value);
         void set_filter(Node* filterNode);
+        StringConstant* get_name();
+        ConstantNode* get_value();
         void print(int depth) override;
         ~ArgumentNode();
 };
@@ -242,6 +255,7 @@ class ObjectWrapperNode : public Node {
     public:
         ObjectWrapperNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~ObjectWrapperNode();
 };
@@ -255,6 +269,9 @@ class ObjectNode : public Node {
         ObjectNode(StringConstant* node_name);
         void add_props(Node* fields);
         void add_rels(Node* rels);
+        Node* get_props();
+        Node* get_rels();
+        StringConstant* get_node_name();
         void print(int depth) override;
         ~ObjectNode();
 };
@@ -265,6 +282,7 @@ class FieldsWrapperNode : public Node {
     public:
         FieldsWrapperNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~FieldsWrapperNode();
 };
@@ -275,6 +293,8 @@ class FieldNode : public Node {
         ConstantNode* value;
     public:
         FieldNode(StringConstant* name, ConstantNode* value);
+        StringConstant* get_name();
+        ConstantNode* get_value();
         void print(int depth) override;
         ~FieldNode();
 };
@@ -285,6 +305,7 @@ class RelationWrapperNode : public Node {
     public:
         RelationWrapperNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~RelationWrapperNode();
 };
@@ -292,8 +313,11 @@ class RelationWrapperNode : public Node {
 class RelationNode : public Node {
     private:
         ConstantNode* name;
+        StringConstant* value;
     public:
-        RelationNode(ConstantNode* name);
+        RelationNode(ConstantNode* name, StringConstant* value);
+        ConstantNode* get_name();
+        StringConstant* get_value();
         void print(int depth) override;
         ~RelationNode();
 };
@@ -304,6 +328,7 @@ class SubOperationWrapperNode : public Node {
     public:
         SubOperationWrapperNode();
         void add_attr(Node* attr);
+        std::list<Node*> get_attributes();
         void print(int depth) override;
         ~SubOperationWrapperNode();
 };
@@ -311,11 +336,14 @@ class SubOperationWrapperNode : public Node {
 class SubOperationNode : public Node {
     private:
         node_type type;
-        const char* sub_op_token;
+        sub_operation sub_op_token;
         ConstantNode* name;
         ConstantNode* value;
     public:
-        SubOperationNode(const char* sub_op_token, ConstantNode* name, ConstantNode* value);
+        SubOperationNode(sub_operation sub_op_token, ConstantNode* name, ConstantNode* value);
+        const char* get_sub_op();
+        ConstantNode* get_name();
+        ConstantNode* get_value();
         void print(int depth) override;
         ~SubOperationNode();
 };

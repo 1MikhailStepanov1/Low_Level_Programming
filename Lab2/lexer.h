@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "lexer.h"
+#line 6 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.h"
 
-#line 8 "lexer.h"
+#line 8 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -469,9 +469,9 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 50 "lexer.l"
+#line 52 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
 
 
-#line 476 "lexer.h"
+#line 476 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

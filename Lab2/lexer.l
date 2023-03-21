@@ -6,7 +6,7 @@
 #include "parser.h"
 %}
 
-%option yylineno noyywrap nounput
+%option yylineno noyywrap nounput noinput
 
 %%
 
@@ -34,7 +34,9 @@
 "update:"                               { return UPDATE_FLAG; }
 "props"                                 { return PROPS_TOKEN; }
 "relations"                             { return RELATIONS_TOKEN; }
-\"(set|add|sub)\"                       { return SUB_OPERATION_TOKEN; }
+\"set\"                                 { yylval.sub_op = sub_operation::SET; return SUB_OPERATION_TOKEN; }
+\"add\"                                 { yylval.sub_op = sub_operation::ADD; return SUB_OPERATION_TOKEN; }
+\"sub\"                                 { yylval.sub_op = sub_operation::SUB; return SUB_OPERATION_TOKEN; }
 "node_name: "                           { return NODE_NAME; }
 "node_class: "                          { return NODE_CLASS; }
 "true"                                  { yylval.bool_val = true; return BOOL_TOKEN; }

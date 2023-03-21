@@ -52,7 +52,6 @@ node database::get_node(const std::string &node_name) {
     node_name_validation(node_name, true);
 
     node result;
-    auto temp = information.get_id_by_node_name(node_name);
     result.deserialize(file, information.get_id_by_node_name(node_name));
 
     return result;
@@ -62,6 +61,9 @@ void database::delete_node_meta(const std::string &node_name, int32_t pos) {
     information.free.push_back(pos);
     information.node_names.erase(node_name);
     for (auto & node_class : information.node_classes){
+        if (information.node_classes.empty()){
+            break;
+        }
         if (node_class.second.count(pos) != 0){
             node_class.second.erase(pos);
         }

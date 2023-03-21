@@ -23,6 +23,7 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
     bool bool_val;
     filter_operation filter_op;
     logical_operation logical_op;
+    sub_operation sub_op;
 
     Node* node;
     QueryNode* queryNode;
@@ -59,7 +60,7 @@ void yyerror(NodeWrapper& nodeWrapper, const char* s){
 %token<str> REF_TOKEN
 %token PROPS_TOKEN
 %token RELATIONS_TOKEN
-%token<str> SUB_OPERATION_TOKEN
+%token<sub_op> SUB_OPERATION_TOKEN
 %token NODE_NAME
 %token NODE_CLASS
 %token FILTER_TOKEN
@@ -162,7 +163,7 @@ field: name value { $$ = new FieldNode($1, $2); }
 relations: relations COMMA relation { $$ = $1; $1->add_attr($3); }
           | relation { $$ = new RelationWrapperNode(); $$->add_attr($1); }
 
-relation: name { $$ = new RelationNode($1); }
+relation: name STRING_TOKEN { $$ = new RelationNode($1, new StringConstant($2)); }
 
 sub_operations: sub_operations COMMA sub_operation { $$ = $1; $1->add_attr($3); }
                | sub_operation { $$ = new SubOperationWrapperNode(); $$->add_attr($1); }

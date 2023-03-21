@@ -3,3 +3,14 @@
 /cmake-build-debug-mingw/
 .idea
 ./Lab1/data_for_test
+./third-party/
+./cmake_install.cmake
+./CMakeCache.txt
+./CMakeFiles
+./file.data
+./server
+./client
+./Lab2/libLab2.a
+./Lab2/cmake_install.cmake
+./Lab1/Makefile
+./Lab1/cmake_install.cmake

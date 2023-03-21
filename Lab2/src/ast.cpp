@@ -1,7 +1,7 @@
 #include "../include/ast.h"
 #include <iostream>
-#include <vector>
 #include <cstring>
+#include <list>
 
 void print_node_val(const char* node, const char* val, int depth){
     for (int i = 0; i < depth; i++){
@@ -104,7 +104,20 @@ const char* get_str_from_logic_op_type (logical_operation logic_op){
         default:
             return "unknown";
     }
-};
+}
+
+const char* get_str_from_sub_op_type(sub_operation sub_op){
+    switch (sub_op) {
+        case SET:
+            return "SET";
+        case ADD:
+            return "ADD";
+        case SUB:
+            return "SUB";
+        default:
+            return "Unknown";
+    }
+}
 
 
 
@@ -113,6 +126,22 @@ QueryNode::QueryNode(const char* op_type, StringConstant *class_type) {
     this->type = QUERY_NODE;
     this->oper_type = get_op_type_from_string(op_type);
     this->class_type = class_type;
+}
+
+const char* QueryNode::get_str_oper_type(){
+    return get_string_from_operation_type(this->oper_type);
+}
+
+StringConstant* QueryNode::get_class_type(){
+    return this->class_type;
+}
+
+Node *QueryNode::get_selection_set() {
+    return this->selection_set;
+}
+
+Node *QueryNode::get_result_set() {
+    return this->result_set;
 }
 
 void QueryNode::setSelectionSet(Node* sel_set) {
@@ -156,6 +185,18 @@ void SelectionSetNode::set_subops(Node * sub_ops) {
     this->sub_operations = sub_ops;
 }
 
+Node* SelectionSetNode::get_arguments() {
+    return this->arguments;
+}
+
+Node* SelectionSetNode::get_objects() {
+    return this->objects;
+}
+
+Node* SelectionSetNode::get_sub_operations() {
+    return this->sub_operations;
+}
+
 void SelectionSetNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     if (this->arguments != NULL) {
@@ -184,6 +225,10 @@ void ResultSetNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
 }
 
+std::list<Node *> ResultSetNode::get_attributes() {
+    return this->attributes;
+}
+
 void ResultSetNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     for (auto n : attributes){
@@ -206,6 +251,10 @@ void ArgumentWrapperNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
 }
 
+std::list<Node*> ArgumentWrapperNode::get_attributes() {
+    return this->attributes;
+}
+
 void ArgumentWrapperNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     for (auto n : this->attributes){
@@ -226,8 +275,16 @@ LogicalOperationNode::LogicalOperationNode(logical_operation logic_op) {
     this->logic_op = logic_op;
 }
 
+const char* LogicalOperationNode::get_logic_op_type() {
+    return get_str_from_logic_op_type(this->logic_op);
+}
+
 void LogicalOperationNode::set_attr(Node *attr) {
     this->attributes = attr;
+}
+
+Node *LogicalOperationNode::get_attr() {
+    return this->attributes;
 }
 
 void LogicalOperationNode::print(int depth) {
@@ -264,6 +321,14 @@ void ArgumentNode::set_filter(Node *filterNode) {
     this->filerNode = filterNode;
 }
 
+StringConstant *ArgumentNode::get_name() {
+    return this->name;
+}
+
+ConstantNode *ArgumentNode::get_value() {
+    return this->value;
+}
+
 void ArgumentNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
     print_node_val("Argument_value", this->value->get_str_val().c_str(), depth+1);
@@ -285,6 +350,10 @@ ObjectWrapperNode::ObjectWrapperNode() {
 
 void ObjectWrapperNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
+}
+
+std::list<Node*> ObjectWrapperNode::get_attributes() {
+    return this->attributes;
 }
 
 void ObjectWrapperNode::print(int depth) {
@@ -314,6 +383,18 @@ void ObjectNode::add_rels(Node *rels) {
     this->relations = rels;
 }
 
+Node *ObjectNode::get_props() {
+    return this->props;
+}
+
+Node *ObjectNode::get_rels() {
+    return this->relations;
+}
+
+StringConstant *ObjectNode::get_node_name() {
+    return this->node_name;
+}
+
 void ObjectNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     print_node_val("Name", this->node_name->get_str_val().c_str(), depth + 1);
@@ -326,8 +407,6 @@ void ObjectNode::print(int depth) {
 }
 
 ObjectNode::~ObjectNode() {
-//    free((void*) this->node_name);
-//    free((void*) this->node_class);
     delete this->props;
     delete this->relations;
 }
@@ -339,6 +418,10 @@ FieldsWrapperNode::FieldsWrapperNode() {
 
 void FieldsWrapperNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
+}
+
+std::list<Node *> FieldsWrapperNode::get_attributes() {
+    return this->attributes;
 }
 
 void FieldsWrapperNode::print(int depth) {
@@ -361,6 +444,14 @@ FieldNode::FieldNode(StringConstant *name, ConstantNode *value) {
     this->value = value;
 }
 
+StringConstant *FieldNode::get_name() {
+    return this->name;
+}
+
+ConstantNode *FieldNode::get_value() {
+    return this->value;
+}
+
 void FieldNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
     print_node_val("Value", this->value->get_str_val().c_str(), depth+1);
@@ -380,6 +471,10 @@ void RelationWrapperNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
 }
 
+std::list<Node *> RelationWrapperNode::get_attributes() {
+    return this->attributes;
+}
+
 void RelationWrapperNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), "", depth);
     for (auto n : this->attributes){
@@ -394,13 +489,23 @@ RelationWrapperNode::~RelationWrapperNode() {
 }
 
 // ---------------------------   Relation Node   --------------------------- //
-RelationNode::RelationNode(ConstantNode *name) {
+RelationNode::RelationNode(ConstantNode *name, StringConstant* value) {
     this->type = RELATION_NODE;
     this->name = name;
+    this->value = value;
+}
+
+ConstantNode *RelationNode::get_name() {
+    return this->name;
+}
+
+StringConstant *RelationNode::get_value() {
+    return this->value;
 }
 
 void RelationNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), this->name->get_str_val().c_str(), depth);
+    print_node_val("Value", this->value->get_str_val().c_str(), depth+1);
 }
 
 RelationNode::~RelationNode() {
@@ -414,6 +519,10 @@ SubOperationWrapperNode::SubOperationWrapperNode() {
 
 void SubOperationWrapperNode::add_attr(Node *attr) {
     this->attributes.push_back(attr);
+}
+
+std::list<Node *> SubOperationWrapperNode::get_attributes() {
+    return this->attributes;
 }
 
 void SubOperationWrapperNode::print(int depth) {
@@ -430,21 +539,32 @@ SubOperationWrapperNode::~SubOperationWrapperNode() {
 }
 
 // ---------------------------   SubOperation Node   --------------------------- //
-SubOperationNode::SubOperationNode(const char *sub_op_token, ConstantNode *name, ConstantNode *value) {
+SubOperationNode::SubOperationNode(sub_operation sub_op_token, ConstantNode *name, ConstantNode *value) {
     this->type = SUB_OPERATION;
     this->sub_op_token = sub_op_token;
     this->name = name;
     this->value = value;
 }
 
+const char *SubOperationNode::get_sub_op() {
+    return get_str_from_sub_op_type(this->sub_op_token);
+}
+
+ConstantNode *SubOperationNode::get_name() {
+    return this->name;
+}
+
+ConstantNode *SubOperationNode::get_value() {
+    return this->value;
+}
+
 void SubOperationNode::print(int depth) {
-    print_node_val(get_string_from_node_type(this->type), this->sub_op_token, depth);
+    print_node_val(get_string_from_node_type(this->type), get_str_from_sub_op_type(this->sub_op_token), depth);
     print_node_val("Name", this->name->get_str_val().c_str(), depth+1);
     print_node_val("Value", this->value->get_str_val().c_str(), depth+1);
 }
 
 SubOperationNode::~SubOperationNode() {
-    free((void*) sub_op_token);
     delete this->name;
     delete this->value;
 }

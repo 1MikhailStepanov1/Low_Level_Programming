@@ -161,7 +161,6 @@ class_type: Person
 Person(insert: {
     {
         node_name: Volkswagen,
-        node_class: Object,
         props {
             cyl : 123,
             privet : "privet"
@@ -188,11 +187,56 @@ class_type: Person
   ResultSet:
     StringConstant: id
 
+
+Person(insert: {
+    {
+        node_name: Volkswagen,
+        props {
+            cyl : 123,
+            privet : "privet"
+        }
+    },
+    {
+        node_name: Audi,
+        props{
+            capacity: 5,
+            model: "A6"
+        }
+        relations{
+            cyl: "privet"
+        }
+    }
+}){
+    id
+};
+
+Result Output:
+Query: Insert
+class_type: Person
+  SelectionSet:
+    Objects:
+      Object:
+        Name: Volkswagen
+        Fields:
+          Field: cyl
+            Value: 123
+          Field: privet
+            Value: "privet"
+      Object:
+        Name: Audi
+        Fields:
+          Field: capacity
+            Value: 5
+          Field: model
+            Value: "A6"
+  ResultSet:
+    StringConstant: id
+
 ------------------------------------------------------
 
 Запрос на обновление элемента
 
-Person(update:[["set", node_name, "Jack"],["set", props.cyl, "123"]], id: 1){
+Person(update: [["set", node_name, "Jack"],["set", props.cyl, "123"]], id: 1){
     id,
     node_class,
     node_name
@@ -205,17 +249,13 @@ class_type: Person
       Argument: id
         Argument_value: 1
     SubOperations:
-      Sub_Operation: Person
+      Sub_Operation: SET
         Name: node_name
         Value: "Jack"
-      Sub_Operation: "Jack"
+      Sub_Operation: SET
         Name: props.cyl
         Value: "123"
   ResultSet:
     StringConstant: id
     StringConstant: node_class
     StringConstant: node_name
-
-
-AND
-OR

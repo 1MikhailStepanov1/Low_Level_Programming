@@ -1,7 +1,7 @@
 #ifndef LLP_RELATIONSHIP_H
 #define LLP_RELATIONSHIP_H
 
-#include "../include/util.h"
+#include "util.h"
 #include <fstream>
 #include <iostream>
 #include <cinttypes>

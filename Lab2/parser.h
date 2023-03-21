@@ -35,11 +35,11 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_PARSER_H_INCLUDED
-# define YY_YY_PARSER_H_INCLUDED
+#ifndef YY_YY_HOME_MIKHAIL_CLIONPROJECTS_LOW_LEVEL_PROGRAMMING_LAB2_PARSER_H_INCLUDED
+# define YY_YY_HOME_MIKHAIL_CLIONPROJECTS_LOW_LEVEL_PROGRAMMING_LAB2_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -90,7 +90,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "parser.y"
+#line 19 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.y"
 
     const char* str;
     float float_val;
@@ -98,6 +98,7 @@ union YYSTYPE
     bool bool_val;
     filter_operation filter_op;
     logical_operation logical_op;
+    sub_operation sub_op;
 
     Node* node;
     QueryNode* queryNode;
@@ -118,7 +119,7 @@ union YYSTYPE
     ConstantNode* constant;
     StringConstant* stringConstant;
 
-#line 122 "parser.h"
+#line 123 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -133,4 +134,4 @@ extern YYSTYPE yylval;
 int yyparse (NodeWrapper& root);
 
 
-#endif /* !YY_YY_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_HOME_MIKHAIL_CLIONPROJECTS_LOW_LEVEL_PROGRAMMING_LAB2_PARSER_H_INCLUDED  */

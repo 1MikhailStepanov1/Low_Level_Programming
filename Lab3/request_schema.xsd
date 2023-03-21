@@ -1,0 +1,68 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name='constant_t'>
+        <xs:sequence>
+            <xs:element name='type' type="xs:string"/>
+            <xs:element name='value' type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="logical_condition_t">
+        <xs:sequence>
+            <xs:element name='logical_operation' type='xs:string'/>
+            <xs:choice>
+                <xs:element name="field" type="constant_t" minOccurs="2" maxOccurs="10"/>
+                <xs:element name="condition" type="logical_condition_t"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name='argument_t'>
+        <xs:sequence>
+            <xs:element name='field' type="constant_t" minOccurs="0" maxOccurs="50"/>
+            <xs:element name='logic_op' type="logical_condition_t" minOccurs="0" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="object_t">
+        <xs:sequence>
+            <xs:element name="obj_name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="field" type="constant_t" minOccurs="0" maxOccurs="50"/>
+            <xs:element name='relation' type="constant_t" minOccurs="0" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sub_operation_t">
+        <xs:sequence>
+            <xs:element name="sub_op_type" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="field" type="constant_t" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name='selection_set_t'>
+        <xs:sequence>
+            <xs:element name='argument' type='argument_t' minOccurs="0" maxOccurs="50"/>
+            <xs:element name='object' type='object_t' minOccurs="0" maxOccurs="50"/>
+            <xs:element name="sub_operations" type='sub_operation_t' minOccurs="0" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="result_set_t">
+        <xs:sequence>
+            <xs:element name='field' type='xs:string' minOccurs="1" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name='request_t'>
+        <xs:sequence>
+            <xs:element name='query_type' type="xs:string"/>
+            <xs:element name='class_type' type="xs:string"/>
+            <xs:sequence>
+                <xs:element name='selection_set' type='selection_set_t'/>
+                <xs:element name='result_set' type='result_set_t'/>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="request" type="request_t"/>
+</xs:schema>
