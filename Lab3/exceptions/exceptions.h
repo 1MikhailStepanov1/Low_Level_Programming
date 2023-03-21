@@ -24,4 +24,8 @@ struct ConnectionException : public MyException{
     ConnectionException(std::string message) : MyException(message){}
 };
 
+struct InvalidSchemaException : public MyException{
+    InvalidSchemaException(std::string message) : MyException(message){}
+};
+
 #endif
