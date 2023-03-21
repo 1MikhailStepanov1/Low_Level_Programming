@@ -28,4 +28,8 @@ struct InvalidSchemaException : public MyException{
     InvalidSchemaException(std::string message) : MyException(message){}
 };
 
+struct IncorrectRequestException : public MyException{
+    IncorrectRequestException(std::string message) : MyException(message){}
+};
+
 #endif

@@ -48,12 +48,18 @@ void database::add_node(node node) {
     add_node_to_meta(node);
 }
 
-node database::get_node(const std::string &node_name) {
+node database::get_node_by_name(const std::string &node_name) {
     node_name_validation(node_name, true);
 
     node result;
     result.deserialize(file, information.get_id_by_node_name(node_name));
 
+    return result;
+}
+
+node database::get_node_by_id(int32_t id) {
+    node result;
+    result.deserialize(file, id);
     return result;
 }
 

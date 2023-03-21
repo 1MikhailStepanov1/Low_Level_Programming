@@ -38,6 +38,7 @@ public:
     bool get_bool();
     float get_float();
     std::string get_string();
+    std::string get_value();
 
     template <class Archive>
     void load(Archive& ar) {

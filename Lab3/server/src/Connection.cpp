@@ -4,8 +4,8 @@ Connection::Connection(const char *port) {
     int p = atoi(port);
 
     map[""].name = "";
-//    map[""].schema = "resp_schema.xsd";
-    properties.no_namespace_schema_location("../../request_schema.xsd");
+    map[""].schema = "resp_schema.xsd";
+    properties.no_namespace_schema_location("./Lab3/request_schema.xsd");
 
     sock0 = socket(AF_INET, SOCK_STREAM, 0);
     if (sock0 < 0){
@@ -54,8 +54,6 @@ void Connection::close_connection() {
 }
 
 request_t Connection::receive_request() {
-    xml_schema::properties props;
-    props.no_namespace_schema_location("../../request_schema.xsd");
     int bytes_read = read(sock1, buf, BUFFER_SIZE);
 
     if (bytes_read < 0){
@@ -66,5 +64,11 @@ request_t Connection::receive_request() {
     std::cout << buf << std::endl;
     buf[bytes_read] = 0;
     std::istringstream iss(buf);
-    return *request(iss, 0, props);
+    return *request(iss, 0, this->properties);
+}
+
+void Connection::send_response(response_t response) {
+    std::ostringstream oss;
+    response(oss, resp, map);
+    std::cout << oss.str() << std::endl;
 }

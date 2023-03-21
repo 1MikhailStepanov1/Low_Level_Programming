@@ -40,6 +40,19 @@ std::string property::get_string() {
     return string_val;
 }
 
+std::string property::get_value() {
+    switch (tag) {
+        case INT:
+            return std::to_string(get_int());
+        case FLOAT:
+            return std::to_string(get_float());
+        case BOOL:
+            return get_bool() ? "true" : "false";
+        case STRING:
+            return get_string();
+    }
+}
+
 property::property() {
 
 }

@@ -18,7 +18,8 @@ struct database{
 
     void add_node(node node);
     void update_node(const std::string& node_name, node node);
-    node get_node(const std::string& node_name);
+    node get_node_by_name(const std::string& node_name);
+    node get_node_by_id(int32_t id);
     void delete_node(const std::string& node_name);
 
 private:

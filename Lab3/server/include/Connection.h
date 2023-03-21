@@ -1,8 +1,10 @@
+#pragma once
+
 #ifndef LOW_LEVEL_PROGRAMMING_CONNECTION_SERVER_H
 #define LOW_LEVEL_PROGRAMMING_CONNECTION_SERVER_H
 
 #include "../../common/request_schema.hxx"
-//#include "../../common/response_schema.hxx"
+#include "../../common/response_schema.hxx"
 #include "../../exceptions/exceptions.h"
 #include <iostream>
 #include <netinet/ip.h>
@@ -28,7 +30,7 @@ class Connection{
         void accept_client();
         void close_connection();
         request_t receive_request();
-        void send_response();
+        void send_response(response_t response);
 };
 
 #endif

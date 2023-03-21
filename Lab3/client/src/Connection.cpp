@@ -3,7 +3,7 @@
 Connection::Connection() {
     map[""].name = "";
     map[""].schema = "request_schema.xsd";
-//    properties.no_namespace_schema_location("../../response_schema.xsd");
+    properties.no_namespace_schema_location("../../response_schema.xsd");
     this->sock = -1;
 }
 

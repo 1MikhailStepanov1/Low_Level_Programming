@@ -3,6 +3,7 @@
 #include <sstream>
 #include "../exceptions/exceptions.h"
 #include "./include/Connection.h"
+#include "./include/RequestInvoker.h"
 
 using namespace std;
 
@@ -15,9 +16,12 @@ int main(int argc, char *argv[]) {
     try {
         Connection* connection = new Connection(argv[1]);
         connection->accept_client();
+        RequestInvoker invoker = new RequestInvoker("../file.data");
 //        char message[1000];
         while(1){
             request_t req = connection->receive_request();
+            response_t resp = invoker.parse_and_execute_query(req);
+            connection->send_response(resp);
 //            memset(&message, 0, sizeof(message));
 //            recv(s1, (char*) &message, sizeof(message), 0);
 //            cout << "Client " << message << endl;

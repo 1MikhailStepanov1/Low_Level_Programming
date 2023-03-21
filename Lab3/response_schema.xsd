@@ -1,0 +1,35 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <xs:complexType name='filling_t'>
+        <xs:sequence>
+            <xs:element name='type' type="xs:string"/>
+            <xs:element name='value' type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name='node_t'>
+        <xs:sequence>
+            <xs:element name='node_name' type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name='node_class' type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name='field' type="filling_t" minOccurs="0" maxOccurs="50"/>
+            <xs:element name='relation' type="filling_t" minOccurs="0" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="body_t">
+        <xs:sequence>
+            <xs:element name="node" type="node_t" minOccurs="0" maxOccurs="50"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="response_t">
+        <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="isFinished" type="xs:boolean"/>
+            <xs:element name="body" type="body_t" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="response" type="response_t"/>
+</xs:schema>
