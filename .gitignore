@@ -14,3 +14,5 @@
 ./Lab2/cmake_install.cmake
 ./Lab1/Makefile
 ./Lab1/cmake_install.cmake
+./libDB_MODULE.a
+./libPARSE_MODULE.a

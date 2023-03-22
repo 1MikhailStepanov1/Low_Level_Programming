@@ -4,6 +4,10 @@ database::database(const std::string& file){
     this->file = file;
 }
 
+database::database() {
+
+}
+
 void database::create() {
     information.serialize(file, BIN);
 }

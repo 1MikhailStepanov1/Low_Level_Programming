@@ -90,7 +90,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.y"
+#line 19 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
 
     const char* str;
     float float_val;

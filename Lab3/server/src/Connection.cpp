@@ -54,6 +54,7 @@ void Connection::close_connection() {
 }
 
 request_t Connection::receive_request() {
+    memset(&buf, 0, BUFFER_SIZE);
     int bytes_read = read(sock1, buf, BUFFER_SIZE);
 
     if (bytes_read < 0){
@@ -67,7 +68,7 @@ request_t Connection::receive_request() {
     return *request(iss, 0, this->properties);
 }
 
-void Connection::send_response(response_t response) {
+void Connection::send_response(response_t resp) {
     std::ostringstream oss;
     response(oss, resp, map);
     std::cout << oss.str() << std::endl;

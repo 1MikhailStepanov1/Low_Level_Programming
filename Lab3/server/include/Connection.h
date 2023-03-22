@@ -30,7 +30,7 @@ class Connection{
         void accept_client();
         void close_connection();
         request_t receive_request();
-        void send_response(response_t response);
+        void send_response(response_t resp);
 };
 
 #endif

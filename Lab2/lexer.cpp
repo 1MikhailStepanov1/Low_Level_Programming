@@ -582,8 +582,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
-#line 2 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 1 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
+#line 2 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -806,7 +806,7 @@ YY_DECL
 		}
 
 	{
-#line 11 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 11 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 
 
 #line 813 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.cpp"
@@ -878,199 +878,199 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 13 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return L_BRACKET; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 14 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return R_BRACKET; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 15 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return L_BRACE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 16 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return R_BRACE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 17 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return L_SQUARE_BRACKET; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 18 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return R_SQUARE_BRACKET; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 19 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return COMMA; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 20 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::GT; return COMP_OP; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 21 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::GE; return COMP_OP; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 22 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::LT; return COMP_OP; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 23 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::LE; return COMP_OP; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 24 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 24 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::NE; return COMP_OP; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 25 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 25 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.filter_op = filter_operation::LIKE; return LIKE_FILTER; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 26 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.logical_op = logical_operation::OR; return LOGIC_OP; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 27 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 27 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.logical_op = logical_operation::AND; return LOGIC_OP; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 28 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 28 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return FILTER_TOKEN; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 29 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 29 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return OP_TOKEN; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 30 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 30 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return VAL_TOKEN; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 31 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 31 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return SELECTION_FLAG; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 32 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 32 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return DELETE_FLAG; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 33 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 33 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return INSERTION_FLAG; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 34 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 34 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return UPDATE_FLAG; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 35 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 35 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return PROPS_TOKEN; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 36 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 36 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return RELATIONS_TOKEN; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 37 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 37 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.sub_op = sub_operation::SET; return SUB_OPERATION_TOKEN; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 38 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 38 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.sub_op = sub_operation::ADD; return SUB_OPERATION_TOKEN; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 39 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 39 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.sub_op = sub_operation::SUB; return SUB_OPERATION_TOKEN; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 40 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 40 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return NODE_NAME; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 41 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 41 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { return NODE_CLASS; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 42 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 42 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.bool_val = true; return BOOL_TOKEN; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 43 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 43 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.bool_val = false; return BOOL_TOKEN; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 44 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 44 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.str = strdup(yytext); return NAME_TOKEN; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 45 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 45 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.str = strdup(yytext); return REF_TOKEN;}
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 46 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 46 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.str = strdup(yytext); return STRING_TOKEN; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 47 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 47 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.int_val = atoi(yytext); return INT_TOKEN; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 48 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 48 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { yylval.float_val = atof(yytext); return FLOAT_TOKEN; }
 	YY_BREAK
 case 37:
 /* rule 37 can match eol */
 YY_RULE_SETUP
-#line 49 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 49 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { /* ignore white spaces */ }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 50 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 50 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 { /* ignore everything else */ }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 52 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 52 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 ECHO;
 	YY_BREAK
 #line 1077 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.cpp"
@@ -2049,5 +2049,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 52 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/lexer.l"
+#line 52 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/lexer.l"
 
