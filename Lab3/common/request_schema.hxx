@@ -857,16 +857,20 @@ class request_t: public ::xml_schema::type
   // selection_set
   //
   typedef ::selection_set_t selection_set_type;
+  typedef ::xsd::cxx::tree::optional< selection_set_type > selection_set_optional;
   typedef ::xsd::cxx::tree::traits< selection_set_type, char > selection_set_traits;
 
-  const selection_set_type&
+  const selection_set_optional&
   selection_set () const;
 
-  selection_set_type&
+  selection_set_optional&
   selection_set ();
 
   void
   selection_set (const selection_set_type& x);
+
+  void
+  selection_set (const selection_set_optional& x);
 
   void
   selection_set (::std::unique_ptr< selection_set_type > p);
@@ -874,16 +878,20 @@ class request_t: public ::xml_schema::type
   // result_set
   //
   typedef ::result_set_t result_set_type;
+  typedef ::xsd::cxx::tree::optional< result_set_type > result_set_optional;
   typedef ::xsd::cxx::tree::traits< result_set_type, char > result_set_traits;
 
-  const result_set_type&
+  const result_set_optional&
   result_set () const;
 
-  result_set_type&
+  result_set_optional&
   result_set ();
 
   void
   result_set (const result_set_type& x);
+
+  void
+  result_set (const result_set_optional& x);
 
   void
   result_set (::std::unique_ptr< result_set_type > p);
@@ -891,14 +899,7 @@ class request_t: public ::xml_schema::type
   // Constructors.
   //
   request_t (const query_type_type&,
-             const class_type_type&,
-             const selection_set_type&,
-             const result_set_type&);
-
-  request_t (const query_type_type&,
-             const class_type_type&,
-             ::std::unique_ptr< selection_set_type >,
-             ::std::unique_ptr< result_set_type >);
+             const class_type_type&);
 
   request_t (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -928,8 +929,8 @@ class request_t: public ::xml_schema::type
   protected:
   ::xsd::cxx::tree::one< query_type_type > query_type_;
   ::xsd::cxx::tree::one< class_type_type > class_type_;
-  ::xsd::cxx::tree::one< selection_set_type > selection_set_;
-  ::xsd::cxx::tree::one< result_set_type > result_set_;
+  selection_set_optional selection_set_;
+  result_set_optional result_set_;
 };
 
 #include <iosfwd>

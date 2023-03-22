@@ -160,8 +160,8 @@ class QueryNode : public Node {
     private:
         operation_type oper_type;
         StringConstant* class_type;
-        Node* selection_set;
-        Node* result_set;
+        Node* selection_set = NULL;
+        Node* result_set = NULL;
 
     public:
         QueryNode(const char* op_type, StringConstant* class_type);

@@ -455,16 +455,16 @@ class_type (::std::unique_ptr< class_type_type > x)
   this->class_type_.set (std::move (x));
 }
 
-const request_t::selection_set_type& request_t::
+const request_t::selection_set_optional& request_t::
 selection_set () const
 {
-  return this->selection_set_.get ();
+  return this->selection_set_;
 }
 
-request_t::selection_set_type& request_t::
+request_t::selection_set_optional& request_t::
 selection_set ()
 {
-  return this->selection_set_.get ();
+  return this->selection_set_;
 }
 
 void request_t::
@@ -474,27 +474,39 @@ selection_set (const selection_set_type& x)
 }
 
 void request_t::
+selection_set (const selection_set_optional& x)
+{
+  this->selection_set_ = x;
+}
+
+void request_t::
 selection_set (::std::unique_ptr< selection_set_type > x)
 {
   this->selection_set_.set (std::move (x));
 }
 
-const request_t::result_set_type& request_t::
+const request_t::result_set_optional& request_t::
 result_set () const
 {
-  return this->result_set_.get ();
+  return this->result_set_;
 }
 
-request_t::result_set_type& request_t::
+request_t::result_set_optional& request_t::
 result_set ()
 {
-  return this->result_set_.get ();
+  return this->result_set_;
 }
 
 void request_t::
 result_set (const result_set_type& x)
 {
   this->result_set_.set (x);
+}
+
+void request_t::
+result_set (const result_set_optional& x)
+{
+  this->result_set_ = x;
 }
 
 void request_t::
@@ -1294,27 +1306,12 @@ result_set_t::
 
 request_t::
 request_t (const query_type_type& query_type,
-           const class_type_type& class_type,
-           const selection_set_type& selection_set,
-           const result_set_type& result_set)
+           const class_type_type& class_type)
 : ::xml_schema::type (),
   query_type_ (query_type, this),
   class_type_ (class_type, this),
-  selection_set_ (selection_set, this),
-  result_set_ (result_set, this)
-{
-}
-
-request_t::
-request_t (const query_type_type& query_type,
-           const class_type_type& class_type,
-           ::std::unique_ptr< selection_set_type > selection_set,
-           ::std::unique_ptr< result_set_type > result_set)
-: ::xml_schema::type (),
-  query_type_ (query_type, this),
-  class_type_ (class_type, this),
-  selection_set_ (std::move (selection_set), this),
-  result_set_ (std::move (result_set), this)
+  selection_set_ (this),
+  result_set_ (this)
 {
 }
 
@@ -1392,7 +1389,7 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< selection_set_type > r (
         selection_set_traits::create (i, f, this));
 
-      if (!selection_set_.present ())
+      if (!this->selection_set_)
       {
         this->selection_set_.set (::std::move (r));
         continue;
@@ -1406,7 +1403,7 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< result_set_type > r (
         result_set_traits::create (i, f, this));
 
-      if (!result_set_.present ())
+      if (!this->result_set_)
       {
         this->result_set_.set (::std::move (r));
         continue;
@@ -1427,20 +1424,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "class_type",
-      "");
-  }
-
-  if (!selection_set_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "selection_set",
-      "");
-  }
-
-  if (!result_set_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "result_set",
       "");
   }
 }
@@ -2021,24 +2004,26 @@ operator<< (::xercesc::DOMElement& e, const request_t& i)
 
   // selection_set
   //
+  if (i.selection_set ())
   {
     ::xercesc::DOMElement& s (
       ::xsd::cxx::xml::dom::create_element (
         "selection_set",
         e));
 
-    s << i.selection_set ();
+    s << *i.selection_set ();
   }
 
   // result_set
   //
+  if (i.result_set ())
   {
     ::xercesc::DOMElement& s (
       ::xsd::cxx::xml::dom::create_element (
         "result_set",
         e));
 
-    s << i.result_set ();
+    s << *i.result_set ();
   }
 }
 

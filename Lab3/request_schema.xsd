@@ -58,8 +58,8 @@
             <xs:element name='query_type' type="xs:string"/>
             <xs:element name='class_type' type="xs:string"/>
             <xs:sequence>
-                <xs:element name='selection_set' type='selection_set_t'/>
-                <xs:element name='result_set' type='result_set_t'/>
+                <xs:element name='selection_set' type='selection_set_t' minOccurs="0"/>
+                <xs:element name='result_set' type='result_set_t' minOccurs="0"/>
             </xs:sequence>
         </xs:sequence>
     </xs:complexType>

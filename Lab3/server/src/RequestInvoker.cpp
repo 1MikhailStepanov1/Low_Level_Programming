@@ -269,22 +269,39 @@ static body_t get_query_by_result_set(std::vector <node> *nodes, result_set_t re
 
 
 response_t RequestInvoker::parse_and_execute_query(request_t request) {
-    response_t resp = response_t(200, "Select done.", 1);
+    response_t resp = response_t(200, "", 1);
+    std::cout << " PISYA1 " << std::endl;
     if (strcmp(request.query_type().c_str(), "Select") == 0) {
-        std::vector <node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set());
-        body_t answer = get_query_by_result_set(&nodes, request.result_set());
+        std::cout << " PISYA2 " << std::endl;
+        std::vector<node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
+        std::cout << " POPA " << std::endl;
+        body_t answer = get_query_by_result_set(&nodes, request.result_set().get());
         resp.body().set(answer);
+        resp.message().append("Select done.");
     }
     if (strcmp(request.query_type().c_str(), "Insert") == 0){
-        std::vector<node> nodes = get_nodes_by_insert(this->db, request.class_type(), request.selection_set());
+        std::vector<node> nodes = get_nodes_by_insert(this->db, request.class_type(), request.selection_set().get());
         std::vector<node> add_nodes;
         for (node n : nodes){
             this->db.add_node(n);
             add_nodes.push_back(this->db.get_node_by_name(n.node_name));
         }
         std::cout << this->db.get_node_by_name("Volkswagen").id << std::endl;
-        body_t answer = get_query_by_result_set(&add_nodes, request.result_set());
+        body_t answer = get_query_by_result_set(&add_nodes, request.result_set().get());
         resp.body().set(answer);
+        resp.message().append("Insert done.");
+    }
+    if (strcmp(request.query_type().c_str(), "Delete") == 0){
+        std::vector<node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
+        std::vector<node> add_nodes;
+        for (node n : nodes){
+            add_nodes.push_back(this->db.get_node_by_name(n.node_name));
+            this->db.delete_node(n.node_name);
+        }
+        std::cout << this->db.get_node_by_name("Volkswagen").id << std::endl;
+        body_t answer = get_query_by_result_set(&add_nodes, request.result_set().get());
+        resp.body().set(answer);
+        resp.message().append("Delete done.");
     }
     return resp;
 }

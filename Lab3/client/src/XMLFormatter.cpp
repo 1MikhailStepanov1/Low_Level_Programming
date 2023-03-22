@@ -93,9 +93,17 @@ result_set_t form_result_set(ResultSetNode* resultSetNode){
 
 request_t convert_to_XML_format(NodeWrapper& nodeWrapper){
     QueryNode* node = (QueryNode*)nodeWrapper.node;
+    selection_set_t selection_set = selection_set_t();
+    result_set_t result_set = result_set_t();
 
-    selection_set_t selection_set = form_selection_set((SelectionSetNode*)node->get_selection_set());
-    result_set_t result_set = form_result_set((ResultSetNode*) node->get_result_set());
-    request_t request = request_t(node->get_str_oper_type(), node->get_class_type()->get_str_val(), selection_set, result_set);
+    request_t request = request_t(node->get_str_oper_type(), node->get_class_type()->get_str_val());
+    if (node->get_selection_set() != NULL) {
+        selection_set = form_selection_set((SelectionSetNode *) node->get_selection_set());
+    }
+    if (node->get_result_set() != NULL) {
+        result_set = form_result_set((ResultSetNode *) node->get_result_set());
+    }
+    request.selection_set().set(selection_set);
+    request.result_set().set(result_set);
     return request;
 }

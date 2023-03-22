@@ -155,8 +155,12 @@ void QueryNode::setResultSet(Node* res_set) {
 void QueryNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), get_string_from_operation_type(this->oper_type), depth);
     print_node_val("class_type", this->class_type->get_str_val().c_str(), depth);
-    this->selection_set->print(depth+1);
-    this->result_set->print(depth+1);
+    if (this->selection_set != NULL) {
+        this->selection_set->print(depth + 1);
+    }
+    if (this->result_set != NULL) {
+        this->result_set->print(depth + 1);
+    }
 }
 
 QueryNode::~QueryNode() {

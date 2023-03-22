@@ -16,3 +16,5 @@
 ./Lab1/cmake_install.cmake
 ./libDB_MODULE.a
 ./libPARSE_MODULE.a
+./Lab2/parser.c
+./Lab2/lexer.c

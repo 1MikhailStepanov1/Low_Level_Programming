@@ -106,6 +106,8 @@ query: select_query { root.node = $1;}
       | update_query { root.node = $1; }
 
 select_query: name L_BRACKET SELECTION_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("select", $1); node->setSelectionSet($5); node->setResultSet($8); $$ = node; }
+            | name L_BRACKET SELECTION_FLAG R_BRACKET L_BRACE R_BRACE { QueryNode* node = new QueryNode("select", $1); $$ = node; }
+            | name L_BRACKET SELECTION_FLAG COMMA selection_set R_BRACKET L_BRACE R_BRACE { QueryNode* node = new QueryNode("select", $1); node->setSelectionSet($5); $$ = node; }
 
 delete_query: name L_BRACKET DELETE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE { QueryNode* node = new QueryNode("delete", $1); node->setSelectionSet($5); node->setResultSet($8); $$ = node; }
 

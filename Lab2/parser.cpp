@@ -489,16 +489,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   161
+#define YYLAST   162
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  31
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  22
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  55
+#define YYNRULES  57
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  145
+#define YYNSTATES  149
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   285
@@ -550,12 +550,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   103,   103,   104,   105,   106,   108,   110,   112,   114,
-     116,   117,   118,   119,   121,   122,   123,   124,   126,   127,
-     128,   129,   131,   132,   133,   135,   136,   137,   139,   140,
-     142,   143,   145,   147,   148,   150,   151,   153,   154,   155,
-     156,   158,   159,   161,   163,   164,   166,   168,   169,   171,
-     172,   174,   176,   177,   178,   179
+       0,   103,   103,   104,   105,   106,   108,   109,   110,   112,
+     114,   116,   118,   119,   120,   121,   123,   124,   125,   126,
+     128,   129,   130,   131,   133,   134,   135,   137,   138,   139,
+     141,   142,   144,   145,   147,   149,   150,   152,   153,   155,
+     156,   157,   158,   160,   161,   163,   165,   166,   168,   170,
+     171,   173,   174,   176,   178,   179,   180,   181
 };
 #endif
 
@@ -592,7 +592,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-46)
+#define YYPACT_NINF (-48)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -606,21 +606,21 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -10,   -46,     9,   -46,   -46,   -46,   -46,    24,   -46,    28,
-      12,    16,    -2,    -2,    -2,    -2,    95,    96,     5,   -15,
-       7,   100,     3,    20,   -46,   -46,     5,   102,   103,   104,
-      90,    54,   -46,    92,    34,   -46,   106,   -46,   -46,   -46,
-     -46,    89,   -46,   -46,    91,   -46,    93,    -4,   108,    -4,
-      94,   -46,   110,   115,   116,   -10,   -46,    95,   113,   114,
-      96,   105,    18,    97,    99,    55,    39,   -46,   -46,    22,
-      39,    39,    39,    56,   -46,    70,    -4,   -46,    66,   118,
-     119,   123,   124,   -46,   -46,    67,   -46,   126,   127,    68,
-      72,    73,   -46,    85,   128,   129,    20,   130,   131,   -46,
-     -46,   -46,   -46,   -46,    83,   -46,   -46,   -46,   -46,   -46,
-     137,   138,    29,    29,   -46,   -46,   -46,   -46,   -10,   -10,
-     136,   139,    74,   -46,    29,    80,   -46,   107,   -46,   -46,
-       2,   -10,   -46,   140,   -10,   -46,   -46,   143,   -46,   -46,
-     -46,   -10,    84,   144,   -46
+     -10,   -48,     7,   -48,   -48,   -48,   -48,    23,   -48,    30,
+      19,    29,    -2,    -2,    39,    -2,    -2,    65,   100,     6,
+     -15,    16,    67,     5,   102,   -48,   -48,     6,    91,   106,
+     109,   110,    96,    58,   -48,    98,    79,   -48,   112,   -48,
+     -48,   -48,   -48,    97,   -48,   -48,   101,   -48,   103,    -4,
+     113,    -4,   104,   -48,   114,   -48,   116,   120,   -10,   -48,
+      65,   119,   121,   100,   107,    20,   105,   108,    62,    84,
+     -48,   -48,    24,    84,    15,    84,    70,   -48,    86,    -4,
+     -48,    78,   125,   126,   127,   130,   -48,   -48,    71,   -48,
+     133,   134,    75,   -48,    76,    77,   -48,    89,   132,   135,
+     102,   137,   138,   -48,   -48,   -48,   -48,   -48,    95,   -48,
+     -48,   -48,   -48,   -48,   143,   144,    32,    32,   -48,   -48,
+     -48,   -48,   -10,   -10,   142,   145,    83,   -48,    32,    87,
+     -48,   122,   -48,   -48,     2,   -10,   -48,   136,   -10,   -48,
+     -48,   147,   -48,   -48,   -48,   -10,    88,   148,   -48
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -628,37 +628,37 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    51,     0,     2,     3,     4,     5,     0,     1,     0,
+       0,    53,     0,     2,     3,     4,     5,     0,     1,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    10,    20,    21,     0,     0,     0,     0,
-       0,     0,    36,     0,     0,    48,     0,    52,    53,    54,
-      55,     0,    25,    28,     0,    30,     0,     0,     0,     0,
-       0,    22,     0,     0,     0,     0,    11,     0,     0,    12,
-       0,     0,     0,     0,     0,     0,     0,    18,    19,     0,
-       0,     0,     0,     0,    35,     0,     0,    47,     0,     0,
-       0,     0,     0,    32,    16,     0,    17,     0,     0,     0,
-       0,     0,    37,     0,     0,     0,    13,     0,     0,    27,
-      26,    29,    31,     8,     0,    24,    23,     9,     6,     7,
-       0,     0,     0,     0,    33,    34,    15,    14,     0,     0,
-       0,     0,     0,    42,     0,     0,    45,     0,    50,    49,
-       0,     0,    43,     0,     0,    46,    38,     0,    41,    39,
-      44,     0,     0,     0,    40
+       0,     0,     0,     0,    12,    22,    23,     0,     0,     0,
+       0,     0,     0,     0,    38,     0,     0,    50,     0,    54,
+      55,    56,    57,     0,    27,    30,     0,    32,     0,     0,
+       0,     0,     0,    24,     0,     7,     0,     0,     0,    13,
+       0,     0,    14,     0,     0,     0,     0,     0,     0,     0,
+      20,    21,     0,     0,     0,     0,     0,    37,     0,     0,
+      49,     0,     0,     0,     0,     0,    34,    18,     0,    19,
+       0,     0,     0,     8,     0,     0,    39,     0,     0,     0,
+      15,     0,     0,    29,    28,    31,    33,    10,     0,    26,
+      25,    11,     6,     9,     0,     0,     0,     0,    35,    36,
+      17,    16,     0,     0,     0,     0,     0,    44,     0,     0,
+      47,     0,    52,    51,     0,     0,    45,     0,     0,    48,
+      40,     0,    43,    41,    46,     0,     0,     0,    42
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -46,   -46,   -46,   -46,   -46,   -46,    81,    -3,   -45,    86,
-     109,     4,   -46,    88,   -46,    21,     8,    17,   -46,   101,
-       0,   -25
+     -48,   -48,   -48,   -48,   -48,   -48,    50,   -18,   -47,    92,
+     111,     4,   -48,    99,   -48,    21,    10,    22,   -48,    94,
+       0,   -26
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_uint8 yydefgoto[] =
 {
-       0,     2,     3,     4,     5,     6,    22,    85,    23,    24,
-      25,    41,    31,    32,   122,   123,   125,   126,    34,    35,
-      26,    42
+       0,     2,     3,     4,     5,     6,    23,    88,    24,    25,
+      26,    43,    33,    34,   126,   127,   129,   130,    36,    37,
+      27,    44
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -666,44 +666,44 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       7,    51,    65,    16,     1,    17,    36,    48,   136,     8,
-       1,    18,     1,    18,    43,    19,    20,    19,    20,   137,
-      21,    14,    21,    44,    46,    15,    36,     9,    36,    49,
-      50,    96,    37,    38,    39,    40,    45,    80,    10,    11,
-      12,    13,    59,    60,    88,    37,    38,    79,    40,    37,
-      38,    87,    40,     1,    84,    73,    37,    38,    39,    40,
-      56,    83,    92,    57,    49,    93,    86,    89,    90,    91,
-      86,    86,    86,   103,   107,    95,   104,   104,   108,   109,
-     130,   104,   104,   131,     1,    94,   133,   120,   121,   134,
-     143,    97,    98,   134,    27,    28,    29,     1,   116,   132,
-      30,   110,   111,    33,   117,    47,    52,    53,    54,    55,
-      58,    61,    62,    66,    63,    70,    64,    69,   124,   127,
-      71,    72,    75,    76,    99,   100,    81,    78,    82,   101,
-     102,   124,   105,   106,   127,    67,   135,   112,   113,   114,
-     115,   127,   118,   119,   128,    74,   139,   129,   141,   142,
-     144,   140,   138,     0,     0,     0,     0,     0,    68,     0,
-       0,    77
+       7,    53,    68,    17,     1,    18,    38,     8,   140,    50,
+       1,    19,     1,    19,    45,    20,    21,    20,    21,   141,
+      22,    93,    22,    14,    46,    48,     9,    38,    15,     1,
+      87,    52,   100,    39,    40,    41,    42,    38,    16,    83,
+      10,    11,    12,    13,    29,    47,    91,    39,    40,    82,
+      42,    39,    40,    90,    42,    92,    94,    95,    76,    39,
+      40,    41,    42,    28,    59,    30,    31,    60,    86,    89,
+      32,    51,    49,    89,    89,    89,    96,   107,    99,    97,
+     108,   111,   112,   113,   108,   108,   108,    62,    63,   134,
+     124,   125,   135,   137,   147,    54,   138,   138,     1,    87,
+       1,    98,   136,   101,   102,   114,   115,    35,   121,     1,
+     120,    51,    55,    56,    57,    58,    61,    64,    69,    73,
+      65,    74,   128,   131,    66,    75,    67,    72,    78,    81,
+      79,   103,   104,   105,    84,   128,   106,    85,   131,   109,
+     110,   116,   143,    70,   117,   131,   118,   119,   122,   123,
+     132,   139,   145,   133,   148,   146,   142,    80,     0,    77,
+     144,     0,    71
 };
 
 static const yytype_int16 yycheck[] =
 {
-       0,    26,    47,     5,    14,     7,    21,     4,     6,     0,
+       0,    27,    49,     5,    14,     7,    21,     0,     6,     4,
       14,    15,    14,    15,    29,    19,    20,    19,    20,    17,
-      24,     9,    24,    19,    20,     9,    21,     3,    21,     9,
-      26,    76,    27,    28,    29,    30,    29,    62,    10,    11,
-      12,    13,     8,     9,    69,    27,    28,    29,    30,    27,
-      28,    29,    30,    14,    15,    55,    27,    28,    29,    30,
-       6,     6,     6,     9,     9,     9,    66,    70,    71,    72,
-      70,    71,    72,     6,     6,    75,     9,     9,     6,     6,
-       6,     9,     9,     9,    14,    15,     6,   112,   113,     9,
-       6,    25,    26,     9,    13,    14,    15,    14,    15,   124,
-       5,    16,    17,     7,   104,     5,     4,     4,     4,    19,
-      18,     5,    23,     5,    23,     5,    23,    23,   118,   119,
-       5,     5,     9,     9,     6,     6,    29,    22,    29,     6,
-       6,   131,     6,     6,   134,    49,    29,     9,     9,     9,
-       9,   141,     5,     5,     8,    57,     6,     8,     5,   141,
-       6,   134,   131,    -1,    -1,    -1,    -1,    -1,    49,    -1,
-      -1,    60
+      24,     6,    24,     4,    20,    21,     3,    21,     9,    14,
+      15,    27,    79,    27,    28,    29,    30,    21,     9,    65,
+      10,    11,    12,    13,     5,    29,    72,    27,    28,    29,
+      30,    27,    28,    29,    30,    73,    74,    75,    58,    27,
+      28,    29,    30,    13,     6,    15,    16,     9,     6,    69,
+       5,     9,     5,    73,    74,    75,     6,     6,    78,     9,
+       9,     6,     6,     6,     9,     9,     9,     8,     9,     6,
+     116,   117,     9,     6,     6,     4,     9,     9,    14,    15,
+      14,    15,   128,    25,    26,    16,    17,     7,   108,    14,
+      15,     9,     6,     4,     4,    19,    18,     5,     5,     5,
+      23,     5,   122,   123,    23,     5,    23,    23,     9,    22,
+       9,     6,     6,     6,    29,   135,     6,    29,   138,     6,
+       6,     9,     6,    51,     9,   145,     9,     9,     5,     5,
+       8,    29,     5,     8,     6,   145,   135,    63,    -1,    60,
+     138,    -1,    51
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -711,42 +711,42 @@ static const yytype_int16 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,    14,    32,    33,    34,    35,    36,    51,     0,     3,
-      10,    11,    12,    13,     9,     9,     5,     7,    15,    19,
-      20,    24,    37,    39,    40,    41,    51,    37,    37,    37,
-       5,    43,    44,     7,    49,    50,    21,    27,    28,    29,
-      30,    42,    52,    29,    42,    29,    42,     5,     4,     9,
-      42,    52,     4,     4,     4,    19,     6,     9,    18,     8,
-       9,     5,    23,    23,    23,    39,     5,    40,    41,    23,
-       5,     5,     5,    51,    44,     9,     9,    50,    22,    29,
-      52,    29,    29,     6,    15,    38,    51,    29,    52,    38,
-      38,    38,     6,     9,    15,    51,    39,    25,    26,     6,
-       6,     6,     6,     6,     9,     6,     6,     6,     6,     6,
-      16,    17,     9,     9,     9,     9,    15,    51,     5,     5,
-      52,    52,    45,    46,    51,    47,    48,    51,     8,     8,
-       6,     9,    52,     6,     9,    29,     6,    17,    46,     6,
-      48,     5,    47,     6,     6
+      10,    11,    12,    13,     4,     9,     9,     5,     7,    15,
+      19,    20,    24,    37,    39,    40,    41,    51,    37,     5,
+      37,    37,     5,    43,    44,     7,    49,    50,    21,    27,
+      28,    29,    30,    42,    52,    29,    42,    29,    42,     5,
+       4,     9,    42,    52,     4,     6,     4,     4,    19,     6,
+       9,    18,     8,     9,     5,    23,    23,    23,    39,     5,
+      40,    41,    23,     5,     5,     5,    51,    44,     9,     9,
+      50,    22,    29,    52,    29,    29,     6,    15,    38,    51,
+      29,    52,    38,     6,    38,    38,     6,     9,    15,    51,
+      39,    25,    26,     6,     6,     6,     6,     6,     9,     6,
+       6,     6,     6,     6,    16,    17,     9,     9,     9,     9,
+      15,    51,     5,     5,    52,    52,    45,    46,    51,    47,
+      48,    51,     8,     8,     6,     9,    52,     6,     9,    29,
+       6,    17,    46,     6,    48,     5,    47,     6,     6
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    31,    32,    32,    32,    32,    33,    34,    35,    36,
-      37,    37,    37,    37,    38,    38,    38,    38,    39,    39,
-      39,    39,    40,    40,    40,    40,    40,    40,    40,    40,
-      40,    40,    41,    42,    42,    43,    43,    44,    44,    44,
-      44,    45,    45,    46,    47,    47,    48,    49,    49,    50,
-      50,    51,    52,    52,    52,    52
+       0,    31,    32,    32,    32,    32,    33,    33,    33,    34,
+      35,    36,    37,    37,    37,    37,    38,    38,    38,    38,
+      39,    39,    39,    39,    40,    40,    40,    40,    40,    40,
+      40,    40,    40,    40,    41,    42,    42,    43,    43,    44,
+      44,    44,    44,    45,    45,    46,    47,    47,    48,    49,
+      49,    50,    50,    51,    52,    52,    52,    52
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     1,     1,     1,     9,     9,     8,     8,
-       1,     3,     3,     5,     3,     3,     1,     1,     3,     3,
-       1,     1,     2,     5,     5,     2,     5,     5,     2,     5,
-       2,     5,     4,     5,     5,     3,     1,     4,     9,     9,
-      13,     3,     1,     2,     3,     1,     2,     3,     1,     7,
-       7,     1,     1,     1,     1,     1
+       0,     2,     1,     1,     1,     1,     9,     6,     8,     9,
+       8,     8,     1,     3,     3,     5,     3,     3,     1,     1,
+       3,     3,     1,     1,     2,     5,     5,     2,     5,     5,
+       2,     5,     2,     5,     4,     5,     5,     3,     1,     4,
+       9,     9,    13,     3,     1,     2,     3,     1,     2,     3,
+       1,     7,     7,     1,     1,     1,     1,     1
 };
 
 
@@ -1511,302 +1511,314 @@ yyreduce:
 #line 1512 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 7: /* delete_query: name L_BRACKET DELETE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 110 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                                  { QueryNode* node = new QueryNode("delete", (yyvsp[-8].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
+  case 7: /* select_query: name L_BRACKET SELECTION_FLAG R_BRACKET L_BRACE R_BRACE  */
+#line 109 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                      { QueryNode* node = new QueryNode("select", (yyvsp[-5].stringConstant)); (yyval.queryNode) = node; }
 #line 1518 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 8: /* insert_query: name L_BRACKET INSERTION_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 112 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                               { QueryNode* node = new QueryNode("insert", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
+  case 8: /* select_query: name L_BRACKET SELECTION_FLAG COMMA selection_set R_BRACKET L_BRACE R_BRACE  */
+#line 110 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                          { QueryNode* node = new QueryNode("select", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-3].selectionSetNode)); (yyval.queryNode) = node; }
 #line 1524 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 9: /* update_query: name L_BRACKET UPDATE_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
-#line 114 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                            { QueryNode* node = new QueryNode("update", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
+  case 9: /* delete_query: name L_BRACKET DELETE_FLAG COMMA selection_set R_BRACKET L_BRACE result_set R_BRACE  */
+#line 112 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                                  { QueryNode* node = new QueryNode("delete", (yyvsp[-8].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
 #line 1530 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 10: /* selection_set: arguments  */
-#line 116 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                         { SelectionSetNode* node = new SelectionSetNode(); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
+  case 10: /* insert_query: name L_BRACKET INSERTION_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
+#line 114 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                               { QueryNode* node = new QueryNode("insert", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
 #line 1536 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 11: /* selection_set: L_BRACE objects R_BRACE  */
-#line 117 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                        { SelectionSetNode* node = new SelectionSetNode(); node->set_objs((yyvsp[-1].objectWrapperNode)); (yyval.selectionSetNode) = node; }
+  case 11: /* update_query: name L_BRACKET UPDATE_FLAG selection_set R_BRACKET L_BRACE result_set R_BRACE  */
+#line 116 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                            { QueryNode* node = new QueryNode("update", (yyvsp[-7].stringConstant)); node->setSelectionSet((yyvsp[-4].selectionSetNode)); node->setResultSet((yyvsp[-1].resultSetNode)); (yyval.queryNode) = node; }
 #line 1542 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 12: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET  */
+  case 12: /* selection_set: arguments  */
 #line 118 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                 { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-1].subOperationWrapperNode)); (yyval.selectionSetNode) = node; }
+                         { SelectionSetNode* node = new SelectionSetNode(); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
 #line 1548 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 13: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET COMMA arguments  */
+  case 13: /* selection_set: L_BRACE objects R_BRACE  */
 #line 119 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                 { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-3].subOperationWrapperNode)); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
+                                        { SelectionSetNode* node = new SelectionSetNode(); node->set_objs((yyvsp[-1].objectWrapperNode)); (yyval.selectionSetNode) = node; }
 #line 1554 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 14: /* result_set: result_set COMMA name  */
-#line 121 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                  { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
+  case 14: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET  */
+#line 120 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                 { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-1].subOperationWrapperNode)); (yyval.selectionSetNode) = node; }
 #line 1560 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 15: /* result_set: result_set COMMA REF_TOKEN  */
-#line 122 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                        { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
+  case 15: /* selection_set: L_SQUARE_BRACKET sub_operations R_SQUARE_BRACKET COMMA arguments  */
+#line 121 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                 { SelectionSetNode* node = new SelectionSetNode(); node->set_subops((yyvsp[-3].subOperationWrapperNode)); node->set_args((yyvsp[0].argumentWrapperNode)); (yyval.selectionSetNode) = node; }
 #line 1566 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 16: /* result_set: REF_TOKEN  */
+  case 16: /* result_set: result_set COMMA name  */
 #line 123 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                       { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
+                                  { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
 #line 1572 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 17: /* result_set: name  */
+  case 17: /* result_set: result_set COMMA REF_TOKEN  */
 #line 124 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                  { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
+                                        { (yyval.resultSetNode) = (yyvsp[-2].resultSetNode); (yyvsp[-2].resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
 #line 1578 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 18: /* arguments: arguments COMMA argument  */
-#line 126 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                    { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
+  case 18: /* result_set: REF_TOKEN  */
+#line 125 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                       { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr(new StringConstant((yyvsp[0].str))); }
 #line 1584 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 19: /* arguments: arguments COMMA logic_op  */
-#line 127 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                     { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
+  case 19: /* result_set: name  */
+#line 126 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                  { (yyval.resultSetNode) = new ResultSetNode(); (yyval.resultSetNode)->add_attr((yyvsp[0].stringConstant)); }
 #line 1590 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 20: /* arguments: argument  */
+  case 20: /* arguments: arguments COMMA argument  */
 #line 128 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
+                                    { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
 #line 1596 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 21: /* arguments: logic_op  */
+  case 21: /* arguments: arguments COMMA logic_op  */
 #line 129 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
+                                     { (yyval.argumentWrapperNode) = (yyvsp[-2].argumentWrapperNode); (yyvsp[-2].argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
 #line 1602 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 22: /* argument: name value  */
-#line 131 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                     { (yyval.argumentNode) = new ArgumentNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
+  case 22: /* arguments: argument  */
+#line 130 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].argumentNode)); }
 #line 1608 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 23: /* argument: name filter VAL_TOKEN value R_BRACE  */
-#line 132 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                               { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+  case 23: /* arguments: logic_op  */
+#line 131 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                     { (yyval.argumentWrapperNode) = new ArgumentWrapperNode(); (yyval.argumentWrapperNode)->add_attr((yyvsp[0].logicalOperationNode)); }
 #line 1614 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 24: /* argument: name filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+  case 24: /* argument: name value  */
 #line 133 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                      { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+                     { (yyval.argumentNode) = new ArgumentNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
 #line 1620 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 25: /* argument: REF_TOKEN value  */
-#line 135 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                           { (yyval.argumentNode) = new ArgumentNode(new StringConstant((yyvsp[-1].str)), (yyvsp[0].constant)); }
+  case 25: /* argument: name filter VAL_TOKEN value R_BRACE  */
+#line 134 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                               { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1626 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 26: /* argument: REF_TOKEN filter VAL_TOKEN value R_BRACE  */
-#line 136 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                    { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+  case 26: /* argument: name filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 135 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                      { ArgumentNode* node = new ArgumentNode((yyvsp[-4].stringConstant), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1632 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 27: /* argument: REF_TOKEN filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+  case 27: /* argument: REF_TOKEN value  */
 #line 137 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+                           { (yyval.argumentNode) = new ArgumentNode(new StringConstant((yyvsp[-1].str)), (yyvsp[0].constant)); }
 #line 1638 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 28: /* argument: NODE_NAME STRING_TOKEN  */
-#line 139 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                  { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[0].str))); }
+  case 28: /* argument: REF_TOKEN filter VAL_TOKEN value R_BRACE  */
+#line 138 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                    { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), (yyvsp[-1].constant)); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1644 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 29: /* argument: NODE_NAME filter VAL_TOKEN STRING_TOKEN R_BRACE  */
-#line 140 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+  case 29: /* argument: REF_TOKEN filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 139 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant((yyvsp[-4].str)), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1650 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 30: /* argument: NODE_CLASS STRING_TOKEN  */
-#line 142 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                   { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[0].str))); }
+  case 30: /* argument: NODE_NAME STRING_TOKEN  */
+#line 141 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                  { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[0].str))); }
 #line 1656 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 31: /* argument: NODE_CLASS filter VAL_TOKEN STRING_TOKEN R_BRACE  */
-#line 143 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                            { ArgumentNode* node = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
+  case 31: /* argument: NODE_NAME filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 142 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                           { ArgumentNode* node = new ArgumentNode(new StringConstant("node_name"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1662 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 32: /* logic_op: LOGIC_OP L_BRACE arguments R_BRACE  */
-#line 145 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                             { LogicalOperationNode* node = new LogicalOperationNode((yyvsp[-3].logical_op)); node->set_attr((yyvsp[-1].argumentWrapperNode)); (yyval.logicalOperationNode) = node; }
+  case 32: /* argument: NODE_CLASS STRING_TOKEN  */
+#line 144 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                   { (yyval.argumentNode) = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[0].str))); }
 #line 1668 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 33: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN COMP_OP COMMA  */
-#line 147 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                    { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
+  case 33: /* argument: NODE_CLASS filter VAL_TOKEN STRING_TOKEN R_BRACE  */
+#line 145 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                            { ArgumentNode* node = new ArgumentNode(new StringConstant("node_class"), new StringConstant((yyvsp[-1].str))); node->set_filter((yyvsp[-3].filterNode)); (yyval.argumentNode) = node; }
 #line 1674 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 34: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN LIKE_FILTER COMMA  */
-#line 148 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                         { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
+  case 34: /* logic_op: LOGIC_OP L_BRACE arguments R_BRACE  */
+#line 147 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                             { LogicalOperationNode* node = new LogicalOperationNode((yyvsp[-3].logical_op)); node->set_attr((yyvsp[-1].argumentWrapperNode)); (yyval.logicalOperationNode) = node; }
 #line 1680 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 35: /* objects: objects COMMA object  */
-#line 150 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                              { (yyval.objectWrapperNode) = (yyvsp[-2].objectWrapperNode); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
+  case 35: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN COMP_OP COMMA  */
+#line 149 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                    { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
 #line 1686 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 36: /* objects: object  */
-#line 151 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                 { (yyval.objectWrapperNode) = new ObjectWrapperNode(); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
+  case 36: /* filter: FILTER_TOKEN L_BRACE OP_TOKEN LIKE_FILTER COMMA  */
+#line 150 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                         { (yyval.filterNode) = new FilterNode((yyvsp[-1].filter_op)); }
 #line 1692 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 37: /* object: L_BRACE NODE_NAME name R_BRACE  */
-#line 153 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                      { (yyval.objectNode) = new ObjectNode((yyvsp[-1].stringConstant)); }
+  case 37: /* objects: objects COMMA object  */
+#line 152 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                              { (yyval.objectWrapperNode) = (yyvsp[-2].objectWrapperNode); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
 #line 1698 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 38: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE  */
-#line 154 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-2].fieldsWrapperNode)); }
+  case 38: /* objects: object  */
+#line 153 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                 { (yyval.objectWrapperNode) = new ObjectWrapperNode(); (yyval.objectWrapperNode)->add_attr((yyvsp[0].objectNode)); }
 #line 1704 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 39: /* object: L_BRACE NODE_NAME name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+  case 39: /* object: L_BRACE NODE_NAME name R_BRACE  */
 #line 155 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                       { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
+                                      { (yyval.objectNode) = new ObjectNode((yyvsp[-1].stringConstant)); }
 #line 1710 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 40: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+  case 40: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE R_BRACE  */
 #line 156 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                                                          { (yyval.objectNode) = new ObjectNode((yyvsp[-10].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-6].fieldsWrapperNode)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
+                                                                                { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-2].fieldsWrapperNode)); }
 #line 1716 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 41: /* fields: fields COMMA field  */
-#line 158 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                           { (yyval.fieldsWrapperNode) = (yyvsp[-2].fieldsWrapperNode); (yyvsp[-2].fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
+  case 41: /* object: L_BRACE NODE_NAME name COMMA RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+#line 157 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                       { (yyval.objectNode) = new ObjectNode((yyvsp[-6].stringConstant)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
 #line 1722 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 42: /* fields: field  */
-#line 159 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-               { (yyval.fieldsWrapperNode) = new FieldsWrapperNode(); (yyval.fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
+  case 42: /* object: L_BRACE NODE_NAME name COMMA PROPS_TOKEN L_BRACE fields R_BRACE RELATIONS_TOKEN L_BRACE relations R_BRACE R_BRACE  */
+#line 158 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                                                          { (yyval.objectNode) = new ObjectNode((yyvsp[-10].stringConstant)); (yyval.objectNode)->add_props((yyvsp[-6].fieldsWrapperNode)); (yyval.objectNode)->add_rels((yyvsp[-2].relationWrapperNode)); }
 #line 1728 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 43: /* field: name value  */
-#line 161 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                  { (yyval.fieldNode) = new FieldNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
+  case 43: /* fields: fields COMMA field  */
+#line 160 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                           { (yyval.fieldsWrapperNode) = (yyvsp[-2].fieldsWrapperNode); (yyvsp[-2].fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
 #line 1734 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 44: /* relations: relations COMMA relation  */
-#line 163 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                    { (yyval.relationWrapperNode) = (yyvsp[-2].relationWrapperNode); (yyvsp[-2].relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
+  case 44: /* fields: field  */
+#line 161 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+               { (yyval.fieldsWrapperNode) = new FieldsWrapperNode(); (yyval.fieldsWrapperNode)->add_attr((yyvsp[0].fieldNode)); }
 #line 1740 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 45: /* relations: relation  */
-#line 164 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                     { (yyval.relationWrapperNode) = new RelationWrapperNode(); (yyval.relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
+  case 45: /* field: name value  */
+#line 163 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                  { (yyval.fieldNode) = new FieldNode((yyvsp[-1].stringConstant), (yyvsp[0].constant)); }
 #line 1746 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 46: /* relation: name STRING_TOKEN  */
-#line 166 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                            { (yyval.relationNode) = new RelationNode((yyvsp[-1].stringConstant), new StringConstant((yyvsp[0].str))); }
+  case 46: /* relations: relations COMMA relation  */
+#line 165 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                    { (yyval.relationWrapperNode) = (yyvsp[-2].relationWrapperNode); (yyvsp[-2].relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
 #line 1752 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 47: /* sub_operations: sub_operations COMMA sub_operation  */
-#line 168 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                   { (yyval.subOperationWrapperNode) = (yyvsp[-2].subOperationWrapperNode); (yyvsp[-2].subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
+  case 47: /* relations: relation  */
+#line 166 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                     { (yyval.relationWrapperNode) = new RelationWrapperNode(); (yyval.relationWrapperNode)->add_attr((yyvsp[0].relationNode)); }
 #line 1758 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 48: /* sub_operations: sub_operation  */
-#line 169 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                               { (yyval.subOperationWrapperNode) = new SubOperationWrapperNode(); (yyval.subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
+  case 48: /* relation: name STRING_TOKEN  */
+#line 168 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                            { (yyval.relationNode) = new RelationNode((yyvsp[-1].stringConstant), new StringConstant((yyvsp[0].str))); }
 #line 1764 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 49: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA name COMMA value R_SQUARE_BRACKET  */
-#line 171 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                            { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].sub_op), (yyvsp[-3].stringConstant), (yyvsp[-1].constant)); }
+  case 49: /* sub_operations: sub_operations COMMA sub_operation  */
+#line 170 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                   { (yyval.subOperationWrapperNode) = (yyvsp[-2].subOperationWrapperNode); (yyvsp[-2].subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
 #line 1770 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 50: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA REF_TOKEN COMMA value R_SQUARE_BRACKET  */
-#line 172 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                                                                                                  { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].sub_op), new StringConstant((yyvsp[-3].str)), (yyvsp[-1].constant)); }
+  case 50: /* sub_operations: sub_operation  */
+#line 171 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                               { (yyval.subOperationWrapperNode) = new SubOperationWrapperNode(); (yyval.subOperationWrapperNode)->add_attr((yyvsp[0].subOperationNode)); }
 #line 1776 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 51: /* name: NAME_TOKEN  */
-#line 174 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                 { (yyval.stringConstant) = new StringConstant((yyvsp[0].str)); }
+  case 51: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA name COMMA value R_SQUARE_BRACKET  */
+#line 173 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                            { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].sub_op), (yyvsp[-3].stringConstant), (yyvsp[-1].constant)); }
 #line 1782 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 52: /* value: INT_TOKEN  */
-#line 176 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                 { (yyval.constant) = new IntConstant((yyvsp[0].int_val)); }
+  case 52: /* sub_operation: L_SQUARE_BRACKET SUB_OPERATION_TOKEN COMMA REF_TOKEN COMMA value R_SQUARE_BRACKET  */
+#line 174 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                                                                                                  { (yyval.subOperationNode) = new SubOperationNode((yyvsp[-5].sub_op), new StringConstant((yyvsp[-3].str)), (yyvsp[-1].constant)); }
 #line 1788 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 53: /* value: FLOAT_TOKEN  */
-#line 177 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                    { (yyval.constant) = new FloatConstant((yyvsp[0].float_val)); }
+  case 53: /* name: NAME_TOKEN  */
+#line 176 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                 { (yyval.stringConstant) = new StringConstant((yyvsp[0].str)); }
 #line 1794 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 54: /* value: STRING_TOKEN  */
+  case 54: /* value: INT_TOKEN  */
 #line 178 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                     { (yyval.constant) = new StringConstant((yyvsp[0].str)); }
+                 { (yyval.constant) = new IntConstant((yyvsp[0].int_val)); }
 #line 1800 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
-  case 55: /* value: BOOL_TOKEN  */
+  case 55: /* value: FLOAT_TOKEN  */
 #line 179 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
-                   { (yyval.constant) = new BoolConstant((yyvsp[0].bool_val)); }
+                    { (yyval.constant) = new FloatConstant((yyvsp[0].float_val)); }
 #line 1806 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
     break;
 
+  case 56: /* value: STRING_TOKEN  */
+#line 180 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                     { (yyval.constant) = new StringConstant((yyvsp[0].str)); }
+#line 1812 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
+    break;
 
-#line 1810 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
+  case 57: /* value: BOOL_TOKEN  */
+#line 181 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+                   { (yyval.constant) = new BoolConstant((yyvsp[0].bool_val)); }
+#line 1818 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
+    break;
+
+
+#line 1822 "/home/mikhail/CLionProjects/Low_Level_Programming/Lab2/parser.cpp"
 
       default: break;
     }
@@ -2030,4 +2042,4 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 181 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
+#line 183 "/home/mikhail/CLionProjects/Low_Level_Programming/./Lab2/parser.y"
