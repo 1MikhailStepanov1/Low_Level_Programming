@@ -108,7 +108,7 @@ class_type: Person
 Запрос на удаление элемента
 
 Person(delete: true,
-    node_name: "John"){
+    node_name: "Audi"){
     id,
     node_name
 };

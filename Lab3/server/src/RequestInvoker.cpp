@@ -347,10 +347,16 @@ response_t RequestInvoker::parse_and_execute_query(request_t request) {
             add_nodes.push_back(this->db.get_node_by_name(n.node_name));
             this->db.delete_node(n.node_name);
         }
-        std::cout << this->db.get_node_by_name("Volkswagen").id << std::endl;
         body_t answer = get_query_by_result_set(this->db, &add_nodes, request);
         resp.body().set(answer);
         resp.message().append("Delete done.");
+    }
+    if (strcmp(request.query_type().c_str(), "Update") == 0){
+        std::vector<node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
+        std::vector<node> updated_nodes;
+        body_t answer = get_query_by_result_set(this->db, &updated_nodes, request);
+//        resp.body().set(answer);
+        resp.message().append("Update done.");
     }
     return resp;
 }

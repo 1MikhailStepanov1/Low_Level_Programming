@@ -18,17 +18,10 @@ int main(int argc, char *argv[]) {
         connection->accept_client();
         struct database db = database("../file.data");
         RequestInvoker* invoker = new RequestInvoker(db);
-//        char message[1000];
         while(1){
             request_t req = connection->receive_request();
             response_t resp = invoker->parse_and_execute_query(req);
             connection->send_response(resp);
-//            memset(&message, 0, sizeof(message));
-//            recv(s1, (char*) &message, sizeof(message), 0);
-//            cout << "Client " << message << endl;
-//            memset(&message, 0, sizeof(message));
-//            string pong = "pong";
-//            send(s1, pong.c_str(), strlen(pong.c_str()), 0);
         }
 
     } catch (ConnectionException& exception){
