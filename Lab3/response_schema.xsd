@@ -3,7 +3,10 @@
     <xs:complexType name='filling_t'>
         <xs:sequence>
             <xs:element name='type' type="xs:string"/>
-            <xs:element name='value' type="xs:string"/>
+            <xs:choice>
+                <xs:element name='value' type="xs:string"/>
+                <xs:element name='node' type="node_t" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
     

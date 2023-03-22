@@ -188,7 +188,7 @@ class_type: Person
     StringConstant: id
 
 
-Person(insert: {
+Car(insert: {
     {
         node_name: Volkswagen,
         props {
@@ -203,7 +203,7 @@ Person(insert: {
             model: "A6"
         }
         relations{
-            cyl: "privet"
+            cyl: "Volkswagen"
         }
     }
 }){
@@ -212,7 +212,7 @@ Person(insert: {
 
 Result Output:
 Query: Insert
-class_type: Person
+class_type: Car
   SelectionSet:
     Objects:
       Object:

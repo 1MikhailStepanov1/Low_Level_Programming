@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 set(CLIENT_NAME client)
 set(SERVER_NAME server)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_GLIBCXX_DEBUG")
 
 add_compile_options(
         -fsanitize=address,undefined,leak

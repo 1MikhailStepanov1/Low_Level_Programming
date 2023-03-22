@@ -65,7 +65,13 @@ request_t Connection::receive_request() {
     std::cout << buf << std::endl;
     buf[bytes_read] = 0;
     std::istringstream iss(buf);
-    return *request(iss, 0, this->properties);
+    try {
+        return *request(iss, 0, this->properties);
+    }catch (const xml_schema::exception& e) {
+        std::ostringstream oss;
+        oss << e;
+        throw InvalidSchemaException(oss.str());
+    }
 }
 
 void Connection::send_response(response_t resp) {

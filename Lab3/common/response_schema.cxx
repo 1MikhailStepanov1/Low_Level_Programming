@@ -67,16 +67,16 @@ type (::std::unique_ptr< type_type > x)
   this->type_.set (std::move (x));
 }
 
-const filling_t::value_type& filling_t::
+const filling_t::value_optional& filling_t::
 value () const
 {
-  return this->value_.get ();
+  return this->value_;
 }
 
-filling_t::value_type& filling_t::
+filling_t::value_optional& filling_t::
 value ()
 {
-  return this->value_.get ();
+  return this->value_;
 }
 
 void filling_t::
@@ -86,9 +86,45 @@ value (const value_type& x)
 }
 
 void filling_t::
+value (const value_optional& x)
+{
+  this->value_ = x;
+}
+
+void filling_t::
 value (::std::unique_ptr< value_type > x)
 {
   this->value_.set (std::move (x));
+}
+
+const filling_t::node_optional& filling_t::
+node () const
+{
+  return this->node_;
+}
+
+filling_t::node_optional& filling_t::
+node ()
+{
+  return this->node_;
+}
+
+void filling_t::
+node (const node_type& x)
+{
+  this->node_.set (x);
+}
+
+void filling_t::
+node (const node_optional& x)
+{
+  this->node_ = x;
+}
+
+void filling_t::
+node (::std::unique_ptr< node_type > x)
+{
+  this->node_.set (std::move (x));
 }
 
 
@@ -302,11 +338,11 @@ body (::std::unique_ptr< body_type > x)
 //
 
 filling_t::
-filling_t (const type_type& type,
-           const value_type& value)
+filling_t (const type_type& type)
 : ::xml_schema::type (),
   type_ (type, this),
-  value_ (value, this)
+  value_ (this),
+  node_ (this)
 {
 }
 
@@ -316,7 +352,8 @@ filling_t (const filling_t& x,
            ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   type_ (x.type_, f, this),
-  value_ (x.value_, f, this)
+  value_ (x.value_, f, this),
+  node_ (x.node_, f, this)
 {
 }
 
@@ -326,7 +363,8 @@ filling_t (const ::xercesc::DOMElement& e,
            ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   type_ (this),
-  value_ (this)
+  value_ (this),
+  node_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -366,9 +404,23 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< value_type > r (
         value_traits::create (i, f, this));
 
-      if (!value_.present ())
+      if (!this->value_)
       {
         this->value_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // node
+    //
+    if (n.name () == "node" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< node_type > r (
+        node_traits::create (i, f, this));
+
+      if (!this->node_)
+      {
+        this->node_.set (::std::move (r));
         continue;
       }
     }
@@ -380,13 +432,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "type",
-      "");
-  }
-
-  if (!value_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "value",
       "");
   }
 }
@@ -406,6 +451,7 @@ operator= (const filling_t& x)
     static_cast< ::xml_schema::type& > (*this) = x;
     this->type_ = x.type_;
     this->value_ = x.value_;
+    this->node_ = x.node_;
   }
 
   return *this;
@@ -1094,13 +1140,26 @@ operator<< (::xercesc::DOMElement& e, const filling_t& i)
 
   // value
   //
+  if (i.value ())
   {
     ::xercesc::DOMElement& s (
       ::xsd::cxx::xml::dom::create_element (
         "value",
         e));
 
-    s << i.value ();
+    s << *i.value ();
+  }
+
+  // node
+  //
+  if (i.node ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "node",
+        e));
+
+    s << *i.node ();
   }
 }
 

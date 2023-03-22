@@ -294,24 +294,48 @@ class filling_t: public ::xml_schema::type
   // value
   //
   typedef ::xml_schema::string value_type;
+  typedef ::xsd::cxx::tree::optional< value_type > value_optional;
   typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
 
-  const value_type&
+  const value_optional&
   value () const;
 
-  value_type&
+  value_optional&
   value ();
 
   void
   value (const value_type& x);
 
   void
+  value (const value_optional& x);
+
+  void
   value (::std::unique_ptr< value_type > p);
+
+  // node
+  //
+  typedef ::node_t node_type;
+  typedef ::xsd::cxx::tree::optional< node_type > node_optional;
+  typedef ::xsd::cxx::tree::traits< node_type, char > node_traits;
+
+  const node_optional&
+  node () const;
+
+  node_optional&
+  node ();
+
+  void
+  node (const node_type& x);
+
+  void
+  node (const node_optional& x);
+
+  void
+  node (::std::unique_ptr< node_type > p);
 
   // Constructors.
   //
-  filling_t (const type_type&,
-             const value_type&);
+  filling_t (const type_type&);
 
   filling_t (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -340,7 +364,8 @@ class filling_t: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< type_type > type_;
-  ::xsd::cxx::tree::one< value_type > value_;
+  value_optional value_;
+  node_optional node_;
 };
 
 class node_t: public ::xml_schema::type

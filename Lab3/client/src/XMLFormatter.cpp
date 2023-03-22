@@ -102,8 +102,8 @@ request_t convert_to_XML_format(NodeWrapper& nodeWrapper){
     }
     if (node->get_result_set() != NULL) {
         result_set = form_result_set((ResultSetNode *) node->get_result_set());
+        request.result_set().set(result_set);
     }
     request.selection_set().set(selection_set);
-    request.result_set().set(result_set);
     return request;
 }
