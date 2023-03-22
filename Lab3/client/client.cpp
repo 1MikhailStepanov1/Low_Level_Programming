@@ -16,6 +16,47 @@ int parseInput(string &query, NodeWrapper &nodeWrapper) {
     return code;
 }
 
+static void print_node(node_t n){
+    string tab1 = "  ";
+    string tab2 = "    ";
+    cout << tab1 << "Node (Name: " << n.node_name() << " Class: " << n.node_class() << ")" << endl;
+    if (!n.field().empty()) {
+        for (auto field: n.field()) {
+            if (field.value().present()) {
+                cout << tab2 << "Field (Name: " << field.type() << " Value: " << field.value() << ")" << endl;
+            } else if (field.node().present()) {
+                cout << tab2 << "Field:" << endl;
+                print_node(field.node().get());
+            }
+        }
+    }
+    if (!n.relation().empty()) {
+        for (auto rel: n.relation()){
+            if (rel.value().present()){
+                cout << tab2 << "Relation (Name: " << rel.type() << " Value: " << rel.value() << ")" << endl;
+            } else if (rel.node().present()){
+                cout << tab1 << "Relation:" << endl;
+                print_node(rel.node().get());
+            }
+        }
+    }
+}
+
+void print_response(response_t resp){
+    cout << "-----------------------------------" << endl;
+    cout << "------------RESPONSE---------------" << endl;
+    cout << "Status: " << resp.status() << endl;
+    cout << "Message: " << resp.message() << endl;
+    cout << "Is finished: " << resp.isFinished() << endl;
+    if (resp.body().present()) {
+        cout << "Body: " << endl;
+        for (auto node : resp.body().get().node()){
+            print_node(node);
+        }
+    }
+    cout << "-----------------------------------" << endl;
+}
+
 int main(int argc, char *argv[]) {
 
     if (argc != 3){
@@ -48,18 +89,8 @@ int main(int argc, char *argv[]) {
                     }
                     buf.clear();
                     cout << "-----------------" << endl;
-
-//                    char message[10000];
-//                    string ping = "ping";
-//                    int res_code = send(s0, ping.c_str(), strlen(ping.c_str()), 0);
-//                    if (res_code < 0){
-//                        throw new ConnectionException(strerror(errno));
-//                        exit(1);
-//                    }
-//                    cout << "Message send" << endl;
-//                    memset(&message, 0, sizeof(message));
-//                    res_code = recv(s0, (char*) &message, sizeof(message), 0);
-//                    cout << "Message from server " << message << endl;
+                    response_t resp = connection.receive_response();
+                    print_response(resp);
                 }
             }
         }

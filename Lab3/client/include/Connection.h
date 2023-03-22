@@ -4,7 +4,7 @@
 #define LOW_LEVEL_PROGRAMMING_CONNECTION_CLIENT_H
 
 #include "../../common/request_schema.hxx"
-//#include "../../common/response_schema.hxx"
+#include "../../common/response_schema.hxx"
 #include "../../exceptions/exceptions.h"
 #include <netinet/ip.h>
 #include <netinet/in.h>
@@ -32,7 +32,7 @@ class Connection {
         void open_connection(const char* ip, const char* port);
         void close_connection();
         void send_request(request_t req);
-        const char* receive_response();
+        response_t receive_response();
 };
 
 #endif

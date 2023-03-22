@@ -4,7 +4,7 @@ Connection::Connection(const char *port) {
     int p = atoi(port);
 
     map[""].name = "";
-    map[""].schema = "resp_schema.xsd";
+    map[""].schema = "response_schema.xsd";
     properties.no_namespace_schema_location("./Lab3/request_schema.xsd");
 
     sock0 = socket(AF_INET, SOCK_STREAM, 0);
@@ -78,4 +78,8 @@ void Connection::send_response(response_t resp) {
     std::ostringstream oss;
     response(oss, resp, map);
     std::cout << oss.str() << std::endl;
+    memset(&buf, 0, BUFFER_SIZE);
+    if (write(sock1, oss.str().c_str(), oss.str().length()) < 0){
+        throw new ConnectionException("Failed to send response");
+    }
 }

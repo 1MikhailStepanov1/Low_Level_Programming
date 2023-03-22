@@ -3,7 +3,7 @@
 Connection::Connection() {
     map[""].name = "";
     map[""].schema = "request_schema.xsd";
-    properties.no_namespace_schema_location("../../response_schema.xsd");
+    properties.no_namespace_schema_location("./Lab3/response_schema.xsd");
     this->sock = -1;
 }
 
@@ -57,6 +57,22 @@ void Connection::send_request(request_t req) {
     }
 }
 
-const char *Connection::receive_response() {
-    return "response";
+response_t Connection::receive_response() {
+    memset(&buf, 0, BUFFER_SIZE);
+    int bytes_read = recv(sock, buf, BUFFER_SIZE, 0);
+    if (bytes_read < 0){
+        std::cout << "PISYA receive request" << std::endl;
+        throw new ConnectionException("Error with receiving data");
+    }
+    std::cout << "Received " << bytes_read << " bytes from client " << sock << std::endl;
+//    std::cout << buf << std::endl;
+    buf[bytes_read] = 0;
+    std::istringstream iss(buf);
+    try {
+        return *response(iss, 0, this->properties);
+    }catch (const xml_schema::exception& e) {
+        std::ostringstream oss;
+        oss << e;
+        throw InvalidSchemaException(oss.str());
+    }
 }

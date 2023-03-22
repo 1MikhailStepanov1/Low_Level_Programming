@@ -308,7 +308,7 @@ static body_t get_query_by_result_set(struct database db, std::vector <node> *no
                             }
                             filling_t relation = filling_t(rel.first.c_str());
                             relation.node().set(join_node);
-                            n.field().push_back(relation);
+                            n.relation().push_back(relation);
                         }
                     }
                 }
