@@ -232,6 +232,7 @@ class FilterNode : public Node {
         filter_operation filter_flag;
     public:
         FilterNode(filter_operation filter_flag);
+        const char* get_filter();
         void print(int depth) override;
 };
 
@@ -245,6 +246,7 @@ class ArgumentNode : public Node {
         void set_filter(Node* filterNode);
         StringConstant* get_name();
         ConstantNode* get_value();
+        Node* get_filter();
         void print(int depth) override;
         ~ArgumentNode();
 };

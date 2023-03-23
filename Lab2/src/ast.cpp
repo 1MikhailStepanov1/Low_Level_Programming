@@ -309,6 +309,10 @@ FilterNode::FilterNode(filter_operation filter_flag) {
     this->filter_flag = filter_flag;
 }
 
+const char *FilterNode::get_filter() {
+    return get_str_filter_from_enum(this->filter_flag);
+}
+
 void FilterNode::print(int depth) {
     print_node_val(get_string_from_node_type(this->type), get_str_filter_from_enum(this->filter_flag), depth);
 }
@@ -331,6 +335,10 @@ StringConstant *ArgumentNode::get_name() {
 
 ConstantNode *ArgumentNode::get_value() {
     return this->value;
+}
+
+Node *ArgumentNode::get_filter() {
+    return this->filerNode;
 }
 
 void ArgumentNode::print(int depth) {

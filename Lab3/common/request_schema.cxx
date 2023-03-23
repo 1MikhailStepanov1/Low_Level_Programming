@@ -40,6 +40,58 @@
 
 #include "request_schema.hxx"
 
+// filter_t
+// 
+
+const filter_t::op_type_type& filter_t::
+op_type () const
+{
+  return this->op_type_.get ();
+}
+
+filter_t::op_type_type& filter_t::
+op_type ()
+{
+  return this->op_type_.get ();
+}
+
+void filter_t::
+op_type (const op_type_type& x)
+{
+  this->op_type_.set (x);
+}
+
+void filter_t::
+op_type (::std::unique_ptr< op_type_type > x)
+{
+  this->op_type_.set (std::move (x));
+}
+
+const filter_t::value_type& filter_t::
+value () const
+{
+  return this->value_.get ();
+}
+
+filter_t::value_type& filter_t::
+value ()
+{
+  return this->value_.get ();
+}
+
+void filter_t::
+value (const value_type& x)
+{
+  this->value_.set (x);
+}
+
+void filter_t::
+value (::std::unique_ptr< value_type > x)
+{
+  this->value_.set (std::move (x));
+}
+
+
 // constant_t
 // 
 
@@ -67,16 +119,16 @@ type (::std::unique_ptr< type_type > x)
   this->type_.set (std::move (x));
 }
 
-const constant_t::value_type& constant_t::
+const constant_t::value_optional& constant_t::
 value () const
 {
-  return this->value_.get ();
+  return this->value_;
 }
 
-constant_t::value_type& constant_t::
+constant_t::value_optional& constant_t::
 value ()
 {
-  return this->value_.get ();
+  return this->value_;
 }
 
 void constant_t::
@@ -86,9 +138,45 @@ value (const value_type& x)
 }
 
 void constant_t::
+value (const value_optional& x)
+{
+  this->value_ = x;
+}
+
+void constant_t::
 value (::std::unique_ptr< value_type > x)
 {
   this->value_.set (std::move (x));
+}
+
+const constant_t::filter_optional& constant_t::
+filter () const
+{
+  return this->filter_;
+}
+
+constant_t::filter_optional& constant_t::
+filter ()
+{
+  return this->filter_;
+}
+
+void constant_t::
+filter (const filter_type& x)
+{
+  this->filter_.set (x);
+}
+
+void constant_t::
+filter (const filter_optional& x)
+{
+  this->filter_ = x;
+}
+
+void constant_t::
+filter (::std::unique_ptr< filter_type > x)
+{
+  this->filter_.set (std::move (x));
 }
 
 
@@ -518,15 +606,133 @@ result_set (::std::unique_ptr< result_set_type > x)
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
+// filter_t
+//
+
+filter_t::
+filter_t (const op_type_type& op_type,
+          const value_type& value)
+: ::xml_schema::type (),
+  op_type_ (op_type, this),
+  value_ (value, this)
+{
+}
+
+filter_t::
+filter_t (const filter_t& x,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  op_type_ (x.op_type_, f, this),
+  value_ (x.value_, f, this)
+{
+}
+
+filter_t::
+filter_t (const ::xercesc::DOMElement& e,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  op_type_ (this),
+  value_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void filter_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // op_type
+    //
+    if (n.name () == "op_type" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< op_type_type > r (
+        op_type_traits::create (i, f, this));
+
+      if (!op_type_.present ())
+      {
+        this->op_type_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // value
+    //
+    if (n.name () == "value" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< value_type > r (
+        value_traits::create (i, f, this));
+
+      if (!value_.present ())
+      {
+        this->value_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!op_type_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "op_type",
+      "");
+  }
+
+  if (!value_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "value",
+      "");
+  }
+}
+
+filter_t* filter_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class filter_t (*this, f, c);
+}
+
+filter_t& filter_t::
+operator= (const filter_t& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->op_type_ = x.op_type_;
+    this->value_ = x.value_;
+  }
+
+  return *this;
+}
+
+filter_t::
+~filter_t ()
+{
+}
+
 // constant_t
 //
 
 constant_t::
-constant_t (const type_type& type,
-            const value_type& value)
+constant_t (const type_type& type)
 : ::xml_schema::type (),
   type_ (type, this),
-  value_ (value, this)
+  value_ (this),
+  filter_ (this)
 {
 }
 
@@ -536,7 +742,8 @@ constant_t (const constant_t& x,
             ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   type_ (x.type_, f, this),
-  value_ (x.value_, f, this)
+  value_ (x.value_, f, this),
+  filter_ (x.filter_, f, this)
 {
 }
 
@@ -546,7 +753,8 @@ constant_t (const ::xercesc::DOMElement& e,
             ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   type_ (this),
-  value_ (this)
+  value_ (this),
+  filter_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -586,9 +794,23 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< value_type > r (
         value_traits::create (i, f, this));
 
-      if (!value_.present ())
+      if (!this->value_)
       {
         this->value_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // filter
+    //
+    if (n.name () == "filter" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< filter_type > r (
+        filter_traits::create (i, f, this));
+
+      if (!this->filter_)
+      {
+        this->filter_.set (::std::move (r));
         continue;
       }
     }
@@ -600,13 +822,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "type",
-      "");
-  }
-
-  if (!value_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "value",
       "");
   }
 }
@@ -626,6 +841,7 @@ operator= (const constant_t& x)
     static_cast< ::xml_schema::type& > (*this) = x;
     this->type_ = x.type_;
     this->value_ = x.value_;
+    this->filter_ = x.filter_;
   }
 
   return *this;
@@ -1730,6 +1946,34 @@ request (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
 #include <xsd/cxx/xml/dom/serialization-source.hxx>
 
 void
+operator<< (::xercesc::DOMElement& e, const filter_t& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // op_type
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "op_type",
+        e));
+
+    s << i.op_type ();
+  }
+
+  // value
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "value",
+        e));
+
+    s << i.value ();
+  }
+}
+
+void
 operator<< (::xercesc::DOMElement& e, const constant_t& i)
 {
   e << static_cast< const ::xml_schema::type& > (i);
@@ -1747,13 +1991,26 @@ operator<< (::xercesc::DOMElement& e, const constant_t& i)
 
   // value
   //
+  if (i.value ())
   {
     ::xercesc::DOMElement& s (
       ::xsd::cxx::xml::dom::create_element (
         "value",
         e));
 
-    s << i.value ();
+    s << *i.value ();
+  }
+
+  // filter
+  //
+  if (i.filter ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "filter",
+        e));
+
+    s << *i.filter ();
   }
 }
 

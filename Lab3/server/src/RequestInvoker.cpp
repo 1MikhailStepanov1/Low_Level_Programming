@@ -35,30 +35,60 @@ void parse_logic_op(std::vector <node> &nodes, logical_condition_t logic_op) {
             for (int i = 0; i < nodes.size(); i++) {
                 bool res = 0;
                 for (auto arg: logic_op.field()) {
-                    struct parsed_field temp = parse_field(arg.type());
-                    if (temp.place == 0) {
-                        if (strcmp(temp.name.c_str(), "id") == 0) {
-                            int id = stoi(arg.value());
-                            if (nodes[i].id == id) res += 1;
-                        }
-                        if (strcmp(temp.name.c_str(), "node_name") == 0) {
-                            std::string node_name = arg.value();
-                            if (strcmp(nodes[i].node_name.c_str(), node_name.c_str()) == 0) res += 1;
-                        }
-                    }
-
-                    if (temp.place == 1) {
-                        for (auto prop: nodes[i].props) {
-                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
-                                if (strcmp(prop.second.get_value().c_str(), arg.value().c_str()) == 0) res += 1;
+                    if (arg.value().present()) {
+                        struct parsed_field p_field = parse_field(arg.type());
+                        if (p_field.place == 0) {
+                            if (strcmp(p_field.name.c_str(), "id") == 0) {
+                                int id = stoi(arg.value().get());
+                                if (nodes[i].id == id) res += 1;
+                            }
+                            if (strcmp(p_field.name.c_str(), "node_name") == 0) {
+                                std::string node_name = arg.value().get();
+                                if (strcmp(nodes[i].node_name.c_str(), node_name.c_str()) == 0) res += 1;
                             }
                         }
-                    }
 
-                    if (temp.place == 2) {
-                        for (auto rel: nodes[i].relations) {
-                            if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
-                                if (strcmp(rel.second.related_with.c_str(), arg.value().c_str()) == 0) res += 1;
+                        if (p_field.place == 1) {
+                            for (auto prop: nodes[i].props) {
+                                if (strcmp(prop.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(prop.second.get_value().c_str(), arg.value().get().c_str()) == 0)
+                                        res += 1;
+                                }
+                            }
+                        }
+
+                        if (p_field.place == 2) {
+                            for (auto rel: nodes[i].relations) {
+                                if (strcmp(rel.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(rel.second.related_with.c_str(), arg.value().get().c_str()) == 0)
+                                        res += 1;
+                                }
+                            }
+                        }
+                    } else {
+                        struct parsed_field p_field = parse_field(arg.type());
+                        if (p_field.place == 0) {
+                            if (strcmp(p_field.name.c_str(), "id") == 0) {
+                                int id = stoi(arg.filter().get().value());
+                                if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                    if (nodes[i].id > id) res += 1;
+                                }
+                                if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                    if (nodes[i].id < id) res += 1;
+                                }
+                            }
+                        }
+
+                        if (p_field.place == 1) {
+                            for (auto prop: nodes[i].props) {
+                                if (strcmp(prop.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                        if (prop.second.get_int() > atoi(arg.filter().get().value().c_str())) res += 1;
+                                    }
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                        if (prop.second.get_int() < atoi(arg.filter().get().value().c_str())) res += 1;
+                                    }
+                                }
                             }
                         }
                     }
@@ -72,34 +102,64 @@ void parse_logic_op(std::vector <node> &nodes, logical_condition_t logic_op) {
                 }
             }
         }
-        if (strcmp(logic_op.logical_operation().c_str(), "and") == 0) {
+        if (strcmp(logic_op.logical_operation().c_str(), "AND") == 0) {
             for (int i = 0; i < nodes.size(); i++) {
                 bool res = 1;
                 for (auto arg: logic_op.field()) {
-                    struct parsed_field temp = parse_field(arg.type());
-                    if (temp.place == 0) {
-                        if (strcmp(temp.name.c_str(), "id") == 0) {
-                            int id = stoi(arg.value());
-                            if (nodes[i].id != id) res = 0;
-                        }
-                        if (strcmp(temp.name.c_str(), "node_name") == 0) {
-                            std::string node_name = arg.value();
-                            if (strcmp(nodes[i].node_name.c_str(), node_name.c_str()) != 0) res = 0;
-                        }
-                    }
-
-                    if (temp.place == 1) {
-                        for (auto prop: nodes[i].props) {
-                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
-                                if (strcmp(prop.second.get_value().c_str(), arg.value().c_str()) != 0) res = 0;
+                    if (arg.value().present()) {
+                        struct parsed_field p_field = parse_field(arg.type());
+                        if (p_field.place == 0) {
+                            if (strcmp(p_field.name.c_str(), "id") == 0) {
+                                int id = atoi(arg.value().get().c_str());
+                                if (nodes[i].id != id) res = 0;
+                            }
+                            if (strcmp(p_field.name.c_str(), "node_name") == 0) {
+                                std::string node_name = arg.value().get();
+                                if (strcmp(nodes[i].node_name.c_str(), node_name.c_str()) != 0) res = 0;
                             }
                         }
-                    }
 
-                    if (temp.place == 2) {
-                        for (auto rel: nodes[i].relations) {
-                            if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
-                                if (strcmp(rel.second.related_with.c_str(), arg.value().c_str()) != 0) res = 0;
+                        if (p_field.place == 1) {
+                            for (auto prop: nodes[i].props) {
+                                if (strcmp(prop.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(prop.second.get_value().c_str(), arg.value().get().c_str()) != 0)
+                                        res = 0;
+                                }
+                            }
+                        }
+
+                        if (p_field.place == 2) {
+                            for (auto rel: nodes[i].relations) {
+                                if (strcmp(rel.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(rel.second.related_with.c_str(), arg.value().get().c_str()) != 0)
+                                        res = 0;
+                                }
+                            }
+                        }
+                    } else {
+                        struct parsed_field p_field = parse_field(arg.type());
+                        if (p_field.place == 0) {
+                            if (strcmp(p_field.name.c_str(), "id") == 0) {
+                                int id = stoi(arg.filter().get().value());
+                                if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                    if (nodes[i].id > id) res += 1;
+                                }
+                                if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                    if (nodes[i].id < id) res += 1;
+                                }
+                            }
+                        }
+
+                        if (p_field.place == 1) {
+                            for (auto prop: nodes[i].props) {
+                                if (strcmp(prop.first.c_str(), p_field.name.c_str()) == 0) {
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                        if (prop.second.get_int() > atoi(arg.filter().get().value().c_str())) res += 1;
+                                    }
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                        if (prop.second.get_int() < atoi(arg.filter().get().value().c_str())) res += 1;
+                                    }
+                                }
                             }
                         }
                     }
@@ -130,60 +190,114 @@ std::vector <node> get_nodes_by_sel_set(struct database db, std::string node_cla
                 for (auto id: db.information.node_classes.at(node_class)) {
                     node cur = db.get_node_by_id(id);
                     for (auto arg: con.field()) {
-                        struct parsed_field temp = parse_field(arg.type());
-                        if (temp.place == 0) {
-                            if (strcmp(temp.name.c_str(), "id") == 0) {
-                                int id = atoi(arg.value().c_str());
-                                if (cur.id == id) result.push_back(cur);
-                            }
-                            if (strcmp(temp.name.c_str(), "node_name") == 0) {
-                                std::string node_name = arg.value().substr(1, arg.value().size() - 2);
-                                if (strcmp(cur.node_name.c_str(), node_name.c_str()) == 0) {
-                                    {
-                                        bool temp_b = false;
-                                        for (node res_n: result) {
-                                            if (res_n.id == cur.id) {
-                                                temp_b = true;
+                        if (arg.value().present()) {
+                            struct parsed_field temp = parse_field(arg.type());
+                            if (temp.place == 0) {
+                                if (strcmp(temp.name.c_str(), "id") == 0) {
+                                    int id = atoi(arg.value().get().c_str());
+                                    if (cur.id == id) result.push_back(cur);
+                                }
+                                if (strcmp(temp.name.c_str(), "node_name") == 0) {
+                                    std::string node_name = arg.value().get().substr(1, arg.value().get().size() - 2);
+                                    if (strcmp(cur.node_name.c_str(), node_name.c_str()) == 0) {
+                                        {
+                                            bool temp_b = false;
+                                            for (node res_n: result) {
+                                                if (res_n.id == cur.id) {
+                                                    temp_b = true;
+                                                }
+                                            }
+                                            if (!temp_b) {
+                                                result.push_back(cur);
+                                            } else continue;
+                                        }
+                                    }
+                                }
+
+                                if (temp.place == 1) {
+                                    for (auto prop: cur.props) {
+                                        if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
+                                            if (strcmp(prop.second.get_value().c_str(), arg.value().get().c_str()) ==
+                                                0) {
+                                                bool temp_b = false;
+                                                for (node res_n: result) {
+                                                    if (res_n.id == cur.id) {
+                                                        temp_b = true;
+                                                    }
+                                                }
+                                                if (!temp_b) {
+                                                    result.push_back(cur);
+                                                } else continue;
                                             }
                                         }
-                                        if (!temp_b) {
-                                            result.push_back(cur);
-                                        } else continue;
+                                    }
+                                }
+
+                                if (temp.place == 2) {
+                                    for (auto rel: cur.relations) {
+                                        if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
+                                            if (strcmp(rel.second.related_with.c_str(), arg.value().get().c_str()) ==
+                                                0) {
+                                                bool temp_b = false;
+                                                for (node res_n: result) {
+                                                    if (res_n.id == cur.id) {
+                                                        temp_b = true;
+                                                    }
+                                                }
+                                                if (!temp_b) {
+                                                    result.push_back(cur);
+                                                } else continue;
+                                            }
+                                        }
                                     }
                                 }
                             }
-
+                        } else {
+                            std::cout << arg.filter().get().op_type().c_str() << " PISYA "
+                                      << arg.filter().get().value().c_str() << std::endl;
+                            struct parsed_field temp = parse_field(arg.type());
+                            std::cout << temp.place << " POPA temp " << temp.name << std::endl;
+                            if (temp.place == 0) {
+                                if (strcmp(temp.name.c_str(), "id") == 0) {
+                                    int id = atoi(arg.filter().get().value().c_str());
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                        if (cur.id > id) result.push_back(cur);
+                                    }
+                                    if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                        if (cur.id < id) result.push_back(cur);
+                                    }
+                                }
+                            }
                             if (temp.place == 1) {
                                 for (auto prop: cur.props) {
+                                    std::cout << prop.first << " PISYA PROP" << std::endl;
                                     if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
-                                        if (strcmp(prop.second.get_value().c_str(), arg.value().c_str()) == 0) {
-                                            bool temp_b = false;
-                                            for (node res_n: result) {
-                                                if (res_n.id == cur.id) {
-                                                    temp_b = true;
+                                        if (strcmp(arg.filter().get().op_type().c_str(), "GT") == 0) {
+                                            std::cout << " POPA IN GT" << std::endl;
+                                            if (prop.second.get_int() > atoi(arg.filter().get().value().c_str())) {
+                                                bool temp_b = false;
+                                                for (node res_n: result) {
+                                                    if (res_n.id == cur.id) {
+                                                        temp_b = true;
+                                                    }
                                                 }
+                                                if (!temp_b) {
+                                                    result.push_back(cur);
+                                                } else continue;
                                             }
-                                            if (!temp_b) {
-                                                result.push_back(cur);
-                                            } else continue;
                                         }
-                                    }
-                                }
-                            }
-
-                            if (temp.place == 2) {
-                                for (auto rel: cur.relations) {
-                                    if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
-                                        if (strcmp(rel.second.related_with.c_str(), arg.value().c_str()) == 0) {
-                                            bool temp_b = false;
-                                            for (node res_n: result) {
-                                                if (res_n.id == cur.id) {
-                                                    temp_b = true;
+                                        if (strcmp(arg.filter().get().op_type().c_str(), "LT") == 0) {
+                                            if (prop.second.get_int() < atoi(arg.filter().get().value().c_str())) {
+                                                bool temp_b = false;
+                                                for (node res_n: result) {
+                                                    if (res_n.id == cur.id) {
+                                                        temp_b = true;
+                                                    }
                                                 }
+                                                if (!temp_b) {
+                                                    result.push_back(cur);
+                                                } else continue;
                                             }
-                                            if (!temp_b) {
-                                                result.push_back(cur);
-                                            } else continue;
                                         }
                                     }
                                 }
@@ -202,7 +316,7 @@ std::vector <node> get_nodes_by_sel_set(struct database db, std::string node_cla
     return result;
 }
 
-property convert_value_from_srt(std::string input) {
+property convert_value_from_str(std::string input) {
     int resi = atoi(input.c_str());
     float resf = atof(input.c_str());
     if (resi != 0 && resf != 0) {
@@ -232,13 +346,13 @@ std::vector <node> get_nodes_by_insert(struct database db, std::string node_clas
             node n = node(obj.obj_name(), node_class);
             if (!obj.field().empty()) {
                 for (auto field: obj.field()) {
-                    property prop = convert_value_from_srt(field.value());
+                    property prop = convert_value_from_str(field.value().get());
                     n.add_prop(field.type(), prop);
                 }
             }
             if (!obj.relation().empty()) {
                 for (auto relation: obj.relation()) {
-                    relationship rel = relationship(obj.obj_name(), relation.value());
+                    relationship rel = relationship(obj.obj_name().c_str(), relation.value()->c_str());
                     n.add_relationship(relation.type(), rel);
                 }
             }
@@ -247,7 +361,6 @@ std::vector <node> get_nodes_by_insert(struct database db, std::string node_clas
         return result;
     }
 }
-
 
 static body_t get_query_by_result_set(struct database db, std::vector <node> *nodes, request_t request) {
     body_t result;
@@ -293,15 +406,16 @@ static body_t get_query_by_result_set(struct database db, std::vector <node> *no
                 if (temp.place == 2) {
                     for (auto rel: cur.relations) {
                         if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
-                            std::string join_name = rel.second.related_with.substr(1, rel.second.related_with.size()-2);
+                            std::string join_name = rel.second.related_with.substr(1,
+                                                                                   rel.second.related_with.size() - 2);
                             node join = db.get_node_by_name(join_name);
                             node_t join_node = node_t(join.node_name, join.node_class);
-                            for (auto prop : join.props){
+                            for (auto prop: join.props) {
                                 filling_t join_prop = filling_t(prop.first);
                                 join_prop.value().set(prop.second.get_value());
                                 join_node.field().push_back(join_prop);
                             }
-                            for (auto rel : join.relations){
+                            for (auto rel: join.relations) {
                                 filling_t join_rel = filling_t(rel.first);
                                 join_rel.value().set(rel.second.related_with);
                                 join_node.relation().push_back(join_rel);
@@ -319,65 +433,68 @@ static body_t get_query_by_result_set(struct database db, std::vector <node> *no
     return result;
 }
 
-static void update_nodes(struct database db, std::vector <node> *nodes, request_t request){
-    if (!request.selection_set()->sub_operations().empty()){
-        for (node n : *nodes) {
+static void update_nodes(struct database db, std::vector <node> *nodes, request_t request) {
+    if (!request.selection_set()->sub_operations().empty()) {
+        for (node n: *nodes) {
             node prev_n = n;
             for (auto sub_op: request.selection_set()->sub_operations()) {
-                if (strcmp(sub_op.sub_op_type().c_str(), "SET")==0){
+                if (strcmp(sub_op.sub_op_type().c_str(), "SET") == 0) {
                     struct parsed_field temp = parse_field(sub_op.field().type());
-                    if (temp.place == 0){
-                        if (strcmp(temp.name.c_str(), "id")==0){
-                            n.id = atoi(sub_op.field().value().c_str());
+                    if (temp.place == 0) {
+                        if (strcmp(temp.name.c_str(), "id") == 0) {
+                            n.id = atoi(sub_op.field().value().get().c_str());
                         }
-                        if (strcmp(temp.name.c_str(), "node_name") == 0){
+                        if (strcmp(temp.name.c_str(), "node_name") == 0) {
                             n.node_name = temp.name;
                         }
                     }
-                    if (temp.place == 1){
-                        for (auto prop : n.props){
-                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
-                                property new_prop = property(sub_op.field().value().c_str());
+                    if (temp.place == 1) {
+                        for (auto prop: n.props) {
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
+                                property new_prop = property(sub_op.field().value().get().c_str());
                                 n.update_prop(prop.first, new_prop);
                             }
                         }
                     }
-                    if (temp.place == 2){
-                        for (auto rel : n.relations){
-                            if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0){
-                                relationship relation = relationship(rel.second.name, sub_op.field().value());
+                    if (temp.place == 2) {
+                        for (auto rel: n.relations) {
+                            if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0) {
+                                relationship relation = relationship(rel.second.name,
+                                                                     sub_op.field().value().get().c_str());
                                 n.update_relationship(rel.first, relation);
                             }
                         }
                     }
                 }
-                if (strcmp(sub_op.sub_op_type().c_str(), "SUB") == 0){
+                if (strcmp(sub_op.sub_op_type().c_str(), "SUB") == 0) {
                     struct parsed_field temp = parse_field(sub_op.field().type());
-                    if (temp.place == 0){
-                        if (strcmp(temp.name.c_str(), "id")==0){
-                            n.id = n.id - atoi(sub_op.field().value().c_str());
+                    if (temp.place == 0) {
+                        if (strcmp(temp.name.c_str(), "id") == 0) {
+                            n.id = n.id - atoi(sub_op.field().value().get().c_str());
                         }
                     }
-                    if (temp.place == 1){
-                        for (auto prop : n.props){
-                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
-                                property new_prop = property(prop.second.get_int() - stoi(sub_op.field().value()));
+                    if (temp.place == 1) {
+                        for (auto prop: n.props) {
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
+                                property new_prop = property(
+                                        prop.second.get_int() - stoi(sub_op.field().value().get()));
                                 n.update_prop(prop.first, new_prop);
                             }
                         }
                     }
                 }
-                if (strcmp(sub_op.sub_op_type().c_str(), "ADD") == 0){
+                if (strcmp(sub_op.sub_op_type().c_str(), "ADD") == 0) {
                     struct parsed_field temp = parse_field(sub_op.field().type());
-                    if (temp.place == 0){
-                        if (strcmp(temp.name.c_str(), "id")==0){
-                            n.id = n.id + atoi(sub_op.field().value().c_str());
+                    if (temp.place == 0) {
+                        if (strcmp(temp.name.c_str(), "id") == 0) {
+                            n.id = n.id + atoi(sub_op.field().value().get().c_str());
                         }
                     }
-                    if (temp.place == 1){
-                        for (auto prop : n.props){
-                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
-                                property new_prop = property(prop.second.get_int() + stoi(sub_op.field().value()));
+                    if (temp.place == 1) {
+                        for (auto prop: n.props) {
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0) {
+                                property new_prop = property(
+                                        prop.second.get_int() + stoi(sub_op.field().value().get()));
                                 n.update_prop(prop.first, new_prop);
                             }
                         }
@@ -405,7 +522,7 @@ response_t RequestInvoker::parse_and_execute_query(request_t request) {
             this->db.add_node(n);
             add_nodes.push_back(this->db.get_node_by_name(n.node_name));
         }
-        body_t answer = get_query_by_result_set(this->db,&add_nodes, request);
+        body_t answer = get_query_by_result_set(this->db, &add_nodes, request);
         resp.body().set(answer);
         resp.message().append("Insert done.");
     }
@@ -420,8 +537,8 @@ response_t RequestInvoker::parse_and_execute_query(request_t request) {
         resp.body().set(answer);
         resp.message().append("Delete done.");
     }
-    if (strcmp(request.query_type().c_str(), "Update") == 0){
-        std::vector<node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
+    if (strcmp(request.query_type().c_str(), "Update") == 0) {
+        std::vector <node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
         update_nodes(this->db, &nodes, request);
         body_t answer = get_query_by_result_set(this->db, &nodes, request);
         resp.body().set(answer);

@@ -40,6 +40,12 @@ Person(select: true, node_name: "John", props.privet: filter{ op: gt, val: 123})
     relations.muratu
 };
 
+User(select: true, props.followers: filter{ op: gt, val: 63}){
+    id,
+    node_name,
+    props.followers
+}
+
 Query: Select
 class_type: Person
   SelectionSet:

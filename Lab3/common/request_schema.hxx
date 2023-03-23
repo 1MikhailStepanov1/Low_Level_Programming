@@ -252,6 +252,7 @@ namespace xml_schema
 
 // Forward declarations.
 //
+class filter_t;
 class constant_t;
 class logical_condition_t;
 class argument_t;
@@ -274,6 +275,78 @@ class request_t;
 #include <xsd/cxx/tree/list.hxx>
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
+
+class filter_t: public ::xml_schema::type
+{
+  public:
+  // op_type
+  //
+  typedef ::xml_schema::string op_type_type;
+  typedef ::xsd::cxx::tree::traits< op_type_type, char > op_type_traits;
+
+  const op_type_type&
+  op_type () const;
+
+  op_type_type&
+  op_type ();
+
+  void
+  op_type (const op_type_type& x);
+
+  void
+  op_type (::std::unique_ptr< op_type_type > p);
+
+  // value
+  //
+  typedef ::xml_schema::string value_type;
+  typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
+
+  const value_type&
+  value () const;
+
+  value_type&
+  value ();
+
+  void
+  value (const value_type& x);
+
+  void
+  value (::std::unique_ptr< value_type > p);
+
+  // Constructors.
+  //
+  filter_t (const op_type_type&,
+            const value_type&);
+
+  filter_t (const ::xercesc::DOMElement& e,
+            ::xml_schema::flags f = 0,
+            ::xml_schema::container* c = 0);
+
+  filter_t (const filter_t& x,
+            ::xml_schema::flags f = 0,
+            ::xml_schema::container* c = 0);
+
+  virtual filter_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  filter_t&
+  operator= (const filter_t& x);
+
+  virtual 
+  ~filter_t ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< op_type_type > op_type_;
+  ::xsd::cxx::tree::one< value_type > value_;
+};
 
 class constant_t: public ::xml_schema::type
 {
@@ -298,24 +371,48 @@ class constant_t: public ::xml_schema::type
   // value
   //
   typedef ::xml_schema::string value_type;
+  typedef ::xsd::cxx::tree::optional< value_type > value_optional;
   typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
 
-  const value_type&
+  const value_optional&
   value () const;
 
-  value_type&
+  value_optional&
   value ();
 
   void
   value (const value_type& x);
 
   void
+  value (const value_optional& x);
+
+  void
   value (::std::unique_ptr< value_type > p);
+
+  // filter
+  //
+  typedef ::filter_t filter_type;
+  typedef ::xsd::cxx::tree::optional< filter_type > filter_optional;
+  typedef ::xsd::cxx::tree::traits< filter_type, char > filter_traits;
+
+  const filter_optional&
+  filter () const;
+
+  filter_optional&
+  filter ();
+
+  void
+  filter (const filter_type& x);
+
+  void
+  filter (const filter_optional& x);
+
+  void
+  filter (::std::unique_ptr< filter_type > p);
 
   // Constructors.
   //
-  constant_t (const type_type&,
-              const value_type&);
+  constant_t (const type_type&);
 
   constant_t (const ::xercesc::DOMElement& e,
               ::xml_schema::flags f = 0,
@@ -344,7 +441,8 @@ class constant_t: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< type_type > type_;
-  ::xsd::cxx::tree::one< value_type > value_;
+  value_optional value_;
+  filter_optional filter_;
 };
 
 class logical_condition_t: public ::xml_schema::type
@@ -1039,6 +1137,9 @@ request (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
 #include <xercesc/framework/XMLFormatter.hpp>
 
 #include <xsd/cxx/xml/dom/auto-ptr.hxx>
+
+void
+operator<< (::xercesc::DOMElement&, const filter_t&);
 
 void
 operator<< (::xercesc::DOMElement&, const constant_t&);

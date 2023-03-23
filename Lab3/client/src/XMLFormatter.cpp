@@ -7,7 +7,8 @@ logical_condition_t form_logical_condition(LogicalOperationNode* logic_node){
     for (auto n : arg_wrap->get_attributes()){
         if (n->get_node_type() == ARGUMENT_NODE){
             ArgumentNode* arg = (ArgumentNode*) n;
-            constant_t c = constant_t(arg->get_name()->get_str_val(), arg->get_value()->get_str_val());
+            constant_t c = constant_t(arg->get_name()->get_str_val());
+            c.value().set(arg->get_value()->get_str_val());
             logical_condition.field().push_back(c);
         }
         if (n->get_node_type() == LOGICAL_OP_NODE){
@@ -34,9 +35,17 @@ selection_set_t form_selection_set(SelectionSetNode* selectionSetNode){
             }
             if (node->get_node_type() == ARGUMENT_NODE) {
                 ArgumentNode *argumentNode = (ArgumentNode *) node;
-                constant_t argument = constant_t(argumentNode->get_name()->get_str_val(),
-                                                 argumentNode->get_value()->get_str_val());
-                args.field().push_back(argument);
+                if (argumentNode->get_filter() != NULL){
+                    FilterNode* filterNode = (FilterNode*) argumentNode->get_filter();
+                    filter_t filter = filter_t(filterNode->get_filter(), argumentNode->get_value()->get_str_val());
+                    constant_t argument = constant_t(argumentNode->get_name()->get_str_val());
+                    argument.filter().set(filter);
+                    args.field().push_back(argument);
+                }else {
+                    constant_t argument = constant_t(argumentNode->get_name()->get_str_val());
+                    argument.value().set(argumentNode->get_value()->get_str_val());
+                    args.field().push_back(argument);
+                }
             }
         }
         selection_set.argument().push_back(args);
@@ -52,8 +61,8 @@ selection_set_t form_selection_set(SelectionSetNode* selectionSetNode){
                 FieldsWrapperNode *fields_wrapper = (FieldsWrapperNode *) obj_node->get_props();
                 for (auto f: fields_wrapper->get_attributes()) {
                     FieldNode *field_node = (FieldNode *) f;
-                    constant_t field = constant_t(field_node->get_name()->get_str_val(),
-                                                  field_node->get_value()->get_str_val());
+                    constant_t field = constant_t(field_node->get_name()->get_str_val());
+                    field.value().set(field_node->get_value()->get_str_val());
                     obj.field().push_back(field);
                 }
             }
@@ -61,8 +70,8 @@ selection_set_t form_selection_set(SelectionSetNode* selectionSetNode){
                 RelationWrapperNode* relations_wrapper = (RelationWrapperNode*) obj_node->get_rels();
                 for (auto r : relations_wrapper->get_attributes()){
                     RelationNode* relation_node = (RelationNode*) r;
-                    constant_t relation = constant_t(relation_node->get_name()->get_str_val(),
-                                                     relation_node->get_value()->get_str_val());
+                    constant_t relation = constant_t(relation_node->get_name()->get_str_val());
+                    relation.value().set(relation_node->get_value()->get_str_val());
                     obj.relation().push_back(relation);
                 }
             }
@@ -74,7 +83,8 @@ selection_set_t form_selection_set(SelectionSetNode* selectionSetNode){
         std::list<Node*> sub_ops_list = sub_ops_wrapper->get_attributes();
         for (auto sub : sub_ops_list){
             SubOperationNode* sub_op_node = (SubOperationNode*) sub;
-            constant_t field = constant_t(sub_op_node->get_name()->get_str_val(), sub_op_node->get_value()->get_str_val());
+            constant_t field = constant_t(sub_op_node->get_name()->get_str_val());
+            field.value().set(sub_op_node->get_value()->get_str_val());
             sub_operation_t sub_op = sub_operation_t(sub_op_node->get_sub_op(), field);
             selection_set.sub_operations().push_back(sub_op);
         }
