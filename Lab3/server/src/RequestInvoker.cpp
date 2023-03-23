@@ -319,11 +319,81 @@ static body_t get_query_by_result_set(struct database db, std::vector <node> *no
     return result;
 }
 
+static void update_nodes(struct database db, std::vector <node> *nodes, request_t request){
+    if (!request.selection_set()->sub_operations().empty()){
+        for (node n : *nodes) {
+            node prev_n = n;
+            for (auto sub_op: request.selection_set()->sub_operations()) {
+                if (strcmp(sub_op.sub_op_type().c_str(), "SET")==0){
+                    struct parsed_field temp = parse_field(sub_op.field().type());
+                    if (temp.place == 0){
+                        if (strcmp(temp.name.c_str(), "id")==0){
+                            n.id = atoi(sub_op.field().value().c_str());
+                        }
+                        if (strcmp(temp.name.c_str(), "node_name") == 0){
+                            n.node_name = temp.name;
+                        }
+                    }
+                    if (temp.place == 1){
+                        for (auto prop : n.props){
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
+                                property new_prop = property(sub_op.field().value().c_str());
+                                n.update_prop(prop.first, new_prop);
+                            }
+                        }
+                    }
+                    if (temp.place == 2){
+                        for (auto rel : n.relations){
+                            if (strcmp(rel.first.c_str(), temp.name.c_str()) == 0){
+                                relationship relation = relationship(rel.second.name, sub_op.field().value());
+                                n.update_relationship(rel.first, relation);
+                            }
+                        }
+                    }
+                }
+                if (strcmp(sub_op.sub_op_type().c_str(), "SUB") == 0){
+                    struct parsed_field temp = parse_field(sub_op.field().type());
+                    if (temp.place == 0){
+                        if (strcmp(temp.name.c_str(), "id")==0){
+                            n.id = n.id - atoi(sub_op.field().value().c_str());
+                        }
+                    }
+                    if (temp.place == 1){
+                        for (auto prop : n.props){
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
+                                property new_prop = property(prop.second.get_int() - stoi(sub_op.field().value()));
+                                n.update_prop(prop.first, new_prop);
+                            }
+                        }
+                    }
+                }
+                if (strcmp(sub_op.sub_op_type().c_str(), "ADD") == 0){
+                    struct parsed_field temp = parse_field(sub_op.field().type());
+                    if (temp.place == 0){
+                        if (strcmp(temp.name.c_str(), "id")==0){
+                            n.id = n.id + atoi(sub_op.field().value().c_str());
+                        }
+                    }
+                    if (temp.place == 1){
+                        for (auto prop : n.props){
+                            if (strcmp(prop.first.c_str(), temp.name.c_str()) == 0){
+                                property new_prop = property(prop.second.get_int() + stoi(sub_op.field().value()));
+                                n.update_prop(prop.first, new_prop);
+                            }
+                        }
+                    }
+                }
+            }
+            db.update_node(prev_n.node_name, n);
+        }
+    }
+}
 
 response_t RequestInvoker::parse_and_execute_query(request_t request) {
     response_t resp = response_t(200, "", 1);
     if (strcmp(request.query_type().c_str(), "Select") == 0) {
         std::vector <node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
+        std::cout << nodes.size() << std::endl;
         body_t answer = get_query_by_result_set(this->db, &nodes, request);
         resp.body().set(answer);
         resp.message().append("Select done.");
@@ -335,7 +405,6 @@ response_t RequestInvoker::parse_and_execute_query(request_t request) {
             this->db.add_node(n);
             add_nodes.push_back(this->db.get_node_by_name(n.node_name));
         }
-        std::cout << this->db.get_node_by_name("Volkswagen").id << std::endl;
         body_t answer = get_query_by_result_set(this->db,&add_nodes, request);
         resp.body().set(answer);
         resp.message().append("Insert done.");
@@ -353,9 +422,9 @@ response_t RequestInvoker::parse_and_execute_query(request_t request) {
     }
     if (strcmp(request.query_type().c_str(), "Update") == 0){
         std::vector<node> nodes = get_nodes_by_sel_set(this->db, request.class_type(), request.selection_set().get());
-        std::vector<node> updated_nodes;
-        body_t answer = get_query_by_result_set(this->db, &updated_nodes, request);
-//        resp.body().set(answer);
+        update_nodes(this->db, &nodes, request);
+        body_t answer = get_query_by_result_set(this->db, &nodes, request);
+        resp.body().set(answer);
         resp.message().append("Update done.");
     }
     return resp;

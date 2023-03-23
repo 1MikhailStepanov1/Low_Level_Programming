@@ -16,12 +16,13 @@ int main(int argc, char *argv[]) {
     try {
         Connection* connection = new Connection(argv[1]);
         connection->accept_client();
-        struct database db = database("../file.data");
+        struct database db = database("/home/mikhail/CLionProjects/Low_Level_Programming/file.data");
         RequestInvoker* invoker = new RequestInvoker(db);
         while(1){
             request_t req = connection->receive_request();
             response_t resp = invoker->parse_and_execute_query(req);
             connection->send_response(resp);
+            invoker->close_db();
         }
 
     } catch (ConnectionException& exception){

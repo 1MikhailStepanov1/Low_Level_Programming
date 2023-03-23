@@ -51,7 +51,7 @@ void Connection::close_connection() {
 void Connection::send_request(request_t req) {
     std::ostringstream oss;
     request(oss, req, map);
-    std::cout << oss.str() << std::endl;
+//    std::cout << oss.str() << std::endl;
     if (write(this->sock, oss.str().c_str(), oss.str().length()) < 0){
         throw new ConnectionException(strerror(errno));
     }
@@ -65,10 +65,10 @@ response_t Connection::receive_response() {
         throw new ConnectionException("Error with receiving data");
     }
     std::cout << "Received " << bytes_read << " bytes from client " << sock << std::endl;
-//    std::cout << buf << std::endl;
     buf[bytes_read] = 0;
     std::istringstream iss(buf);
     try {
+        std::cout << "POPA" << std::endl;
         return *response(iss, 0, this->properties);
     }catch (const xml_schema::exception& e) {
         std::ostringstream oss;

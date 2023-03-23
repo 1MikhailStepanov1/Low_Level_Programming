@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "../../Lab2/include/ast.h"
 #include "../../Lab2/lexer.h"
 #include "../../Lab2/parser.h"
@@ -50,7 +51,7 @@ void print_response(response_t resp){
     cout << "Is finished: " << resp.isFinished() << endl;
     if (resp.body().present()) {
         cout << "Body: " << endl;
-        for (auto node : resp.body().get().node()){
+        for (auto node : resp.body()->node()){
             print_node(node);
         }
     }
@@ -59,7 +60,7 @@ void print_response(response_t resp){
 
 int main(int argc, char *argv[]) {
 
-    if (argc != 3){
+    if (argc < 3){
         cerr << "Usage: " << argv[0] << " <host> <port>" << endl;
     }
 
@@ -73,6 +74,27 @@ int main(int argc, char *argv[]) {
         while (1) {
             string buf;
             string line;
+            std::ifstream file("/home/mikhail/CLionProjects/Low_Level_Programming/extra_task"); // open file for reading
+            while (std::getline(file, line)) { // read each line until end of file
+                if (line.empty()){
+                    break;
+                }
+                NodeWrapper nodeWrapper;
+                int code = parseInput(line, nodeWrapper);
+                if (code) {
+                    cout << "ret_code: " << code << endl;
+                } else {
+//                        nodeWrapper.node->print(0);
+                    cout << "-----------------" << endl;
+                    request_t req = convert_to_XML_format(nodeWrapper);
+                    connection.send_request(req);
+                    delete nodeWrapper.node;
+                }
+                cout << "-----------------" << endl;
+                response_t resp = connection.receive_response();
+                print_response(resp);
+            }
+            file.close(); // close the file
             while (getline(cin, line)) {
                 buf.append(line);
                 if (line.find(';') != string::npos) {
@@ -81,7 +103,7 @@ int main(int argc, char *argv[]) {
                     if (code) {
                         cout << "ret_code: " << code << endl;
                     } else {
-                        nodeWrapper.node->print(0);
+//                        nodeWrapper.node->print(0);
                         cout << "-----------------" << endl;
                         request_t req = convert_to_XML_format(nodeWrapper);
                         connection.send_request(req);
@@ -90,6 +112,7 @@ int main(int argc, char *argv[]) {
                     buf.clear();
                     cout << "-----------------" << endl;
                     response_t resp = connection.receive_response();
+                    cout << "PISYA" << endl;
                     print_response(resp);
                 }
             }
@@ -99,6 +122,8 @@ int main(int argc, char *argv[]) {
     } catch (ConnectionException& exception){
         cout << exception.reason() << endl;
         exit(1);
+    } catch (InvalidSchemaException& exception){
+        cout << exception.reason() << endl;
     }
     return 0;
 }
