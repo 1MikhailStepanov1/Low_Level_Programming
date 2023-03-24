@@ -9,7 +9,6 @@ Connection::Connection(const char *port) {
 
     sock0 = socket(AF_INET, SOCK_STREAM, 0);
     if (sock0 < 0){
-        std::cout << "PISYA constructor1" << std::endl;
         throw new ConnectionException("PISYA constructor1");
     }
 
@@ -29,7 +28,6 @@ Connection::Connection(const char *port) {
 
     res = listen(sock0, 1);
     if (res < 0){
-        std::cout << "PISYA constructor3" << std::endl;
         throw new ConnectionException("PISYA constructor3");
     }
 }
@@ -38,7 +36,7 @@ void Connection::accept_client() {
     std::cout << "Socket base " << this->sock0 << std::endl;
     this->sock1 = accept(this->sock0, NULL, NULL);
     if (this->sock1 < 0){
-        throw new ConnectionException("PISYA accept client");
+        throw new ConnectionException("Error with accepting client");
     }
     std::cout << "Connection from IP "
          << ( ( ntohl(this->local.sin_addr.s_addr) >> 24) & 0xff ) << "."  // High byte of address
@@ -58,7 +56,6 @@ request_t Connection::receive_request() {
     int bytes_read = read(sock1, buf, BUFFER_SIZE);
 
     if (bytes_read < 0){
-        std::cout << "PISYA receive request" << std::endl;
         throw new ConnectionException("Error with receiving data");
     }
     std::cout << "Received " << bytes_read << " bytes from client " << sock1 << " BUFFER " << std::endl;

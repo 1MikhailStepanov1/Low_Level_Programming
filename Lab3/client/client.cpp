@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
         while (1) {
             string buf;
             string line;
-            std::ifstream file("/home/mikhail/CLionProjects/Low_Level_Programming/extra_task"); // open file for reading
+            std::ifstream file("./extra_task"); // open file for reading
             while (std::getline(file, line)) { // read each line until end of file
                 if (line.empty()){
                     break;
@@ -112,7 +112,6 @@ int main(int argc, char *argv[]) {
                     buf.clear();
                     cout << "-----------------" << endl;
                     response_t resp = connection.receive_response();
-                    cout << "PISYA" << endl;
                     print_response(resp);
                 }
             }

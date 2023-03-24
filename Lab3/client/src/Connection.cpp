@@ -61,7 +61,6 @@ response_t Connection::receive_response() {
     memset(&buf, 0, BUFFER_SIZE);
     int bytes_read = recv(sock, buf, BUFFER_SIZE, 0);
     if (bytes_read < 0){
-        std::cout << "PISYA receive request" << std::endl;
         throw new ConnectionException("Error with receiving data");
     }
     std::cout << "Received " << bytes_read << " bytes from client " << sock << std::endl;
